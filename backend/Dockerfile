@@ -3,9 +3,7 @@
 
 # A Dockerfile must begin with a FROM clause. There are pre-built images in the Docker Hub registry. 
 # Since we are building a Node application we are pulling the node image from docker hub 
-# The 18-slim after the colon is the version of node we want to pull. We are currently using the latest node lts (long term support) 
-# Specifying the version is very important for stable builds. This version of node is also compatible with react-scripts v5 but not compatible with react-scripts v4
-# We want our images to be small in size hence we are using the 18-slim version which is a debian distro
+# We use alpine as it is lightweight and our backend only needs to run python
 FROM alpine:latest
 
 # The ARG stanza defines a variable that users can pass at build-time
