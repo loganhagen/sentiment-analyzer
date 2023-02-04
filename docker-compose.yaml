@@ -87,7 +87,7 @@ services:
     # We are using something called bind mount here so that if you are developing inside the container and change any source code - it gets
     # saved in the same destination on the host machine. This is different that the named volume we used for our mymongodb service
     volumes:
-      - ./frontend:/frontend
+      - ./frontend:/app/frontend # better to keep the same name as the folder name in the Dockerfile
 
     environment:
       - TEMP_PORT=3000

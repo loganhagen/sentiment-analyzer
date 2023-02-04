@@ -8,7 +8,11 @@ const config: UserConfig = {
 	},
 	server: {
 		port: 3000,
-		strictPort: false,
+		strictPort: true,
+		host: true, // needed for docker container
+		fs: {
+			allow: ['../node_modules'] // Added to fix this issue: https://github.com/sveltejs/kit/issues/2701
+		}
 	}
 };
 

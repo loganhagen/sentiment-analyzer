@@ -1,25 +1,33 @@
-# The backend/Dockerfile contains the documentation for the Dockerfile Instructions
 FROM node:16-slim
 
-ARG NODE_ENV=production
-ENV NODE_ENV $NODE_ENV
-
+# Do not set NODE_ENV in Dockerfile as vite/react-scripts handles it internally
 ARG PORT=3000
 ENV PORT $PORT
 
+# Install latest npm for all security fixes
 RUN npm i npm@latest -g
 
-WORKDIR /app/frontend
+# It is better to install the dependencies first in a 
+# different directory and point the node_modules/.bin to the PATH
+WORKDIR /app
 
+# Copy package.json and package-lock.json as they are the least likely to change
 COPY package.json package-lock.json ./
 
-RUN npm install
+# Install dependencies using npm ci. ci is a better practice as it removes the node_modules
+# and reinstalls the dependencies from scratch.
+RUN npm ci && npm cache clean --force
+
+# point the node_modules/.bin to the PATH so that we can run the scripts like vite, react-scripts
+ENV PATH /app/node_modules/.bin:$PATH
+
+# Copy the rest of the files in a nested directory
+WORKDIR /app/frontend
 
 COPY . .
 
-# add node_modules/.bin/ to PATH environment variable to make sure binaries can be executed
-ENV PATH /app/node_modules/.bin:$PATH
-
 EXPOSE $PORT
 
-CMD [ "npm", "run", "dev" ]
+# It is better to run npm build and serve the project using a web server like nginx
+# instead of running npm run dev. npm run dev is not meant for production
+CMD ["npm", "run", "dev"]
