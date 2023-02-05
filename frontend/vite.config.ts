@@ -12,6 +12,9 @@ const config: UserConfig = {
 		host: true, // needed for docker container
 		fs: {
 			allow: ['../node_modules'] // Added to fix this issue: https://github.com/sveltejs/kit/issues/2701
+		},
+		watch: {
+			usePolling: true,
 		}
 	}
 };
