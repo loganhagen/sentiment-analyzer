@@ -38,7 +38,7 @@
     // Configure properties specific to VS Code.
     "vscode": {
       // Add the IDs of extensions you want installed when the container is created.
-      "extensions": ["pkief.material-icon-theme", "ms-vscode.vscode-typescript-next", "svelte.svelte-vscode", "bradlc.vscode-tailwindcss", "dbaeumer.vscode-eslint"]
+      "extensions": ["pkief.material-icon-theme", "ms-vscode.vscode-typescript-next", "svelte.svelte-vscode", "bradlc.vscode-tailwindcss", "csstools.postcss", "dbaeumer.vscode-eslint"]
     }
 
   }
