@@ -1,18 +1,15 @@
-# create-svelte
+# Frontend Docker Container
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+## Access the frontend site at `localhost:3000`
+---
+### Accessing the Dev Container
+---
+1. Make sure the three container stack is built and running on your machine
+2. In vscode click on "Open a remote container" in the bottom left corner
+3. Click on "Open folder in Container" from the dropdown menu
+4. Select the "frontend" folder from the project's root directory
+5. The dev environment should open with all dependencies and vscode extensions installed
+---
 
 ## Developing
 
