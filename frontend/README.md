@@ -3,9 +3,7 @@
 ## Access the frontend site at `localhost:3000`
 
 ---
-
 ### Accessing the Dev Container
-
 ---
 
 1. Make sure the three container stack is built and running on your machine
@@ -14,6 +12,18 @@
 4. Select the "frontend" folder from the project's root directory
 5. The dev environment should open with all dependencies and vscode extensions installed
 
+---
+### Pushing to GitLab
+---
+To make sure that your commit passes the CI pipeline lint check, it is important to run the command below before commiting and pushing, otherwise the lint test will fail.
+```bash
+npm run format
+```
+
+If you would like to make sure that your code passes the linter locally, you can just run the command below.
+```bash
+npm run lint
+```
 ---
 
 ## Developing
