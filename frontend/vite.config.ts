@@ -14,7 +14,7 @@ const config: UserConfig = {
 			allow: ['../node_modules'] // Added to fix this issue: https://github.com/sveltejs/kit/issues/2701
 		},
 		watch: {
-			usePolling: true,
+			usePolling: true
 		}
 	}
 };

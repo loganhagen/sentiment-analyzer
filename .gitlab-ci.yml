@@ -24,7 +24,7 @@ lint_frontend:
   stage: lint
   script:
     - cd ./frontend
-    - npm install
+    - npm install prettier eslint
     - npm run lint
   dependencies:
     - build_frontend
