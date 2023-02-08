@@ -6,7 +6,7 @@
 
 # Official framework image. Look for the different tagged releases at:
 # https://hub.docker.com/r/library/node/tags/
-image: node:16-slim
+image: node:16-alpine
 
 stages:
   - build
@@ -39,4 +39,17 @@ test_frontend:
     - npm run test:unit
   dependencies:
     - build_frontend
+  allow_failure: false
+
+
+build_backend:
+  stage: build
+  script:
+    - cd ./backend
+    - apt install 
+    - apk update
+    - apk add py-pip
+    - apk add --no-cache python3-dev 
+    - pip install --upgrade pip
+    - pip --no-cache-dir install -r requirements.txt
   allow_failure: false
