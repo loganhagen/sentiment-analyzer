@@ -4,6 +4,8 @@
 	documentation
 </p>
 
+<p>Test I am adding to a file from container</p>
+
 <style lang="postcss">
 	:global(html) {
 		background-color: theme(colors.gray.800);

@@ -57,6 +57,11 @@ services:
     ports:
       - "8080:8080"
 
+    # We are using something called bind mount here so that if you are developing inside the container and change any source code - it gets
+    # saved in the same destination on the host machine. This is different that the named volume we used for our mymongodb service
+    volumes:
+      - ./backend:/app/backend # better to keep the same name as the folder name in the Dockerfile
+
     # Environment variables are "great" (technically not for secrets) for defining secrets, hostnames and ports
     # NOTE: Variables defined under environment are not available during the image build process.
     # To use build time environment variables the build.args is the place to define them
@@ -66,6 +71,10 @@ services:
       - MONGO_HOSTNAME=host.docker.internal
       - MONGO_PORT=27017
       - MONGO_DATABASE_NAME=task-management
+
+    # This creates interactive mode which lets us execute commands in a shell when the container is running.
+    stdin_open: true
+    tty: true
 
     # depends_on expresses dependency between services.
     # NOTE: depends_on does not wait for the service to be "healthy"
