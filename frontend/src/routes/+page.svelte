@@ -1,8 +1,8 @@
 <script>
-	import Navbar from "./navbar.svelte";
+	import Navbar from './navbar.svelte';
 </script>
 
-<Navbar/>
+<Navbar />
 
 <h1 class="text-slate-500 text-4xl px-2 py-4">Welcome to SvelteKit</h1>
 <p class="px-2">
@@ -10,10 +10,8 @@
 	documentation
 </p>
 
-
 <style lang="postcss">
 	:global(html) {
 		background-color: theme(colors.gray.800);
 	}
-
 </style>
