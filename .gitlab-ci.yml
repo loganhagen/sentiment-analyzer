@@ -46,7 +46,6 @@ build_backend:
   stage: build
   script:
     - cd ./backend
-    - apt install 
     - apk update
     - apk add py-pip
     - apk add --no-cache python3-dev 
