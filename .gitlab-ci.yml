@@ -52,3 +52,12 @@ build_backend:
     - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
   allow_failure: false
+
+test_backend:
+  stage: test
+  script:
+    - cd ./backend
+    - pytest
+  dependencies:
+    - build_backend
+  allow_failure: false
