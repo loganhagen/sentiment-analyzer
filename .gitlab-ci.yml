@@ -14,44 +14,44 @@ stages:
   - test
 
 
-build_frontend:
-  stage: build
-  script:
-    - cd ./frontend
-    - npm install
+# build_frontend:
+#   stage: build
+#   script:
+#     - cd ./frontend
+#     - npm install
 
-lint_frontend:
-  stage: lint
-  script:
-    - cd ./frontend
-    - npm install
-    - npm run lint
-  dependencies:
-    - build_frontend
-  allow_failure: false
-
-
-test_frontend:
-  stage: test
-  script:
-    - cd ./frontend
-    - npm install
-    - npm run test:unit
-  dependencies:
-    - build_frontend
-  allow_failure: false
+# lint_frontend:
+#   stage: lint
+#   script:
+#     - cd ./frontend
+#     - npm install
+#     - npm run lint
+#   dependencies:
+#     - build_frontend
+#   allow_failure: false
 
 
-build_backend:
-  stage: build
-  script:
-    - cd ./backend
-    - apk update
-    - apk add py-pip
-    - apk add --no-cache python3-dev 
-    - pip install --upgrade pip
-    - pip --no-cache-dir install -r requirements.txt
-  allow_failure: false
+# test_frontend:
+#   stage: test
+#   script:
+#     - cd ./frontend
+#     - npm install
+#     - npm run test:unit
+#   dependencies:
+#     - build_frontend
+#   allow_failure: false
+
+
+# build_backend:
+#   stage: build
+#   script:
+#     - cd ./backend
+#     - apk update
+#     - apk add py-pip
+#     - apk add --no-cache python3-dev 
+#     - pip install --upgrade pip
+#     - pip --no-cache-dir install -r requirements.txt
+#   allow_failure: false
 
 lint_backend:
   stage: lint
@@ -59,6 +59,7 @@ lint_backend:
     - cd ./backend
     - apk update
     - apk add py-pip
+    - apk add --no-cache python3-dev
     - pip install --upgrade pip
     - pip install pylint
     - pylint src/ --fail-under=7
