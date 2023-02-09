@@ -1,4 +1,5 @@
 <script>
+	import Home from './home.svelte';
 	export let menu = 1;
 </script>
 
@@ -28,15 +29,9 @@
 </nav>
 
 {#if menu == 1}
-	<p>This is tester home page</p>
+	<Home />
 {:else if menu == 2}
 	<p>This is tester about page</p>
 {:else}
 	<p>Page not found</p>
 {/if}
-
-<style>
-	ul#menu li {
-		display: inline;
-	}
-</style>
