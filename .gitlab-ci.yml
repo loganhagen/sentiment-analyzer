@@ -57,5 +57,6 @@ lint_backend:
   stage: lint
   script:
     - cd ./backend
+    - pip install pylint
     - pylint src/ --fail-under=7
   allow_failure: false
