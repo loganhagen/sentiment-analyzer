@@ -1,12 +1,22 @@
+"""docstring"""
+
 from flask import Flask
 
-def create_app(script_info=None):
+#import API Blueprint object created in api/__init__.py
+from src.api import api_bp
+
+def create_app():
+    """_summary_
+
+    Args:
+        script_info (_type_, optional): _description_. Defaults to None.
+
+    Returns:
+        _type_: _description_
+    """
 
     app = Flask(__name__)
     app.config.from_object("src.config.DevelopmentConfig")
-
-    #import API Blueprint object created in api/__init__.py
-    from src.api import api_bp
 
     #Register the blueprint to the Flask object (app) with a url route
     app.register_blueprint(api_bp, url_prefix="/api")

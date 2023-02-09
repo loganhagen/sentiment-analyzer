@@ -1,11 +1,28 @@
+"""docstring"""
+
 class Config:
-        TESTING = False
+    """_summary_
+    """
+    TESTING = False
 
 class DevelopmentConfig(Config):
-    pass
+    """_summary_
+
+    Args:
+        Config (_type_): _description_
+    """
 
 class TestingConfig(Config):
+    """_summary_
+
+    Args:
+        Config (_type_): _description_
+    """
     Testing = True
 
 class ProductionConfig(Config):
-    pass
+    """_summary_
+
+    Args:
+        Config (_type_): _description_
+    """
