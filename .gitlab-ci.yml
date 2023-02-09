@@ -57,6 +57,9 @@ lint_backend:
   stage: lint
   script:
     - cd ./backend
+    - apk update
+    - apk add py-pip
+    - pip install --upgrade pip
     - pip install pylint
     - pylint src/ --fail-under=7
   allow_failure: false
