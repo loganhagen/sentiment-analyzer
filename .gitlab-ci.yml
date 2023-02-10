@@ -13,7 +13,6 @@ stages:
   - lint
   - test
 
-
 build_frontend:
   stage: build
   script:
@@ -41,7 +40,6 @@ test_frontend:
     - build_frontend
   allow_failure: false
 
-
 build_backend:
   stage: build
   script:
@@ -53,16 +51,15 @@ build_backend:
     - pip --no-cache-dir install -r requirements.txt
   allow_failure: false
 
-test_backend:
-  stage: test
+lint_backend:
+  stage: lint
   script:
     - cd ./backend
     - apk update
     - apk add py-pip
-    - apk add --no-cache python3-dev 
+    - apk add --no-cache python3-dev
     - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
-    - pytest
-  dependencies:
-    - build_backend
+    - cd ..
+    - pylint --rcfile backend/.pylintrc backend/
   allow_failure: false
