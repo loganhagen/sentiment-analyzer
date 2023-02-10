@@ -1,6 +1,22 @@
-<h1>This is the home page</h1>
-<h1 class="text-slate-500 text-4xl px-2 py-4">Welcome to SvelteKit</h1>
-<p class="px-2">
-	Visit <a class="underline text-blue-500" href="https://kit.svelte.dev">kit.svelte.dev</a> to read the
-	documentation
-</p>
+<script>
+	let totalPosts = 6;
+</script>
+
+<main>
+	<h1 class="px-2 py-4 text-4xl text-slate-500">Universal Basic Income</h1>
+	<p class="px-2">
+		Total Posts: {totalPosts}
+	</p>
+</main>
+
+<style lang="postcss">
+	:global(html) {
+		background-color: theme(colors.white);
+	}
+	main {
+		text-align: center;
+		padding: 1em;
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+</style>
