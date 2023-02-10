@@ -29,7 +29,6 @@ lint_frontend:
     - build_frontend
   allow_failure: false
 
-
 test_frontend:
   stage: test
   script:
@@ -64,7 +63,7 @@ lint_backend:
     - pylint --rcfile backend/.pylintrc backend/
   allow_failure: false
 
-  test_backend:
+test_backend:
   stage: test
   script:
     - cd ./backend
