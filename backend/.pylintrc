@@ -108,7 +108,7 @@ unsafe-load-any-extension=no
 [BASIC]
 
 # Naming style matching correct argument names.
-argument-naming-style=any
+argument-naming-style=snake_case
 
 # Regular expression matching correct argument names. Overrides argument-
 # naming-style. If left empty, argument names will be checked with the set
@@ -116,7 +116,7 @@ argument-naming-style=any
 #argument-rgx=
 
 # Naming style matching correct attribute names.
-attr-naming-style=any
+attr-naming-style=snake_case
 
 # Regular expression matching correct attribute names. Overrides attr-naming-
 # style. If left empty, attribute names will be checked with the set naming
@@ -124,7 +124,12 @@ attr-naming-style=any
 #attr-rgx=
 
 # Bad variable names which should always be refused, separated by a comma.
-bad-names=
+bad-names=foo,
+          bar,
+          baz,
+          toto,
+          tutu,
+          tata
 
 # Bad variable names regexes, separated by a comma. If names match any regex,
 # they will always be refused
@@ -166,7 +171,7 @@ const-naming-style=UPPER_CASE
 docstring-min-length=-1
 
 # Naming style matching correct function names.
-function-naming-style=any
+function-naming-style=snake_case
 
 # Regular expression matching correct function names. Overrides function-
 # naming-style. If left empty, function names will be checked with the set
@@ -174,7 +179,12 @@ function-naming-style=any
 #function-rgx=
 
 # Good variable names which should always be accepted, separated by a comma.
-good-names=
+good-names=i,
+           j,
+           k,
+           ex,
+           Run,
+           _
 
 # Good variable names regexes, separated by a comma. If names match any regex,
 # they will always be accepted
@@ -192,14 +202,14 @@ inlinevar-naming-style=any
 #inlinevar-rgx=
 
 # Naming style matching correct method names.
-method-naming-style=any
+method-naming-style=snake_case
 
 # Regular expression matching correct method names. Overrides method-naming-
 # style. If left empty, method names will be checked with the set naming style.
 #method-rgx=
 
 # Naming style matching correct module names.
-module-naming-style=any
+module-naming-style=snake_case
 
 # Regular expression matching correct module names. Overrides module-naming-
 # style. If left empty, module names will be checked with the set naming style.
@@ -223,7 +233,7 @@ property-classes=abc.abstractproperty
 #typevar-rgx=
 
 # Naming style matching correct variable names.
-variable-naming-style=any
+variable-naming-style=snake_case
 
 # Regular expression matching correct variable names. Overrides variable-
 # naming-style. If left empty, variable names will be checked with the set
@@ -295,7 +305,7 @@ max-returns=6
 max-statements=50
 
 # Minimum number of public methods for a class (see R0903).
-min-public-methods=0
+min-public-methods=2
 
 
 [EXCEPTIONS]
@@ -412,7 +422,7 @@ disable=raw-checker-failed,
         useless-suppression,
         deprecated-pragma,
         use-symbolic-message-instead,
-        trailing-whitespace,
+        unrecognized-option,
         missing-final-newline
 
 # Enable the message, report, category or checker with the given id(s). You can
