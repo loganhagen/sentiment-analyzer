@@ -63,3 +63,17 @@ lint_backend:
     - cd ..
     - pylint --rcfile backend/.pylintrc backend/
   allow_failure: false
+
+  test_backend:
+  stage: test
+  script:
+    - cd ./backend
+    - apk update
+    - apk add py-pip
+    - apk add --no-cache python3-dev 
+    - pip install --upgrade pip
+    - pip --no-cache-dir install -r requirements.txt
+    - pytest
+  dependencies:
+    - build_backend
+  allow_failure: false
