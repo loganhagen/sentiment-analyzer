@@ -1,8 +1,8 @@
 """PyTest example to see if PyTest works in GitLab CI Pipeline"""
 
-def func(x):
+def func(test_var):
     """function"""
-    return x + 1
+    return test_var + 1
 
 def test_answer():
     """Function test"""
