@@ -35,4 +35,4 @@ if __name__ == "__main__":
     # print(t.getNumTweets())
 
     # Print a random Tweet.
-    print(t.getRandomDocument("UBI", "tweets"))
+    # print(t.getRandomDocument("UBI", "tweets"))

@@ -1,11 +1,28 @@
-"""doctstring"""
+"""app.py"""
 
-from flask.cli import FlaskGroup
-from src import create_app
+import os
+import tweetList
+from flask import Flask
 
-app = create_app()
+app = Flask(__name__)
 
-cli = FlaskGroup(create_app=create_app)
+t = tweetList.TweetList(os.environ.get("BEARER_TOKEN"))
 
-if __name__ == "__main__":
-    cli()
+@app.route("/")
+def hello_world():
+    """hello_world"""
+    return "home"
+
+@app.route("/random")
+def tweet():
+    """tweet"""
+    doc = t.getRandomDocument("UBI", "tweets")
+
+    return doc["content"]
+
+@app.route("/size")
+def size():
+    """size"""
+    collectionSize = t.getCollectionSize("UBI", "tweets")
+
+    return str(collectionSize)
