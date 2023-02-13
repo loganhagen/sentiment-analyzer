@@ -13,14 +13,14 @@ def hello_world():
     """hello_world"""
     return "home"
 
-@app.route("/random")
+@app.route("/random", methods = ["GET"])
 def tweet():
     """tweet"""
     doc = t.getRandomDocument("UBI", "tweets")
 
     return doc["content"]
 
-@app.route("/size")
+@app.route("/size", methods = ["GET"])
 def size():
     """size"""
     collectionSize = t.getCollectionSize("UBI", "tweets")
