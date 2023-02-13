@@ -1,14 +1,14 @@
-import tweetList 
-import os
+# import tweetList 
+# import os
 
-if __name__ == "__main__":
-    query = '("universal basic income") -is:retweet lang:en'
-    bearer_token = "AAAAAAAAAAAAAAAAAAAAAFvZlQEAAAAAKJ2aLLYYPFSQyRsPgwSonDACeT0%3DwJjK63Eys0ixVHxTaYjTs9eBgOIOrDkOKytKcixt1m4WX3X4Yi"
+# if __name__ == "__main__":
+#     query = '("universal basic income") -is:retweet lang:en'
+#     bearer_token = "AAAAAAAAAAAAAAAAAAAAAFvZlQEAAAAAKJ2aLLYYPFSQyRsPgwSonDACeT0%3DwJjK63Eys0ixVHxTaYjTs9eBgOIOrDkOKytKcixt1m4WX3X4Yi"
 
     # t = tweetList.TweetList(os.environ.get("BEARER_TOKEN"))
 
     # Initialize the TweetList object. Initializes the Tweepy and Mongo clients as well.
-    t = tweetList.TweetList(bearer_token)
+    # t = tweetList.TweetList(bearer_token)
 
     # Search Twitter for up to 1000 Tweets from the last 2 weeks which match the given query.
     # t.getRecentTweets(query, 1000)
@@ -26,7 +26,7 @@ if __name__ == "__main__":
     # t.getDBdump("UBI", "tweets", "tweets.json")
 
     # Print the size of the specified collection.
-    print(t.getCollectionSize("UBI", "tweets"))
+    # print(t.getCollectionSize("UBI", "tweets"))
 
     # Print Tweets currently loaded into memory.
     # t.printTweetList()

@@ -1,16 +1,15 @@
-import tweepy
 import csv
-import re
 import json
-from textblob import TextBlob
+# from textblob import TextBlob
 from datetime import datetime
 from pymongo import MongoClient
-import urllib.parse
+import pymongo
+import tweepy
 
 class TweetList:    
     class Tweet:
-        def __init__(self, id, author_id, created_at, text):
-            self.id  = id
+        def __init__(self, tweet_id, author_id, created_at, text):
+            self.id  = tweet_id
             self.author_id = author_id
             self.created_at = created_at
             self.text = text
@@ -61,18 +60,6 @@ class TweetList:
     def getNumTweets(self):
         return len(self.tweetList)
 
-    # Regex from: https://medium.com/@nikitasilaparasetty/twitter-sentiment-analysis-for-data-science-using-python-in-2022-6d5e43f6fa6e
-    def cleanTweet(self, text):
-        str = text.lower()
-        str = re.sub("@[A-Za-z0-9_]+","", str)
-        str = re.sub("#[A-Za-z0-9_]+","", str)
-        str = re.sub(r'http\S+', '', str)
-        str = re.sub('[()!?]', ' ', str)
-        str = re.sub('\[.*?\]',' ', str)
-        str = re.sub("[^a-z0-9]"," ", str)
-
-        return str
-
     def printTweetList(self):
         for t in self.tweetList:
             print(t.toString())
@@ -85,7 +72,7 @@ class TweetList:
                 writer.writerow(t.toList())
 
     def readFromCSV(self, filename):
-        with open(filename, newline="") as f:
+        with open(filename, newline="", encoding="UTF-8") as f:
             reader = csv.reader(f, delimiter=",")
 
             for r in reader:
@@ -103,14 +90,14 @@ class TweetList:
         fileDict["data"] = tweetList
         obj = json.dumps(fileDict)
 
-        with open(filename, "w") as file:
+        with open(filename, "w", encoding="UTF-8") as file:
             file.write(obj)      
 
     def readFromJSON(self, filename):
-        with open(filename, "r") as f:
+        with open(filename, "r", encoding="UTF-8") as f:
             obj = json.load(f)
-            list = obj["data"]
-            for l in list:
+            data = obj["data"]
+            for l in data:
                 self.tweetList.append(self.Tweet(l["tweet_id"], l["author_id"], l["created_at"], l["content"]))
 
     def pushToDB(self, database, collection):
@@ -127,15 +114,15 @@ class TweetList:
             }
 
             try:
-                status = cl.insert_one(obj)
-            except: 
+                cl.insert_one(obj)
+            except pymongo.errors.DuplicateKeyError: 
                 continue
 
-    def getDBdump(self, database, collection, filename):
+    def getCollection(self, database, collection, filename):
         db = self.mongoClient[database]
         cl = db[collection]
 
-        dict = {
+        output = {
             "date" : str(datetime.now())
         }
         tList = []
@@ -149,11 +136,11 @@ class TweetList:
             }
             tList.append(obj)
 
-        dict["data"] = tList
+        output["data"] = tList
 
-        dictObj = json.dumps(dict)
+        dictObj = json.dumps(output)
 
-        with open(filename, 'w') as file:  
+        with open(filename, 'w', encoding='UTF-8') as file:  
             file.write(dictObj)
 
     def getCollectionSize(self, database, collection):
