@@ -33,5 +33,7 @@ RUN pip --no-cache-dir install -r requirements.txt
 # The EXPOSE STANZA informs Docker that the container listens on the specified network ports at runtime.
 EXPOSE $PORT
 
+ARG FLASK_APP=app.py
+
 # CMD runs when you want to run a container from an image. This can be overridden in the docker compose file
-CMD ["flask","run"]
+#CMD ["flask", "run"]

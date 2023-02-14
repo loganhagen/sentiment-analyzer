@@ -1,5 +1,6 @@
 """docstring"""
 
+#from flask_cors import cross_origin
 from flask_restx import Namespace, Resource
 
 #Create an API namespace for our health operations
@@ -18,5 +19,9 @@ class Health(Resource):
             _type_: _description_
         """
         return {"status": "OK", "message": "Server is healthy"}
+    
+    def put(self):
+        return
+
 
 api.add_resource(Health, "")
