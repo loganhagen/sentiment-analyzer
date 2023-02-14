@@ -3,7 +3,7 @@
 	let totalPosts = -1;
 	let random = 'N/A';
 
-	const sizeEndpoint = 'http://127.0.0.1:8080/tweets/size';
+	const sizeEndpoint = 'http://127.0.0.1:8080/api/tweets/size';
 	onMount(async function () {
 		const sizeResponse = await fetch(sizeEndpoint);
 		const sizeJSON = await sizeResponse.json();
@@ -13,7 +13,7 @@
 	async function getRandomTweet() {
 		const response = await fetch('http://127.0.0.1:8080/api/tweets/random');
 		const responseJSON = await response.json();
-
+		console.log(responseJSON);
 		random = responseJSON['tweet'];
 	}
 </script>
