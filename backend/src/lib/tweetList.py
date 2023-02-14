@@ -10,49 +10,6 @@ import tweepy
 
 class TweetList:
     """Class that handles tweets for our backend API"""    
-    class Tweet:
-        """Class that represents a tweet as a data type"""
-        def __init__(self, tweet_id, author_id, created_at, text):
-            self.id  = tweet_id
-            self.author_id = author_id
-            self.created_at = created_at
-            self.text = text
-            self.polarity = 0.0
-            self.subjectivity = 0.0
-
-        def getTweetID(self):
-            """Returns the tweet id"""
-            return self.id
-
-        def getTweetText(self):
-            """Returns the tweet text"""
-            return self.text
-
-        def getTweetPolarity(self):
-            """Returns the polarity of the tweet"""
-            return self.polarity
-
-        def getTweetSubjectivity(self):
-            """Returns the subjectivity of the tweet"""
-            return self.subjectivity
-
-        def toString(self):
-            """Returns a string representation of the tweet"""
-            return f"tweet_id: {self.id}\nauthor_id: {self.author_id}\ncreated_at: {self.created_at}\ncontent: {self.text}\npolarity: {self.polarity}\nsubjectivity: {self.subjectivity}\n"
-
-        def toList(self):
-            """Returns a list representation of the tweet"""
-            return [self.id, self.author_id, self.created_at, self.text, self.polarity, self.subjectivity]
-
-        def toDict(self):
-            """Returns a dictionary representation of the tweet"""
-            return {
-                "tweet_id" : str(self.id),
-                "author_id" : str(self.author_id),
-                "created_at" : str(self.created_at),
-                "content" : str(self.text)
-            }
-
     def __init__(self, bearer_token):
         self.tweepy_client = tweepy.Client(bearer_token=bearer_token)
         self.mongo_client = MongoClient('mongodb://%s:%s@127.0.0.1' % ("root", "example"))
@@ -73,7 +30,6 @@ class TweetList:
     def initTweetList(self):
         """Initializes the tweet list"""
         for tweet in self.query_result:
-            # str = self.cleanTweet(t.text)
             self.tweet_list.append(
                 self.Tweet(
                     tweet.id,
@@ -193,3 +149,46 @@ class TweetList:
 
         for r in result:
             return r
+
+    class Tweet:
+        """Class that represents a tweet as a data type"""
+        def __init__(self, tweet_id, author_id, created_at, text):
+            self.id  = tweet_id
+            self.author_id = author_id
+            self.created_at = created_at
+            self.text = text
+            self.polarity = 0.0
+            self.subjectivity = 0.0
+
+        def getTweetID(self):
+            """Returns the tweet id"""
+            return self.id
+
+        def getTweetText(self):
+            """Returns the tweet text"""
+            return self.text
+
+        def getTweetPolarity(self):
+            """Returns the polarity of the tweet"""
+            return self.polarity
+
+        def getTweetSubjectivity(self):
+            """Returns the subjectivity of the tweet"""
+            return self.subjectivity
+
+        def toString(self):
+            """Returns a string representation of the tweet"""
+            return f"tweet_id: {self.id}\nauthor_id: {self.author_id}\ncreated_at: {self.created_at}\ncontent: {self.text}\npolarity: {self.polarity}\nsubjectivity: {self.subjectivity}\n"
+
+        def toList(self):
+            """Returns a list representation of the tweet"""
+            return [self.id, self.author_id, self.created_at, self.text, self.polarity, self.subjectivity]
+
+        def toDict(self):
+            """Returns a dictionary representation of the tweet"""
+            return {
+                "tweet_id" : str(self.id),
+                "author_id" : str(self.author_id),
+                "created_at" : str(self.created_at),
+                "content" : str(self.text)
+            }
