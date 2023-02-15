@@ -5,7 +5,6 @@ from src.lib.tweetList import TweetList
 t = TweetList()
 
 t.readFromJSON("tweets.json")
+t.writeToCSV("tweets.csv")
 
 t.pushToDB("UBI", "tweets")
-
-print(t.getCollectionSize("UBI", "tweets"))
