@@ -109,6 +109,7 @@ class TweetList:
                     l["content"])
                 )
 
+    # This is a very slow function.
     def pushToDB(self, database, collection):
         """Pushes the tweet list to the database"""
         db = self.mongo_client[database]
