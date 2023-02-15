@@ -71,7 +71,7 @@ test_backend:
   variables:
     MONGO_USERNAME: "root"
     MONGO_PASSWORD: "example"
-    MONGO_HOSTNAME: "host.docker.internal"
+    MONGO_HOSTNAME: "mongo"
     MONGO_PORT: "27017"
     BEARER_TOKEN: "AAAAAAAAAAAAAAAAAAAAAFvZlQEAAAAAKJ2aLLYYPFSQyRsPgwSonDACeT0%3DwJjK63Eys0ixVHxTaYjTs9eBgOIOrDkOKytKcixt1m4WX3X4Yi"
     FLASK_APP: "app.py"
