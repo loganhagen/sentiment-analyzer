@@ -52,6 +52,9 @@ class TweetList:
                 )
             )
 
+    def emptyList(self):
+        self.tweet_list.clear()
+        
     def getNumTweets(self):
         """Returns the number of tweets"""
         return len(self.tweet_list)
@@ -124,7 +127,7 @@ class TweetList:
             except pymongo.errors.DuplicateKeyError:
                 continue
 
-    def getCollection(self, database, collection, filename):
+    def writeCollectionToJSON(self, database, collection, filename):
         """Returns a collection from the database"""
         db = self.mongo_client[database]
         cl = db[collection]
