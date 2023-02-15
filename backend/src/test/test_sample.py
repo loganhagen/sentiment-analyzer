@@ -9,3 +9,6 @@ def emptyTweetList():
 
 def test_TweepyBearerToken(emptyTweetList):
     assert emptyTweetList.getTweepyBearerToken() == os.environ.get("BEARER_TOKEN")
+
+def test_getMongoClientStatus(emptyTweetList):
+    assert emptyTweetList.getMongoClientStatus() == "Server available"

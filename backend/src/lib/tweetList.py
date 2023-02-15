@@ -4,6 +4,7 @@ import csv
 import json
 from datetime import datetime
 from pymongo import MongoClient
+from pymongo.errors import ConnectionFailure
 import pymongo
 import tweepy
 # from textblob import TextBlob
@@ -20,6 +21,13 @@ class TweetList:
 
     def getTweepyBearerToken(self):
         return self.tweepy_client.bearer_token
+
+    def getMongoClientStatus(self):
+        try:
+            self.mongo_client.admin.command('ismaster')
+        except ConnectionFailure:
+            return "Server not available"
+        return "Server available"
 
     def getRecentTweets(self, query, limit):
         """Returns a list of recent tweets"""

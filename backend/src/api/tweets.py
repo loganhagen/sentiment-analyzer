@@ -1,5 +1,4 @@
 """API route for handling anything that pertains to tweets"""
-import os
 from flask import jsonify
 from flask_restx import Namespace, Resource
 from src.lib.tweetList import TweetList
