@@ -68,6 +68,11 @@ lint_backend:
 
 test_backend:
   stage: test
+  variables:
+    MONGO_USERNAME: "root"
+    MONGO_PASSWORD: "example"
+    MONGO_HOSTNAME: "host.docker.internal"
+    MONGO_PORT: "27017"
   script:
     - cd ./backend
     - apk update
