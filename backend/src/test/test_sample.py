@@ -1,13 +1,11 @@
 """PyTest example to see if PyTest works in GitLab CI Pipeline"""
 import os
+import pytest
+from src.lib.tweetList import TweetList
 
-def func(test_var):
-    """function"""
-    return test_var + 1
+@pytest.fixture
+def emptyTweetList():
+    return TweetList()
 
-def test_answer():
-    """Function test"""
-    assert func(3) == 4
-
-def test_env():
-    assert os.environ.get("MONGO_USERNAME") == "root"
+def test_TweepyBearerToken(emptyTweetList):
+    assert emptyTweetList.getTweepyBearerToken() == os.environ.get("BEARER_TOKEN")

@@ -18,6 +18,9 @@ class TweetList:
         self.query_result = None
         self.tweet_list = []
 
+    def getTweepyBearerToken(self):
+        return self.tweepy_client.bearer_token
+
     def getRecentTweets(self, query, limit):
         """Returns a list of recent tweets"""
         self.query_result = tweepy.Paginator(
