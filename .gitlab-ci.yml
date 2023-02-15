@@ -24,6 +24,7 @@ lint_frontend:
   script:
     - cd ./frontend
     - npm install
+    - npm run format
     - npm run lint
   dependencies:
     - build_frontend

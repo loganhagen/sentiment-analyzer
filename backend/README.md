@@ -19,3 +19,7 @@ When making any changes to the backend files, make sure to update all containers
 ### Adding Python Libraries
 ---
 If you add any python libraries, it is important to `$ pip freeze --all > requirements.txt` so that the docker container is able to install and update all dependencies for the backend whenever rebuilding the container.
+---
+### Linting
+run `$ pylint --rcfile .pylintrc src/` from within the backend folder
+---
