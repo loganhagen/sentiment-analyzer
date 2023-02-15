@@ -8,7 +8,7 @@ import pymongo
 import tweepy
 # from textblob import TextBlob
 
-mongo_uri = 'mongodb://' + os.environ.get['MONGO_USERNAME'] + ':' + os.environ.get['MONGO_PASSWORD'] + '@' + os.environ.get['MONGO_HOSTNAME'] + ':27017'
+mongo_uri = 'mongodb://' + os.environ.get('MONGO_USERNAME') + ':' + os.environ.get('MONGO_PASSWORD') + '@' + os.environ.get('MONGO_HOSTNAME') + ':27017'
 
 class TweetList:
     """Class that handles tweets for our backend API"""    
