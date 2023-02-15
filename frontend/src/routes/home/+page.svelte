@@ -1,5 +1,4 @@
 <script>
-	import { onMount } from 'svelte';
 	import Size from './size.svelte';
 	import Random from './random.svelte';
 </script>

@@ -1,5 +1,4 @@
 <script>
-	import { onMount } from 'svelte';
 	let random = 'N/A';
 
 	async function getRandomTweet() {
