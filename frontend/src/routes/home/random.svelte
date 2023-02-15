@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	let random = 'N/A';
 
 	async function getRandomTweet() {
