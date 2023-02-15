@@ -1,6 +1,8 @@
 """docstring"""
 
+import os
 from flask import Flask
+from flask_cors import CORS
 
 #import API Blueprint object created in api/__init__.py
 from src.api import api_bp
@@ -16,6 +18,7 @@ def create_app():
     """
 
     app = Flask(__name__)
+    CORS(app, resources={r"/api/*": {"origins": "*"}})
     app.config.from_object("src.config.DevelopmentConfig")
 
     #Register the blueprint to the Flask object (app) with a url route

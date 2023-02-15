@@ -8,10 +8,8 @@ api = Namespace('tweets', description='Tweet related operations')
 t = TweetList(os.environ.get("BEARER_TOKEN"))
 
 class Tweets(Resource):
-    """_summary_
-
-    Args:
-        Resource (_type_): _description_
+    """
+    Handles API calls for all tweets
     """
     def get(self):
         """Get a list of tweets"""
@@ -20,10 +18,8 @@ class Tweets(Resource):
         """Add a new list of tweets"""
 
 class Tweet(Resource):
-    """_summary_
-
-    Args:
-        Resource (_type_): _description_
+    """
+    Handles single tweet api calls
     """
 
     def get(self, tweet_id):
@@ -37,31 +33,25 @@ class Tweet(Resource):
 
 
 class RandomTweet(Resource):
-    """_summary_
-
-    Args:
-        Resource (_type_): _description_
+    """
+    Returns a random tweet
     """
 
     def get(self):
         """Get a random tweet"""
         doc = t.getRandomDocument("UBI", "tweets")
         response = jsonify({"tweet" : str(doc["content"])})
-        response.headers.add('Access-Control-Allow-Origin', '*')
         return response
 
 class Size(Resource):
-    """_summary_
-
-    Args:
-        Resource (_type_): _description_
+    """
+    Returns total amount of tweets in database collection
     """
 
     def get(self):
         """Get total number of tweets"""
         collection_size = t.getCollectionSize("UBI", "tweets")
         response = jsonify({"size" : collection_size})
-        response.headers.add('Access-Control-Allow-Origin', '*')
         return response
 
 # Define routes for the API

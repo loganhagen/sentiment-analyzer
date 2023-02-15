@@ -32,7 +32,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=example
       - MONGO_INITDB_DATABASE=task-management
-
+      
   backend:
     # build specifies the build configuration of the image. In our case we want to build the backend image from the Dockerfile inside the ./backend folder
     # build can be specified either as a string containing a path to the build context
@@ -45,8 +45,8 @@ services:
       # You can also add build arguments, which are environment variables accessible only during the build process.
       # You can access this build arguments/override the build args in the Dockerfile
       # More info can be found here: https://docs.docker.com/compose/compose-file/compose-file-v3/#args
-      args:
-        - FLASK_APP=app.py
+      #args:
+        
 
     # This will override the default run command in the CMD of your Dockerfile
     # This is helpful because we can use docker-compose.yaml `command` for development and configure the CMD for production
@@ -71,6 +71,8 @@ services:
       - MONGO_HOSTNAME=host.docker.internal
       - MONGO_PORT=27017
       - MONGO_DATABASE_NAME=task-management
+      - FLASK_APP=app.py
+      - FLASK_DEBUG=1
 
     # This creates interactive mode which lets us execute commands in a shell when the container is running.
     stdin_open: true
