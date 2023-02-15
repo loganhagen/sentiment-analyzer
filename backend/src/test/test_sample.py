@@ -12,3 +12,10 @@ def test_TweepyBearerToken(emptyTweetList):
 
 def test_getMongoClientStatus(emptyTweetList):
     assert emptyTweetList.getMongoClientStatus() == "Server available"
+
+def test_numTweetsInEmptyList(emptyTweetList):
+    assert emptyTweetList.getNumTweets() == 0
+
+def test_readFromJSON(emptyTweetList):
+    emptyTweetList.readFromJSON("tweets.json")
+    assert emptyTweetList.getNumTweets() > 0

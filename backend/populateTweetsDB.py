@@ -7,3 +7,5 @@ t = TweetList()
 t.readFromJSON("tweets.json")
 
 t.pushToDB("UBI", "tweets")
+
+print(t.getCollectionSize("UBI", "tweets"))
