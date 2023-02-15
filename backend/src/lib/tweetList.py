@@ -1,18 +1,20 @@
 """Class that handles tweets for our backend API"""
+import os
 import csv
 import json
-# from textblob import TextBlob
 from datetime import datetime
 from pymongo import MongoClient
 import pymongo
 import tweepy
+# from textblob import TextBlob
 
+mongo_uri = 'mongodb://' + os.environ['MONGO_USERNAME'] + ':' + os.environ['MONGO_PASSWORD'] + '@' + os.environ['MONGO_HOSTNAME'] + ':27017'
 
 class TweetList:
     """Class that handles tweets for our backend API"""    
     def __init__(self, bearer_token):
         self.tweepy_client = tweepy.Client(bearer_token=bearer_token)
-        self.mongo_client = MongoClient('mongodb://%s:%s@127.0.0.1' % ("root", "example"))
+        self.mongo_client = MongoClient(mongo_uri)
         self.query_result = None
         self.tweet_list = []
 

@@ -1,23 +1,20 @@
 <script>
 	import { onMount } from "svelte";
-	let totalPosts = -1;
+	let totalPosts = 0
 	let random = "N/A"
 
-	const sizeEndpoint = "http://localhost:8080/tweets/size";
+	const sizeEndpoint = "http://localhost:8080/api/tweets/size";
 	onMount(async function() {
 		const sizeResponse = await fetch(sizeEndpoint);
 		const sizeJSON = await sizeResponse.json()
 		totalPosts = sizeJSON["size"]
-		
 	});
 
 	async function getRandomTweet() {
-		const response = await fetch("http://localhost:8080/api/health", )
+		const response = await fetch("http://localhost:8080/api/tweets/random", )
 		const responseJSON = await response.json()
-
-		random = responseJSON["message"]
+		random = responseJSON["tweet"]
 	}
-
 
 </script>
 
@@ -26,8 +23,6 @@
 	<p class="px-2"> Total Posts: {totalPosts}</p>
 	<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" on:click={getRandomTweet}>Get Random Tweet</button>
 	<p>{random}</p>
-
-
 </main>
 
 <style lang="postcss">

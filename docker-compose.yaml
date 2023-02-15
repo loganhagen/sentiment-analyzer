@@ -32,7 +32,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=example
       - MONGO_INITDB_DATABASE=task-management
-
+      
   backend:
     # build specifies the build configuration of the image. In our case we want to build the backend image from the Dockerfile inside the ./backend folder
     # build can be specified either as a string containing a path to the build context
