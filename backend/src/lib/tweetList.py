@@ -12,8 +12,8 @@ mongo_uri = 'mongodb://' + os.environ.get('MONGO_USERNAME') + ':' + os.environ.g
 
 class TweetList:
     """Class that handles tweets for our backend API"""    
-    def __init__(self, bearer_token):
-        self.tweepy_client = tweepy.Client(bearer_token=bearer_token)
+    def __init__(self):
+        self.tweepy_client = tweepy.Client(os.environ.get("BEARER_TOKEN"))
         self.mongo_client = MongoClient(mongo_uri)
         self.query_result = None
         self.tweet_list = []

@@ -5,7 +5,7 @@ from flask_restx import Namespace, Resource
 from src.lib.tweetList import TweetList
 
 api = Namespace('tweets', description='Tweet related operations')
-t = TweetList(os.environ.get("BEARER_TOKEN"))
+t = TweetList()
 
 class Tweets(Resource):
     """
