@@ -19,6 +19,7 @@ class TweetList:
         self.tweepy_client = tweepy.Client(os.environ.get("BEARER_TOKEN"))
         self.mongo_client = None
 
+        # Return a mock database to the client variable is the DB_TEST env variable is raised.
         if test_db == '1':
             self.mongo_client = mongomock.MongoClient()
         elif test_db == '0':
