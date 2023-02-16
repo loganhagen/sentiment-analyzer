@@ -105,6 +105,8 @@ class TweetList:
         with open(filename, "w", encoding="UTF-8") as file:
             file.write(obj)
 
+        return 1
+
     def readFromJSON(self, filename):
         """Reads the tweet list from a JSON file"""
         with open(filename, "r", encoding="UTF-8") as file:
