@@ -3,8 +3,6 @@ import os
 import pytest
 from src.lib.tweetList import TweetList
 
-os.environ["TEST_DB"] = '1'
-
 @pytest.fixture
 def emptyTweetList():
     '''Initialize an empty TweetList object.'''
