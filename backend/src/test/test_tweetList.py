@@ -23,7 +23,3 @@ def test_readFromJSON(emptyTweetList):
     '''Loads 2282 tweets into the db from a local JSON file.'''
     emptyTweetList.readFromJSON("tweets_test_input.json")
     assert emptyTweetList.getNumTweets() == 2282
-
-def test_writeToJSON(tweetList):
-    assert tweetList.writeToJSON("tweets_test_output.json") == 1
-

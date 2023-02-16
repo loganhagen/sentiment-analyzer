@@ -22,7 +22,7 @@ class TweetList:
         # Return a mock database to the client variable is the DB_TEST env variable is raised.
         if test_db == '1':
             self.mongo_client = mongomock.MongoClient()
-        elif test_db == '0':
+        else:
             self.mongo_client = MongoClient(mongo_uri)
         
         self.query_result = None
