@@ -7,15 +7,25 @@ from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 import pymongo
 import tweepy
+import mongomock
 # from textblob import TextBlob
 
 mongo_uri = 'mongodb://' + os.environ.get('MONGO_USERNAME') + ':' + os.environ.get('MONGO_PASSWORD') + '@' + os.environ.get('MONGO_HOSTNAME') + ':27017'
+test_db = os.environ.get('TEST_DB')
+print(test_db)
 
 class TweetList:
     """Class that handles tweets for our backend API"""    
     def __init__(self):
         self.tweepy_client = tweepy.Client(os.environ.get("BEARER_TOKEN"))
-        self.mongo_client = MongoClient(mongo_uri)
+        self.mongo_client = None
+
+        if test_db == '1':
+            self.mongo_client = mongomock.MongoClient()
+        elif test_db == '0':
+            pass
+            # self.mongo_client = MongoClient(mongo_uri)
+        
         self.query_result = None
         self.tweet_list = []
 
