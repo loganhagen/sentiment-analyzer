@@ -82,6 +82,7 @@ test_backend:
     - apk add --no-cache python3-dev 
     - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
+    - export DB_TEST=1
     - python -m pytest src/test/
   dependencies:
     - build_backend
