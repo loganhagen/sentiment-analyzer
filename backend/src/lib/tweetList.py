@@ -4,19 +4,39 @@ import csv
 import json
 from datetime import datetime
 from pymongo import MongoClient
+from pymongo.errors import ConnectionFailure
 import pymongo
 import tweepy
+import mongomock
 # from textblob import TextBlob
 
-mongo_uri = 'mongodb://' + os.environ['MONGO_USERNAME'] + ':' + os.environ['MONGO_PASSWORD'] + '@' + os.environ['MONGO_HOSTNAME'] + ':27017'
+mongo_uri = 'mongodb://' + os.environ.get('MONGO_USERNAME') + ':' + os.environ.get('MONGO_PASSWORD') + '@' + os.environ.get('MONGO_HOSTNAME') + ':27017'
+test_db = os.environ.get('DB_TEST')
 
 class TweetList:
     """Class that handles tweets for our backend API"""    
-    def __init__(self, bearer_token):
-        self.tweepy_client = tweepy.Client(bearer_token=bearer_token)
-        self.mongo_client = MongoClient(mongo_uri)
+    def __init__(self):
+        self.tweepy_client = tweepy.Client(os.environ.get("BEARER_TOKEN"))
+        self.mongo_client = None
+
+        # Return a mock database to the client variable is the DB_TEST env variable is raised.
+        if test_db == '1':
+            self.mongo_client = mongomock.MongoClient()
+        else:
+            self.mongo_client = MongoClient(mongo_uri)
+        
         self.query_result = None
         self.tweet_list = []
+
+    def getTweepyBearerToken(self):
+        return self.tweepy_client.bearer_token
+
+    def getMongoClientStatus(self):
+        try:
+            self.mongo_client.admin.command('ismaster')
+        except ConnectionFailure:
+            return "Server not available"
+        return "Server available"
 
     def getRecentTweets(self, query, limit):
         """Returns a list of recent tweets"""
@@ -41,6 +61,9 @@ class TweetList:
                 )
             )
 
+    def emptyList(self):
+        self.tweet_list.clear()
+        
     def getNumTweets(self):
         """Returns the number of tweets"""
         return len(self.tweet_list)
@@ -82,6 +105,8 @@ class TweetList:
         with open(filename, "w", encoding="UTF-8") as file:
             file.write(obj)
 
+        return 1
+
     def readFromJSON(self, filename):
         """Reads the tweet list from a JSON file"""
         with open(filename, "r", encoding="UTF-8") as file:
@@ -95,6 +120,7 @@ class TweetList:
                     l["content"])
                 )
 
+    # This is a very slow function.
     def pushToDB(self, database, collection):
         """Pushes the tweet list to the database"""
         db = self.mongo_client[database]
@@ -113,7 +139,7 @@ class TweetList:
             except pymongo.errors.DuplicateKeyError:
                 continue
 
-    def getCollection(self, database, collection, filename):
+    def writeCollectionToJSON(self, database, collection, filename):
         """Returns a collection from the database"""
         db = self.mongo_client[database]
         cl = db[collection]

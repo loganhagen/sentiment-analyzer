@@ -68,6 +68,14 @@ lint_backend:
 
 test_backend:
   stage: test
+  variables:
+    MONGO_USERNAME: "root"
+    MONGO_PASSWORD: "root"
+    MONGO_HOSTNAME: "mongo"
+    MONGO_PORT: "27017"
+    BEARER_TOKEN: "AAAAAAAAAAAAAAAAAAAAAFvZlQEAAAAAKJ2aLLYYPFSQyRsPgwSonDACeT0%3DwJjK63Eys0ixVHxTaYjTs9eBgOIOrDkOKytKcixt1m4WX3X4Yi"
+    FLASK_APP: "app.py"
+    DB_TEST: '1'
   script:
     - cd ./backend
     - apk update
@@ -75,7 +83,7 @@ test_backend:
     - apk add --no-cache python3-dev 
     - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
-    - pytest
+    - python -m pytest src/test/
   dependencies:
     - build_backend
   allow_failure: false

@@ -72,7 +72,7 @@ services:
       - MONGO_PORT=27017
       - MONGO_DATABASE_NAME=task-management
       - FLASK_APP=app.py
-      - FLASK_DEBUG=1
+      - BEARER_TOKEN=AAAAAAAAAAAAAAAAAAAAAFvZlQEAAAAAKJ2aLLYYPFSQyRsPgwSonDACeT0%3DwJjK63Eys0ixVHxTaYjTs9eBgOIOrDkOKytKcixt1m4WX3X4Yi
 
     # This creates interactive mode which lets us execute commands in a shell when the container is running.
     stdin_open: true
