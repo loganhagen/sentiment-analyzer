@@ -1,0 +1,8 @@
+# https://docs.gitlab.com/ee/user/clusters/agent/
+# File must end with .yaml not .yml
+# https://docs.gitlab.com/ee/user/clusters/agent/gitops.html#gitops-configuration-reference
+gitops:
+  manifest_projects:
+    - id: "24696" # * Project ID is acts an identifier for the path to a Git repository that has Kubernetes manifests in YAML or JSON format.
+      paths:
+        - glob: "/manifests/*.{yaml,yml}"
