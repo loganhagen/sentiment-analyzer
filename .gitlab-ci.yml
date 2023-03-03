@@ -44,21 +44,21 @@ build_backend:
   stage: build
   script:
     - cd ./backend
-    - apk update
-    - apk add py-pip
-    - apk add --no-cache python3-dev 
-    - pip install --upgrade pip
+    # - apk update
+    # - apk add py-pip
+    # - apk add --no-cache python3-dev 
+    # - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
   allow_failure: false
 
 lint_backend:
   stage: lint
   script:
-    - cd ./backend
-    - apk update
-    - apk add py-pip
-    - apk add --no-cache python3-dev
-    - pip install --upgrade pip
+    # - cd ./backend
+    # - apk update
+    # - apk add py-pip
+    # - apk add --no-cache python3-dev
+    # - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
     - cd ..
     - pylint --rcfile backend/.pylintrc backend/
@@ -78,10 +78,10 @@ test_backend:
     DB_TEST: '1'
   script:
     - cd ./backend
-    - apk update
-    - apk add py-pip
-    - apk add --no-cache python3-dev 
-    - pip install --upgrade pip
+    # - apk update
+    # - apk add py-pip
+    # - apk add --no-cache python3-dev 
+    # - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
     - python -m pytest src/test/
   dependencies:
