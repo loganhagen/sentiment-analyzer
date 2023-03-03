@@ -42,23 +42,25 @@ test_frontend:
 
 build_backend:
   stage: build
+  image: python:3.10.10-slim
   script:
     - cd ./backend
     # - apk update
     # - apk add py-pip
     # - apk add --no-cache python3-dev 
-    - pip install --upgrade pip
+    # - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
   allow_failure: false
 
 lint_backend:
   stage: lint
+  image: python:3.10.10-slim
   script:
     # - cd ./backend
     # - apk update
     # - apk add py-pip
     # - apk add --no-cache python3-dev
-    - pip install --upgrade pip
+    # - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
     - cd ..
     - pylint --rcfile backend/.pylintrc backend/
@@ -68,6 +70,7 @@ lint_backend:
 
 test_backend:
   stage: test
+  image: python:3.10.10-slim
   variables:
     MONGO_USERNAME: "root"
     MONGO_PASSWORD: "root"
@@ -81,7 +84,7 @@ test_backend:
     # - apk update
     # - apk add py-pip
     # - apk add --no-cache python3-dev 
-    - pip install --upgrade pip
+    # - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
     - python -m pytest src/test/
   dependencies:
