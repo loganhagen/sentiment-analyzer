@@ -48,7 +48,7 @@ build_backend:
     # - apk update
     # - apk add py-pip
     # - apk add --no-cache python3-dev 
-    # - pip install --upgrade pip
+    - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
   allow_failure: false
 
@@ -60,7 +60,7 @@ lint_backend:
     # - apk update
     # - apk add py-pip
     # - apk add --no-cache python3-dev
-    # - pip install --upgrade pip
+    - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
     - cd ..
     - pylint --rcfile backend/.pylintrc backend/
@@ -84,7 +84,7 @@ test_backend:
     # - apk update
     # - apk add py-pip
     # - apk add --no-cache python3-dev 
-    # - pip install --upgrade pip
+    - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
     - python -m pytest src/test/
   dependencies:
