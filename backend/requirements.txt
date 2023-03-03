@@ -79,7 +79,7 @@ textblob==0.17.1
 thinc==7.4.6
 tldextract==3.4.0
 tomli==2.0.1
-tomlkit==0.5.11
+tomlkit==
 tqdm==4.64.1
 tweepy==4.12.1
 typing_extensions==4.4.0
