@@ -56,7 +56,7 @@ lint_backend:
   stage: lint
   image: python:3.10.10-slim
   script:
-    # - cd ./backend
+    - cd ./backend
     # - apk update
     # - apk add py-pip
     # - apk add --no-cache python3-dev
