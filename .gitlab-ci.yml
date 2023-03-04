@@ -40,13 +40,11 @@ test_frontend:
     - build_frontend
   allow_failure: false
 
+image: python:3.10.10-slim
 build_backend:
   stage: build
   script:
     - cd ./backend
-    - apk update
-    - apk add py-pip
-    - apk add --no-cache python3-dev 
     - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
   allow_failure: false
@@ -55,9 +53,6 @@ lint_backend:
   stage: lint
   script:
     - cd ./backend
-    - apk update
-    - apk add py-pip
-    - apk add --no-cache python3-dev
     - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
     - cd ..
@@ -78,9 +73,6 @@ test_backend:
     DB_TEST: '1'
   script:
     - cd ./backend
-    - apk update
-    - apk add py-pip
-    - apk add --no-cache python3-dev 
     - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
     - python -m pytest src/test/
