@@ -1,6 +1,9 @@
 """Tests for languageProcessing.py"""
 import unittest
+import nltk
 from src.lib.languageProcessing import LanguageProcessing
+
+nltk.download('vader_lexicon')
 
 def test_language_processing():
     """Initialize a languageProcessing object"""

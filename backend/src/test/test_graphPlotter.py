@@ -1,6 +1,9 @@
 """Tests for graphPlotter.py"""
+import nltk
 from src.lib.languageProcessing import LanguageProcessing
 from src.lib.graphPlotter import GraphPlotter
+
+nltk.download('vader_lexicon')
 
 def test_sentiment_bar():
     """Test our bar plots by comparing a freshly built bar plot to a known JSON version of a plotly horizontal bar plot"""
