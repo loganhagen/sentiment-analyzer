@@ -40,8 +40,8 @@ test_frontend:
     - build_frontend
   allow_failure: false
 
-image: python:3.10.10-slim
 build_backend:
+  image: python:3.10.10-slim
   stage: build
   script:
     - cd ./backend
@@ -50,6 +50,7 @@ build_backend:
   allow_failure: false
 
 lint_backend:
+  image: python:3.10.10-slim
   stage: lint
   script:
     - cd ./backend
@@ -62,6 +63,7 @@ lint_backend:
   allow_failure: false
 
 test_backend:
+  image: python:3.10.10-slim
   stage: test
   variables:
     MONGO_USERNAME: "root"
