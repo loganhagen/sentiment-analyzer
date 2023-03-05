@@ -1,6 +1,4 @@
 """Initializes our API blueprint for our Flask app"""
-
-import nltk
 from flask import Blueprint
 from flask_restx import Api
 from src.api.health import api as health_ns
