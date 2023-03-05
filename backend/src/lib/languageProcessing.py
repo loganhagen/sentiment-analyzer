@@ -13,7 +13,7 @@ class LanguageProcessing:
         """Return sentiment analysis data as pandas dataframe"""
         return self.sentiment_analysis.polarity_scores(text)
 
-    def sentimentAnalysisToDataFrame(self, sentiment_scores: dict):
+    def sentimentToDataFrame(self, sentiment_scores: dict):
         """Return sentiment analysis data as pandas dataframe"""
         sent = ['Negative', 'Neutral', 'Positive', 'Compound']
         vals = sentiment_scores.values()
