@@ -4,7 +4,7 @@ import pandas as pd
 
 class GraphPlotter:
     """Class that uses Plotly to generate the graphs that will be used in the app"""
-    def plot_tweet_sentiment(self, df: pd.DataFrame, title:str=None, x_label:str=None, y_label:str=None):
+    def plotTweetSentiment(self, df: pd.DataFrame, title:str=None, x_label:str=None, y_label:str=None):
         """Generates a bar graph of the sentiment analysis data frame from a tweet"""
         fig = px.bar(
             data_frame=df, 

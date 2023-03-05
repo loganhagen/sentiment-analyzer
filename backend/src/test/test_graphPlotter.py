@@ -12,10 +12,10 @@ def test_sentiment_bar():
 
     # Use LanguageProcessing to create a dataframe for our sentiment analysis
     lp = LanguageProcessing()
-    df = lp.get_sentiment(test_str)
+    df = lp.getSentiment(test_str)
 
     gp = GraphPlotter()
-    result_json = gp.plot_tweet_sentiment(df)
+    result_json = gp.plotTweetSentiment(df)
 
     # Check if both JSON representations are the same
     assert sample_json == result_json

@@ -8,6 +8,7 @@ from pymongo.errors import ConnectionFailure
 import pymongo
 import tweepy
 import mongomock
+
 # from textblob import TextBlob
 
 mongo_uri = 'mongodb://' + os.environ.get('MONGO_USERNAME') + ':' + os.environ.get('MONGO_PASSWORD') + '@' + os.environ.get('MONGO_HOSTNAME') + ':27017'
@@ -177,6 +178,13 @@ class TweetList:
 
         for r in result:
             return r
+        
+    def getDocumentById(self, database, collection, tweet_id):
+        """Returns a document from the collection by querying for an id"""
+        db = self.mongo_client[database]
+        cl = db[collection]
+        result = cl.find_one( { "_id": tweet_id } ) 
+        return result
 
     class Tweet:
         """Class that represents a tweet as a data type"""
