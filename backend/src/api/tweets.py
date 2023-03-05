@@ -3,7 +3,6 @@ from flask import jsonify
 from flask_restx import Namespace, Resource
 from src.db.connect import DBConnect
 from src.lib.languageProcessing import LanguageProcessing
-import pandas as pd
 
 api = Namespace('tweets', description='Tweet related operations')
 dbc = DBConnect()
