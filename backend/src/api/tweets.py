@@ -3,7 +3,6 @@ from flask import jsonify
 from flask_restx import Namespace, Resource
 from src.lib.tweetList import TweetList
 from src.lib.languageProcessing import LanguageProcessing
-import pandas as pd
 
 api = Namespace('tweets', description='Tweet related operations')
 t = TweetList()
