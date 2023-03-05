@@ -16,12 +16,6 @@ ARG PORT=8080
 ENV PORT $PORT
 
 # The RUN stanza runs the commands mentioned while building the image
-# It is recommended to get the latest version of npm to get the latest security fixes
-# RUN apt-get update && apt-get -y upgrade
-# RUN apt add build-base
-# RUN apt add py-pip
-# RUN apt add --no-cache python3-dev 
-# RUN pip install --upgrade pip
 
 # WORKDIR creates the directory and changes the current working directory to the created directory
 WORKDIR /app/backend
@@ -34,7 +28,5 @@ RUN pip --no-cache-dir install -r requirements.txt
 # The EXPOSE STANZA informs Docker that the container listens on the specified network ports at runtime.
 EXPOSE $PORT
 
-# ARG FLASK_APP=app.py
-
 # CMD runs when you want to run a container from an image. This can be overridden in the docker compose file
-# CMD ["flask", "run"]
+#CMD ["flask", "run"]
