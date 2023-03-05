@@ -12,7 +12,8 @@ def test_sentiment_bar():
 
     # Use LanguageProcessing to create a dataframe for our sentiment analysis
     lp = LanguageProcessing()
-    df = lp.getSentiment(test_str)
+    sentiment = lp.getSentiment(test_str)
+    df = lp.sentimentToDataFrame(sentiment)
 
     gp = GraphPlotter()
     result_json = gp.plotTweetSentiment(df)
