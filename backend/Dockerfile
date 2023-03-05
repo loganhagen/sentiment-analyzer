@@ -4,7 +4,7 @@
 # A Dockerfile must begin with a FROM clause. There are pre-built images in the Docker Hub registry. 
 # Since we are building a Node application we are pulling the node image from docker hub 
 # We use alpine as it is lightweight and our backend only needs to run python
-FROM alpine:latest
+FROM python:3.10.10-slim
 
 # The ARG stanza defines a variable that users can pass at build-time
 ARG PORT=8080
@@ -16,11 +16,6 @@ ARG PORT=8080
 ENV PORT $PORT
 
 # The RUN stanza runs the commands mentioned while building the image
-# It is recommended to get the latest version of npm to get the latest security fixes
-RUN apk update
-RUN apk add py-pip
-RUN apk add --no-cache python3-dev 
-RUN pip install --upgrade pip
 
 # WORKDIR creates the directory and changes the current working directory to the created directory
 WORKDIR /app/backend
@@ -32,8 +27,6 @@ RUN pip --no-cache-dir install -r requirements.txt
 # Last we expose the PORT 8080.
 # The EXPOSE STANZA informs Docker that the container listens on the specified network ports at runtime.
 EXPOSE $PORT
-
-ARG FLASK_APP=app.py
 
 # CMD runs when you want to run a container from an image. This can be overridden in the docker compose file
 #CMD ["flask", "run"]

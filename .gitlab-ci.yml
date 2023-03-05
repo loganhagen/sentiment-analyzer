@@ -41,23 +41,19 @@ test_frontend:
   allow_failure: false
 
 build_backend:
+  image: python:3.10.10-slim
   stage: build
   script:
     - cd ./backend
-    - apk update
-    - apk add py-pip
-    - apk add --no-cache python3-dev 
     - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
   allow_failure: false
 
 lint_backend:
+  image: python:3.10.10-slim
   stage: lint
   script:
     - cd ./backend
-    - apk update
-    - apk add py-pip
-    - apk add --no-cache python3-dev
     - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
     - cd ..
@@ -67,6 +63,7 @@ lint_backend:
   allow_failure: false
 
 test_backend:
+  image: python:3.10.10-slim
   stage: test
   variables:
     MONGO_USERNAME: "root"
@@ -78,9 +75,6 @@ test_backend:
     DB_TEST: '1'
   script:
     - cd ./backend
-    - apk update
-    - apk add py-pip
-    - apk add --no-cache python3-dev 
     - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
     - python -m pytest src/test/
