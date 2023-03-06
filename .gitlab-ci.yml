@@ -43,6 +43,7 @@ test_frontend:
 build_backend:
   image: python:3.10.10-slim
   stage: build
+  image: python:3.10.10-slim
   script:
     - cd ./backend
     - pip install --upgrade pip
@@ -52,6 +53,7 @@ build_backend:
 lint_backend:
   image: python:3.10.10-slim
   stage: lint
+  image: python:3.10.10-slim
   script:
     - cd ./backend
     - pip install --upgrade pip
@@ -65,6 +67,7 @@ lint_backend:
 test_backend:
   image: python:3.10.10-slim
   stage: test
+  image: python:3.10.10-slim
   variables:
     MONGO_USERNAME: "root"
     MONGO_PASSWORD: "root"

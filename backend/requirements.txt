@@ -40,6 +40,7 @@ platformdirs==2.6.2
 plone.rfc822==2.0.2
 plotly==5.13.1
 pluggy==1.0.0
+profanity-filter
 pylint==2.16.1
 pymongo==4.3.3
 pyparsing==3.0.9
