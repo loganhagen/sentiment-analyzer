@@ -15,4 +15,10 @@ def test_NewPosts(reddit):
     reddit.getNewPosts()
     post_list = reddit.getPostList()
     assert 100 == len(post_list)
+
+
+def test_TopPosts(reddit):
+    reddit.getTopPosts()
+    post_list = reddit.getPostList()
+    assert 100 == len(post_list)
     
