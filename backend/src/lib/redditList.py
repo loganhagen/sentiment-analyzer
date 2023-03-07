@@ -37,7 +37,7 @@ class RedditList:
     
     def getHotPosts(self):
         """Adds hot posts to postList"""
-        redRes = requests.get('https://oauth.reddit.com/r/basicincome/hot',params={'limit': '2'},headers=self.headers,timeout=5)
+        redRes = requests.get('https://oauth.reddit.com/r/basicincome/hot',params={'limit': '100'},headers=self.headers,timeout=5)
         self.query_result = redRes.json()['data']['children']
         self.initPostList()
 
@@ -137,7 +137,7 @@ class RedditList:
 
     
 
-if __name__ == "__main__":
-    reddit = RedditList()
-    reddit.getTopPost()
-    print(reddit.getNumPosts())
+#if __name__ == "__main__":
+#    reddit = RedditList()
+#    reddit.getTopPost()
+#    print(reddit.getNumPosts())
