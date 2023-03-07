@@ -51,7 +51,7 @@ class RedditList:
 
 
 
-    def getTopPost(self):
+    def getTopPosts(self):
         redRes = requests.get('https://oauth.reddit.com/r/basicincome/top',params={'limit': '100','t': 'all'},headers=self.headers,timeout=5)
         self.query_result = redRes.json()['data']['children']
         self.initPostList()
