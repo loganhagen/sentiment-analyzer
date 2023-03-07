@@ -40,7 +40,7 @@ class RandomTweet(Resource):
     def get(self):
         """Get a random tweet"""
         doc = t.getRandomDocument("UBI", "tweets")
-        response = jsonify({"tweet" : str(doc["content"]), "id": str(doc["_id"])})
+        response = jsonify({"text" : str(doc["content"]), "id": str(doc["_id"]), "date": str(doc["created_at"]), "type": "tweet"})
 
         return response
 
