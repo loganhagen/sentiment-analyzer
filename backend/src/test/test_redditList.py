@@ -10,3 +10,9 @@ def test_HotPosts(reddit):
     reddit.getHotPosts()
     post_list = reddit.getPostList()
     assert 100 == len(post_list)
+
+def test_NewPosts(reddit):
+    reddit.getNewPosts()
+    post_list = reddit.getPostList()
+    assert 100 == len(post_list)
+    
