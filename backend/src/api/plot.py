@@ -18,12 +18,19 @@ class SentimentPlot(Resource):
     Creates a plot of the sentiment of a given tweets
     """
     
-    def get(self, tweet_id):
-        """Returns a plot of the sentiment of a given tweet"""
+    def get(self, collection, post_id):
 
-        doc = t.getDocumentById("UBI", "tweets", tweet_id)
-        tweet_text = str(doc["content"])
-        sentiment = lp.getSentiment(tweet_text)
+        """Returns a plot of the sentiment of a given tweet"""
+        if collection == "tweet":
+            collection = "tweets"
+        elif collection == "reddit":
+            collection = "reddit"
+        else:
+            return {"message": "Invalid collection"}, 400
+
+        doc = t.getDocumentById("UBI", collection, post_id)
+        text = str(doc["content"])
+        sentiment = lp.getSentiment(text)
         df = lp.sentimentToDataFrame(sentiment)
 
         plot = gp.plotTweetSentiment(df)
@@ -31,4 +38,4 @@ class SentimentPlot(Resource):
         return plot
 
 
-api.add_resource(SentimentPlot, "/sentiment/<string:tweet_id>")
+api.add_resource(SentimentPlot, "/sentiment/<string:collection>/<string:post_id>")
