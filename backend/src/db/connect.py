@@ -56,3 +56,11 @@ class DBConnect:
 
         for document in col.find({}):
             col.update_one(document, {"$set": {"content" : pf.censor(document["content"])}})
+
+    def getDocumentById(self, database, collection, tweet_id):
+        """Returns a document from the collection by querying for an id"""
+        db = self.client[database]
+        cl = db[collection]
+        result = cl.find_one( { "_id": tweet_id } ) 
+        
+        return result

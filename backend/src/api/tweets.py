@@ -5,6 +5,7 @@ from flask_restx import Namespace, Resource
 from src.db.connect import DBConnect
 
 api = Namespace('tweets', description='Tweet related operations')
+dbc = DBConnect()
 
 class Tweets(Resource):
     """
@@ -38,7 +39,6 @@ class RandomTweet(Resource):
 
     def get(self):
         """Get a random tweet"""
-        dbc = DBConnect()
         doc = dbc.getRandomDocument("UBI", "tweets")
         response = jsonify({"tweet" : str(doc["content"]), "id": str(doc["_id"])})
 
@@ -53,7 +53,6 @@ class Size(Resource):
         """
         Get total number of tweets from database collection
         """
-        dbc = DBConnect()
         collection_size = dbc.getCollectionSize("UBI", "tweets")
         response = jsonify({"size" : collection_size})
         return response
