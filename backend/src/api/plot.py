@@ -33,7 +33,7 @@ class SentimentPlot(Resource):
         sentiment = lp.getSentiment(text)
         df = lp.sentimentToDataFrame(sentiment)
 
-        plot = gp.plotTweetSentiment(df)
+        plot = gp.plotPostSentiment(df)
 
         return plot
 
