@@ -3,6 +3,7 @@ from flask import jsonify
 from flask_restx import Namespace, Resource
 from src.lib.tweetList import TweetList
 from src.lib.languageProcessing import LanguageProcessing
+from flask_cors import cross_origin
 
 api = Namespace('tweets', description='Tweet related operations')
 t = TweetList()
@@ -36,7 +37,7 @@ class RandomTweet(Resource):
     """
     Returns a random tweet
     """
-
+    @cross_origin()
     def get(self):
         """Get a random tweet"""
         doc = t.getRandomDocument("UBI", "tweets")
@@ -48,7 +49,7 @@ class Size(Resource):
     """
     Returns total amount of tweets in database collection
     """
-
+    @cross_origin()
     def get(self):
         """
         Get total number of tweets from database collection
@@ -62,7 +63,7 @@ class Sentiment(Resource):
     """
     Handles sentiment api calls on tweets
     """
-
+    @cross_origin()
     def get(self, tweet_id:str):
         """
         Get the sentiment of a tweet by ID
