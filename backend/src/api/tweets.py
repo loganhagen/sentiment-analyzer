@@ -1,11 +1,11 @@
 """API route for handling anything that pertains to tweets"""
 from flask import jsonify
 from flask_restx import Namespace, Resource
-from src.lib.tweetList import TweetList
 #from src.lib.languageProcessing import LanguageProcessing
+from src.db.connect import DBConnect
 
 api = Namespace('tweets', description='Tweet related operations')
-t = TweetList()
+dbc = DBConnect()
 
 class Tweets(Resource):
     """
@@ -39,7 +39,7 @@ class RandomTweet(Resource):
 
     def get(self):
         """Get a random tweet"""
-        doc = t.getRandomDocument("UBI", "tweets")
+        doc = dbc.getRandomDocument("UBI", "tweets")
         response = jsonify({"tweet" : str(doc["content"]), "id": str(doc["_id"])})
 
         return response
@@ -53,7 +53,7 @@ class Size(Resource):
         """
         Get total number of tweets from database collection
         """
-        collection_size = t.getCollectionSize("UBI", "tweets")
+        collection_size = dbc.getCollectionSize("UBI", "tweets")
         response = jsonify({"size" : collection_size})
         return response
 
