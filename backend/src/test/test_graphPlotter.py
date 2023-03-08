@@ -16,7 +16,7 @@ def test_plotPostSentiment():
     df = lp.sentimentToDataFrame(sentiment)
 
     gp = GraphPlotter()
-    result_json = gp.plotTweetSentiment(df)
+    result_json = gp.plotPostSentiment(df)
 
     # Check if both JSON representations are the same
     assert sample_json == result_json
