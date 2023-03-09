@@ -259,4 +259,4 @@ class RedditList:
                 'date': str(self.date),
                 'body': str(self.body)
             }
-
+        
