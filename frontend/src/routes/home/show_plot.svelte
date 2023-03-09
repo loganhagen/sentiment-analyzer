@@ -1,13 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import type { Plot, Post } from '../../types';
-	import { sharedPlot, sharedPost } from './store';
+	import type { Plot } from '../../types';
+	import { sharedPlot } from './store';
 	import Plotly, { type Root } from 'plotly.js-dist-min';
 
 	//initialize variables
 	let plot: Plot;
 	let plot_div: Root;
-	let post: Post;
 
 	//Disables the intrusive plotly toolbar
 	const config = {
@@ -23,11 +22,6 @@
 			Plotly.react(plot_div, plot.data, plot.layout, config);
 			/* eslint-enable */
 		}
-	});
-
-	//Get post data from store whenever the data is changed
-	sharedPost.subscribe((data) => {
-		post = data;
 	});
 
 	//Load plot on component mount in slot
