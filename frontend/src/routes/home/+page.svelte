@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
 	import Size from './size.svelte';
 	import ShowPost from './show_post.svelte';
-	import SentimentPlot from './sentiment_plot.svelte';
+	import ShowPlot from './show_plot.svelte';
 	import type { Plot, Post } from '../../types';
 	import { sharedPost, sharedPlot } from './store';
 
@@ -62,9 +62,6 @@
 
 		//Update Sentiment Plot
 		await getSentimentPlot();
-
-		console.log(cur_post.text);
-		console.log(cur_plot);
 	}
 </script>
 
@@ -84,10 +81,11 @@
 		<!-- Display size of db -->
 		<Size />
 
-		<!-- Show Post Text and Date Posted -->
+		<!-- Show Post Text, Date Posted, and Post Source -->
 		<ShowPost />
 
-		<SentimentPlot />
+		<!-- Display Plot from store sharedData -->
+		<ShowPlot />
 	</div>
 </main>
 

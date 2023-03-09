@@ -14,4 +14,11 @@
 	<h1 class="text-left font-bold">Post:</h1>
 	<p>{post.text}</p>
 	<p class="text-left font-bold">Date: {post.date}</p>
+	{#if post.type == 'tweet'}
+		<p class="text-left font-bold">Source: Twitter</p>
+	{:else if post.type == 'reddit'}
+		<p class="text-left font-bold">Source: Twitter</p>
+	{:else}
+		<p class="text-left font-bold">Source: N/A</p>
+	{/if}
 </div>

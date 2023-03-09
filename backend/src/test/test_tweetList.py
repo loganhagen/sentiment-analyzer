@@ -1,7 +1,7 @@
 '''Tests for tweetList.py'''
 import os
 import pytest
-from src.lib.tweetList import TweetList
+from src.lib.twitter import Twitter as TweetList
 
 @pytest.fixture
 def emptyTweetList():
