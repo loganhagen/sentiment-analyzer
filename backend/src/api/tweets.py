@@ -1,7 +1,11 @@
 """API route for handling anything that pertains to tweets"""
 from flask import jsonify
 from flask_restx import Namespace, Resource
+<<<<<<< HEAD
 from src.db.connect import DBConnect
+=======
+from src.lib.tweetList import TweetList
+>>>>>>> b4d0630aa0e0d0601b6e0c6a944e6d9c76d17efb
 from src.lib.languageProcessing import LanguageProcessing
 from flask_cors import cross_origin
 
@@ -40,8 +44,13 @@ class RandomTweet(Resource):
     @cross_origin()
     def get(self):
         """Get a random tweet"""
+<<<<<<< HEAD
         doc = dbc.getRandomDocument("UBI", "tweets")
         response = jsonify({"tweet" : str(doc["content"]), "id": str(doc["_id"])})
+=======
+        doc = t.getRandomDocument("UBI", "tweets")
+        response = jsonify({"text" : str(doc["content"]), "id": str(doc["_id"]), "date": str(doc["created_at"]), "type": "tweet"})
+>>>>>>> b4d0630aa0e0d0601b6e0c6a944e6d9c76d17efb
 
         return response
 
@@ -69,7 +78,11 @@ class Sentiment(Resource):
         Get the sentiment of a tweet by ID
         """
         lp = LanguageProcessing()
+<<<<<<< HEAD
         doc = dbc.getDocumentById("UBI", "tweets", tweet_id)
+=======
+        doc = t.getDocumentById("UBI", "tweets", tweet_id)
+>>>>>>> b4d0630aa0e0d0601b6e0c6a944e6d9c76d17efb
         tweet_text = str(doc["content"])
         sentiment = lp.getSentiment(tweet_text)
         response = jsonify({"Sentiment Analysis": sentiment})
