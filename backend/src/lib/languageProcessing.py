@@ -9,12 +9,14 @@ class LanguageProcessing:
         """Initializes the VADER sentiment analyzer"""
         self.sentiment_analysis = SentimentIntensityAnalyzer()
 
-    def get_sentiment(self, text):
+    def getSentiment(self, text):
         """Return sentiment analysis data as pandas dataframe"""
-        scores = self.sentiment_analysis.polarity_scores(text)
+        return self.sentiment_analysis.polarity_scores(text)
 
+    def sentimentToDataFrame(self, sentiment_scores: dict):
+        """Return sentiment analysis data as pandas dataframe"""
         sent = ['Negative', 'Neutral', 'Positive', 'Compound']
-        vals = scores.values()
+        vals = sentiment_scores.values()
 
         df = pd.DataFrame(sent, columns=['Sentiment'])
         df['Sentiment Score'] = vals
