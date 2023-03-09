@@ -1,4 +1,5 @@
 import os
+import json
 from datetime import datetime
 import requests
 
@@ -83,6 +84,12 @@ class RedditList:
     def getPostList(self):
         """Returns the post list"""
         return self.postList
+    
+    def emptyPostList(self):
+        self.postList.clear()
+
+    def emptyCommentList(self):
+        self.commentList.clear()
 
     def postExists(self, post_id):
         """Returns true if post exists in postList"""
@@ -101,24 +108,22 @@ class RedditList:
             return False
         
         #FIX go through every post and add comments from the post
-        url = 'https://oauth.reddit.com/r/basicincome/comments/' + str(self.postList[0].post_id)
-        redRes = requests.get(url,params={'depth': '1'},headers=self.headers,timeout=5)
-        self.query_result = redRes.json()[1]['data']['children']['data']
-        self.initCommentList()
+        for post in self.postList:
+            url = 'https://oauth.reddit.com/r/basicincome/comments/' + str(post.getPostID())
+            redRes = requests.get(url,params={'depth': '1'},headers=self.headers,timeout=5)
+            self.query_result = redRes.json()[1]['data']['children']
+            self.initCommentList()
 
-
-        return None
+    def getNumComments(self):
+        return len(self.commentList)
     
     def initCommentList(self):
         """Add Comments to the commentList"""
         for child in self.query_result:
             author = child['data']['author']
             body = child['data']['body']
-            #convert to readable date time
             date = datetime.fromtimestamp(child['data']['created_utc'])
-            #parse to get rid of t3
-            post_id = child['data']['link_id']
-            
+            post_id = self.splitPostID(child['data']['link_id'])
             self.commentList.append(
                 self.Comment(
                     author,
@@ -128,6 +133,9 @@ class RedditList:
                 )
             )
 
+    def splitPostID(self,post_id):
+        """Splits post_id field from comment to return only the post id"""
+        return post_id.split('_',1)[1]
     
     class Post:
         """Class that represents a post"""
@@ -140,15 +148,22 @@ class RedditList:
             self.commentList = []
 
         def getPostID(self):
+            """Returns post id"""
             return self.post_id
         
         def setNumComments(self, num_comments):
+            """Sets the number of comments for the post"""
             self.num_comments = num_comments
+
+        def getNumComments(self):
+            return self.num_comments
         
         def getTitle(self):
+            """Returns the post title"""
             return self.title
         
         def getDate(self):
+            """Returns the post date"""
             return self.date
         
         def toDict(self):
