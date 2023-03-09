@@ -2,16 +2,16 @@
 import nltk
 #from flask import Response, jsonify
 from flask_restx import Namespace, Resource
-from src.lib.tweetList import TweetList
 from src.lib.languageProcessing import LanguageProcessing
 from src.lib.graphPlotter import GraphPlotter
+from src.db.connect import DBConnect
 
 nltk.download('vader_lexicon')
 
 api = Namespace('plot', description='Graph Plotting Related Operations')
-t = TweetList()
 lp = LanguageProcessing()
 gp = GraphPlotter()
+dbc = DBConnect()
 
 class SentimentPlot(Resource):
     """
@@ -28,7 +28,7 @@ class SentimentPlot(Resource):
         else:
             return {"message": "Invalid collection"}, 400
 
-        doc = t.getDocumentById("UBI", collection, post_id)
+        doc = dbc.getDocumentById("UBI", collection, post_id)
         text = str(doc["content"])
         sentiment = lp.getSentiment(text)
         df = lp.sentimentToDataFrame(sentiment)
