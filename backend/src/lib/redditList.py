@@ -52,6 +52,7 @@ class RedditList:
 
 
     def getTopPosts(self):
+        """Adds top posts to list"""
         redRes = requests.get('https://oauth.reddit.com/r/basicincome/top',params={'limit': '100','t': 'all'},headers=self.headers,timeout=5)
         self.query_result = redRes.json()['data']['children']
         self.initPostList()
@@ -62,20 +63,22 @@ class RedditList:
         for child in self.query_result:
             title = child['data']['title']
             author = child['data']['author']
-            created_utc = child['data']['created_utc']
+            created_utc = datetime.fromtimestamp(child['data']['created_utc'])
             post_id = child['data']['id']
+            num_comments = child['data']['num_comments']
 
             #check if post exists in post list
-            #i think this should be done in the database file instead
+            #i think this should be done in the database file as well
+            #database should check by id for repeating posts
             if not self.postExists(post_id):
-                self.postList.append(
-                    self.Post(
+                post = self.Post(
                         title,
                         author,
                         post_id,
                         created_utc
                     )
-                )
+                self.postList.append(post)
+                post.setNumComments(num_comments)
 
     def getPostList(self):
         """Returns the post list"""
@@ -96,19 +99,51 @@ class RedditList:
         """Gets a list of comments for each post in postList"""
         if not self.postList:
             return False
-    
+        
+        #FIX go through every post and add comments from the post
+        url = 'https://oauth.reddit.com/r/basicincome/comments/' + str(self.postList[0].post_id)
+        redRes = requests.get(url,params={'depth': '1'},headers=self.headers,timeout=5)
+        self.query_result = redRes.json()[1]['data']['children']['data']
+        self.initCommentList()
+
+
         return None
     
+    def initCommentList(self):
+        """Add Comments to the commentList"""
+        for child in self.query_result:
+            author = child['data']['author']
+            body = child['data']['body']
+            #convert to readable date time
+            date = datetime.fromtimestamp(child['data']['created_utc'])
+            #parse to get rid of t3
+            post_id = child['data']['link_id']
+            
+            self.commentList.append(
+                self.Comment(
+                    author,
+                    body,
+                    post_id,
+                    date
+                )
+            )
+
+    
     class Post:
-        def __init__(self, title, author, post_id, created_utc):
+        """Class that represents a post"""
+        def __init__(self, title, author, post_id, date):
             self.title = title
             self.author = author
             self.post_id = post_id
-            self.date = datetime.fromtimestamp(created_utc)
+            self.date = date
+            self.num_comments = 0
             self.commentList = []
 
         def getPostID(self):
             return self.post_id
+        
+        def setNumComments(self, num_comments):
+            self.num_comments = num_comments
         
         def getTitle(self):
             return self.title
@@ -126,18 +161,28 @@ class RedditList:
             }
         
     class Comment:
-        def __init__(self, author, comment, post_id, created_utc):
+        """Class that represents a a comment"""
+        def __init__(self, author, body, post_id, date):
             self.author = author
-            self.comment = comment
-            self.post_id = post_id
-            self.date = created_utc
+            self.body = body
+            self.post_id = self.parsePostID(post_id)
+            self.date = date
       
         def getComment(self):
-            return self.comment
+            """Returns comment"""
+            return self.body
+        
+        def parsePostID(self, post_id):
+            """Returns post id without subscript t3"""
+            #FIX parse the post_id
+            return post_id
+        
+        def toDict(self):
+            """Returns dictionary representation of Comment"""
+            #FIX
+            return None
 
-    
-
-#if __name__ == "__main__":
-#    reddit = RedditList()
-#    reddit.getTopPost()
-#    print(reddit.getNumPosts())
+if __name__ == "__main__":
+    reddit = RedditList()
+    reddit.getTopPosts()
+    reddit.getComments()
