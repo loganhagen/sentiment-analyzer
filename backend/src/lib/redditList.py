@@ -260,12 +260,3 @@ class RedditList:
                 'body': str(self.body)
             }
 
-
-if __name__ == "__main__":
-    reddit = RedditList()
-    reddit.getHotPosts()
-    reddit.getTopPosts()
-    reddit.getNewPosts()
-    reddit.getComments()
-    reddit.addCommentsToPost()
-    reddit.writeToFile('redditList.json')
