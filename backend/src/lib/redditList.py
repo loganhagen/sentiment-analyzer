@@ -247,7 +247,6 @@ class RedditList:
 
         def parsePostID(self, post_id):
             """Returns post id without subscript t3"""
-            #FIX parse the post_id
             return post_id
         
 
