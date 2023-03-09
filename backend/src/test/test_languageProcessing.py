@@ -14,6 +14,6 @@ def test_get_sentiment():
     test_str = "I really love NVIDIA"
     expected_results = [0.0, 0.308, 0.692, 0.6697]
     lp = LanguageProcessing()
-    df = lp.get_sentiment(test_str)
+    df = lp.getSentiment(test_str)
     # Use unittest module to compare the results
     unittest.TestCase().assertListEqual(list(df['Sentiment Score']), expected_results)

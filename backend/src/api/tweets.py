@@ -1,8 +1,9 @@
 """API route for handling anything that pertains to tweets"""
 from flask import jsonify
 from flask_restx import Namespace, Resource
-#from src.lib.languageProcessing import LanguageProcessing
 from src.db.connect import DBConnect
+from src.lib.languageProcessing import LanguageProcessing
+import pandas as pd
 
 api = Namespace('tweets', description='Tweet related operations')
 dbc = DBConnect()
@@ -63,22 +64,22 @@ class Sentiment(Resource):
     Handles sentiment api calls on tweets
     """
 
-    def get(self, tweet_id):
+    def get(self, tweet_id:str):
         """
         Get the sentiment of a tweet by ID
         """
-        #lp = LanguageProcessing()
+        lp = LanguageProcessing()
+        doc = dbc.getDocumentById("UBI", "tweets", tweet_id)
+        tweet_text = str(doc["content"])
+        sentiment = lp.getSentiment(tweet_text)
+        response = jsonify({"Sentiment Analysis": sentiment})
 
-        #!!!! Implement TweetList getDocument(db, collection, tweet_id)
-        #tweet_text = str(doc["content"])
-        #sentiment = lp.getSentiment(tweet_text)
-        #response = jsonify({"sentiment" : sentiment}) 
-        #return response
+        return response
 
 
 # Define routes for the API
 api.add_resource(Tweets, "")
-api.add_resource(Tweet, "/<int:tweet_id>")
+api.add_resource(Tweet, "/<string:tweet_id>")
 api.add_resource(RandomTweet, "/random")
 api.add_resource(Size, "/size")
-api.add_resource(Sentiment, "/<int:tweet_id>/sentiment")
+api.add_resource(Sentiment, "/sentiment/<string:tweet_id>")

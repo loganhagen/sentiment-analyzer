@@ -24,6 +24,7 @@
 		
 		//update our current tweet
 		cur_tweet = {tweet_text: text, tweet_id: id};
+		console.log(cur_tweet.tweet_id);
 
 		//solves promise error in dev console
 		return true;
