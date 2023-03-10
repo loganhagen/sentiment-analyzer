@@ -3,7 +3,6 @@ import json
 import re
 from typing import List
 import mongomock
-import nltk
 from nltk.corpus import stopwords
 from pymongo import MongoClient
 from profanity_filter import ProfanityFilter
@@ -78,9 +77,7 @@ class DBConnect:
     def cleanCollection(self, database: str, collection: str) -> None:
         db = self.client[database]
         cl = db[collection]
-        nltk.download("stopwords")
 
-        print("Cleaning...")
         for document in cl.find({}):
             result = document["content"]
             
@@ -98,4 +95,21 @@ class DBConnect:
             result = " ".join(tokens)
 
             cl.update_one(document, {"$set": {"content" : result}})
-        print("Completed.")
+
+    def cleanString(self, content : str) -> str:
+        # Copy parameter.
+        result = content
+        # Remove mentions
+        result = re.sub("@([a-zA-Z0-9_]{1,50})", "", result)
+        # Remove hashtags
+        result = re.sub("#([a-zA-Z0-9_]{1,50})", "", result)
+        # Remove hyperlinks
+        result = re.sub(r"http\S+", "", result)
+        # Remove newlines
+        result = re.sub("\n", "", result)
+        # Remove stop words
+        tokens = [word for word in result.split() if word.lower() not in stopwords.words('english')]
+        # Concatenate tokens.
+        result = " ".join(tokens)
+
+        return result
