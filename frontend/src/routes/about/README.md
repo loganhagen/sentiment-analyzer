@@ -73,7 +73,7 @@ Clicking on a word in the word cloud will take you to its definition in google. 
 
 ### Jonalton Hamilton- **Principle Reddit Engineer**
 
-### Kyle Lukaszek - **Level 9 DevOps Artisan****
+### Kyle Lukaszek - **Level 9 DevOps Artisan**
 
 ### Logan Hagen - **Lord of the Scrum**
 
@@ -85,7 +85,7 @@ Clicking on a word in the word cloud will take you to its definition in google. 
 
 ## Real Quotes by the team
 
-"When the USB antenna went down, our only choice was to disconnect and hack the neural array! This was pretty frustrating..." - Stefan
+"When the USB antenna went down, our only choice was to disconnect and hack the neural array!" - Stefan
 
 "Let me give you a preview of static npm; I think you'd appreciate the fact that it's flexible." - Kyle
 
@@ -94,3 +94,15 @@ Clicking on a word in the word cloud will take you to its definition in google. 
 "It's about time we crowdfund Node.js." - Tiffiny
 
 "If you neglect to deploy Kubernetes, prepare to handle Agile machine learning." - Jonalton
+
+## Tech Used to make website
+This can be expanded upon. Are these items correct, what is missing that should be here for sure. Anything you can rate highly that is nice to work with?
+
+### Backend
+- Python, Flask, pylint
+- mongoDB, pymongo
+
+### Frontend
+- Sveltekit
+- Typescript
+- Tailwind CSS
