@@ -73,6 +73,10 @@ services:
       - MONGO_DATABASE_NAME=task-management
       - FLASK_APP=app.py
       - BEARER_TOKEN=AAAAAAAAAAAAAAAAAAAAAFvZlQEAAAAAKJ2aLLYYPFSQyRsPgwSonDACeT0%3DwJjK63Eys0ixVHxTaYjTs9eBgOIOrDkOKytKcixt1m4WX3X4Yi
+      - REDDIT_USERNAME=Complex_Worry2833
+      - REDDIT_PASSWORD=Xa99bu94Eu6g
+      - CLIENT_ID=IeTiyJnJ3tE1ntCIz0dcyw
+      - SECRET_TOKEN=Rzttejco5MDht_FpCWJZxUv_CMyFtw
 
     # This creates interactive mode which lets us execute commands in a shell when the container is running.
     stdin_open: true
