@@ -5,13 +5,6 @@
 	let result = "";
 	let answer = "";
 
-	// onMount (async function () {
-	// 	const response = await fetch('http://localhost:8080/api/about');
-	// 	const responseJSON = await response.json();
-
-	// 	about = responseJSON["choices"][0]["text"]
-	// });
-
 	async function askQuestion () {
 		const res = await fetch('http://localhost:8080/api/about', {
 			method: 'POST',
@@ -29,8 +22,6 @@
 </script>
 
 <main>
-	<!-- <h1 class="px-2 py-4 text-4xl text-slate-500">About Universal Basic Income</h1>
-	<p>{about}</p> -->
 	<p>Q & A (Powered By OpenAI)</p>
 	<input bind:value={input} placeholder="Your question here...">
 	<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg" 
