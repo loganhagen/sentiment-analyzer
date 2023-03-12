@@ -99,3 +99,6 @@ class DBConnect:
 
             cl.update_one(document, {"$set": {"content" : result}})
         print("Completed.")
+
+    def closeConnection(self) -> None:
+        self.client.close()

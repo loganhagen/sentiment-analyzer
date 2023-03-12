@@ -1,3 +1,17 @@
+<script>
+</script>
+
+
 <main>
-	<h1 class="text-4xl px-4 py-4">This is the about page.</h1>
+	<div class="about">
+		<p>Hello, world!</p>
+	</div>
 </main>
+
+<style>
+.about 
+{
+	text-align:center;
+
+}
+</style>

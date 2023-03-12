@@ -77,6 +77,7 @@ services:
       - REDDIT_PASSWORD=Xa99bu94Eu6g
       - CLIENT_ID=IeTiyJnJ3tE1ntCIz0dcyw
       - SECRET_TOKEN=Rzttejco5MDht_FpCWJZxUv_CMyFtw
+      - OPENAI_API_KEY=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
 
     # This creates interactive mode which lets us execute commands in a shell when the container is running.
     stdin_open: true
