@@ -19,6 +19,7 @@ describe('Show Post', () => {
 		type: responseJSON['type']
 	};
 
+	//Set post data in the page/component related svelte store
 	sharedPost.set(post);
 
 	test('Check for correct text of post', () => {
