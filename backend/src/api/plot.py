@@ -6,8 +6,8 @@ from src.lib.languageProcessing import LanguageProcessing
 from src.lib.graphPlotter import GraphPlotter
 from src.db.connect import DBConnect
 
-nltk.download('vader_lexicon')
-nltk.download('stopwords')
+# nltk.download('vader_lexicon')
+# nltk.download('stopwords')
 
 api = Namespace('plot', description='Graph Plotting Related Operations')
 lp = LanguageProcessing()

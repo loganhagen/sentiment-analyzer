@@ -1,5 +1,4 @@
 """app.py"""
-import nltk
 from flask.cli import FlaskGroup
 from src import create_app
 
