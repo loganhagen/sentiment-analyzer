@@ -1,7 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
 	let question = "";
-	let result = "";
 	let answer = "";
 
 	async function askQuestion () {

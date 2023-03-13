@@ -1,9 +1,7 @@
 <script>
-    import { onMount } from 'svelte';
-
     let tweets = new Array();
 
-    onMount(async function () {
+    async function getTweets() {
             let response;
             var as = "";
 
@@ -20,14 +18,35 @@
             } else {
                 console.log(`HTTP response code: ${response?.status}`);
             }
-        });
+        }
 
 </script>
 
-{#each tweets as tweet, i}
-    <br>
-    <p>{i + 1}</p>
-    <p>{tweet["_id"]}</p>
-    <p>{tweet["content"]}</p>
-    <p ><a href="//twitter.com/user/status/{tweet["_id"]}" target="_blank" rel="noreferrer">Link to post</a></p>
-{/each} 
+<main>
+    <div>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg" 
+        on:click={getTweets}>Get Tweets!
+        </button>
+        <br>
+        {#each tweets as tweet, i}
+            <br>
+            <p>Post #{i + 1}</p>
+            <p>ID: {tweet["_id"]}</p>
+            <p>"{tweet["content"]}"</p>
+            <p>----</p>
+            <p><a href="//twitter.com/user/status/{tweet["_id"]}" style="color: blue" target="_blank" rel="noreferrer">Link</a></p>
+        {/each} 
+    <div>
+</main>
+
+<style lang="postcss">
+	:global(html) {
+		background-color: theme(colors.white);
+	}
+	div {
+		text-align: center;
+		padding: 1em;
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+</style>
