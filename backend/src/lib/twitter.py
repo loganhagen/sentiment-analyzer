@@ -79,6 +79,15 @@ class Twitter:
             file.write(obj)
 
         return 1
+    
+    def getJSON(self) -> str:
+        self.readFromJSON("tweets.json")
+        file_dict = {}
+        file_dict["data"] = self.tweet_list
+        obj = json.dumps(file_dict)
+
+        return obj
+
 
     def readFromJSON(self, filename):
         """Reads the tweet list from a JSON file"""
