@@ -16,8 +16,12 @@
 	<p class="text-left font-bold">Date: {post.date}</p>
 	{#if post.type == 'tweet'}
 		<p class="text-left font-bold">Source: Twitter</p>
+		<p class="text-left underline">
+			<a href="//twitter.com/user/status/{post.id}" target="_blank" rel="noreferrer">Link to post</a
+			>
+		</p>
 	{:else if post.type == 'reddit'}
-		<p class="text-left font-bold">Source: Twitter</p>
+		<p class="text-left font-bold">Source: Reddit</p>
 	{:else}
 		<p class="text-left font-bold">Source: N/A</p>
 	{/if}

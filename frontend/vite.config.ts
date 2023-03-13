@@ -4,7 +4,10 @@ import type { UserConfig } from 'vite';
 const config: UserConfig = {
 	plugins: [sveltekit()],
 	test: {
-		include: ['src/**/*.{test,spec}.{js,ts}']
+		globals: true,
+		include: ['src/**/*.{test,spec}.{js,ts}'],
+		environment: 'jsdom',
+		setupFiles: ['src/setupTest.ts']
 	},
 	server: {
 		port: 3000,
