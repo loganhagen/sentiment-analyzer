@@ -12,7 +12,6 @@ nltk.download('stopwords')
 api = Namespace('plot', description='Graph Plotting Related Operations')
 lp = LanguageProcessing()
 gp = GraphPlotter()
-dbc = DBConnect()
 
 class SentimentPlot(Resource):
     """
@@ -29,12 +28,13 @@ class SentimentPlot(Resource):
         else:
             return {"message": "Invalid collection"}, 400
 
+        dbc = DBConnect()
         doc = dbc.getDocumentById("UBI", collection, post_id)
         text = dbc.cleanString(str(doc["content"]))
         sentiment = lp.getSentiment(text)
         df = lp.sentimentToDataFrame(sentiment)
-
         plot = gp.plotPostSentiment(df)
+        dbc.closeConnection()
 
         return plot
 

@@ -113,3 +113,6 @@ class DBConnect:
         result = " ".join(tokens)
 
         return result
+    
+    def closeConnection(self) -> None:
+        self.client.close()
