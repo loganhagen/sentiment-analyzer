@@ -6,7 +6,7 @@
 	let answer = "";
 
 	async function askQuestion () {
-		const res = await fetch('http://localhost:8080/api/about', {
+		const res = await fetch('http://localhost:8080/api/question', {
 			method: 'POST',
 			body: JSON.stringify({
 				input,

@@ -4,7 +4,7 @@ from flask_restx import Api
 from src.api.health import api as health_ns
 from src.api.tweets import api as tweets_ns
 from src.api.plot import api as plot_ns
-from src.api.about import api as about_ns
+from src.api.question import api as question_ns
 
 #Create an API blueprint
 api_bp = Blueprint("api", __name__)
@@ -16,4 +16,4 @@ api = Api(api_bp, title="Flask REST API", description="A RESTapi built with Flas
 api.add_namespace(health_ns)
 api.add_namespace(tweets_ns)
 api.add_namespace(plot_ns)
-api.add_namespace(about_ns)
+api.add_namespace(question_ns)

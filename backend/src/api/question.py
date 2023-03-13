@@ -1,4 +1,4 @@
-"""API route for the About page"""
+"""API route for the Q&A page"""
 
 import os
 import openai
@@ -10,26 +10,7 @@ api = Namespace('question', description='Question page operations')
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-class AskQuestion(Resource):
-    def get(self):
-        # content = request.json
-
-        # response = openai.Completion.create(
-        #     model="text-davinci-001",
-        #     prompt=content["input"],
-        #     temperature=0.75,
-        #     max_tokens=256,
-        #     top_p=1,
-        #     frequency_penalty=0,
-        #     presence_penalty=0
-        #     )
-
-        # return response
-
-        args = request.args
-
-        return args
-    
+class Question(Resource):   
     def post(self):
         content = request.json
 
@@ -45,4 +26,4 @@ class AskQuestion(Resource):
 
         return response
 
-api.add_resource(AskQuestion, "")
+api.add_resource(Question, "")
