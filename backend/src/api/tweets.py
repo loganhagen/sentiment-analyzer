@@ -6,6 +6,7 @@ from src.lib.twitter import Twitter
 from src.lib.languageProcessing import LanguageProcessing
 
 api = Namespace('tweets', description='Tweet related operations')
+dbc = DBConnect()
 
 class Tweets(Resource):
     """
@@ -14,7 +15,6 @@ class Tweets(Resource):
     def get(self):
         """Get a list of tweets"""
 
-        dbc = DBConnect()
         return dbc.getCollectionJSON("UBI", "tweets")
 
     def post(self):
@@ -41,10 +41,8 @@ class RandomTweet(Resource):
     """
     def get(self):
         """Get a random tweet"""
-        dbc = DBConnect()
         doc = dbc.getRandomDocument("UBI", "tweets")
         response = jsonify({"text" : str(doc["content"]), "id": str(doc["_id"]), "date": str(doc["created_at"]), "type": "tweet"})
-        dbc.closeConnection()
 
         return response
 
@@ -56,10 +54,8 @@ class Size(Resource):
         """
         Get total number of tweets from database collection
         """
-        dbc = DBConnect()
         collection_size = dbc.getCollectionSize("UBI", "tweets")
         response = jsonify({"size" : collection_size})
-        dbc.closeConnection()
 
         return response
 
@@ -72,13 +68,11 @@ class Sentiment(Resource):
         """
         Get the sentiment of a post by ID
         """
-        dbc = DBConnect()
         lp = LanguageProcessing()
         doc = dbc.getDocumentById("UBI", "tweets", post_id)
         tweet_text = str(doc["content"])
         sentiment = lp.getSentiment(tweet_text)
         response = jsonify({"Sentiment Analysis": sentiment})
-        dbc.closeConnection()
 
         return response
 
