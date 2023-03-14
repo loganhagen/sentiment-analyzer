@@ -65,7 +65,7 @@ class DBConnect:
         file = {}
         file["data"] = docs
 
-        return file
+        return json.dumps(file)
 
     def censorCollection(self, database: str, collection: str) -> None:
         pf = ProfanityFilter()
