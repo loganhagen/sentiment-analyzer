@@ -2,7 +2,6 @@
 from flask import jsonify
 from flask_restx import Namespace, Resource
 from src.db.connect import DBConnect
-from src.lib.twitter import Twitter
 from src.lib.languageProcessing import LanguageProcessing
 
 api = Namespace('tweets', description='Tweet related operations')
