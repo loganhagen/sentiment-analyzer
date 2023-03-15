@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { PUBLIC_API_URL } from '$env/static/public';
 	let totalPosts = 0;
 
-	const sizeEndpoint = 'http://localhost:8080/api/tweets/size';
+	const sizeEndpoint = PUBLIC_API_URL + 'tweets/size';
 	onMount(async function () {
 		const sizeResponse = await fetch(sizeEndpoint);
 		const sizeJSON = await sizeResponse.json();
