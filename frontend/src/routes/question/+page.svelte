@@ -1,21 +1,21 @@
 <script>
-	import { onMount } from 'svelte';
-	let question = "";
-	let result = "";
-	let answer = "";
+	import { PUBLIC_API_URL } from '$env/static/public';
 
-	async function askQuestion () {
+	let question = '';
+	let answer = '';
+
+	async function askQuestion() {
 		let response;
 
 		try {
-			response = await fetch('http://localhost:8080/api/question?' + new URLSearchParams({"q" : question}));
+			response = await fetch(PUBLIC_API_URL + 'question?' + new URLSearchParams({ q: question }));
 		} catch (error) {
-			console.log("Failed API call.");
+			console.log('Failed API call.');
 		}
 
 		if (response?.ok) {
 			let json = await response.json();
-			answer = json["choices"][0]["text"];
+			answer = json['choices'][0]['text'];
 		} else {
 			console.log(`HTTP response code: ${response?.status}`);
 		}
@@ -24,9 +24,11 @@
 
 <main>
 	<p>Q & A (Powered By OpenAI)</p>
-	<input bind:value={question} placeholder="Your question here...">
-	<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg" 
-	on:click={askQuestion}>Ask!
+	<input bind:value={question} placeholder="Your question here..." />
+	<button
+		class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
+		on:click={askQuestion}
+		>Ask!
 	</button>
 	<p>{answer}</p>
 </main>
