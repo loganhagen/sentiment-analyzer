@@ -1,9 +1,8 @@
 <script>
-    let tweets = new Array();
+    let tweets = [];
 
     async function getTweets() {
             let response;
-            var as = "";
 
             try {
                 response = await fetch('http://localhost:8080/api/tweets');
