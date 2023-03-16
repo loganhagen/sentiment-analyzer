@@ -1,1 +1,1 @@
-<p>This is the about page.</p>
+<p>Universal basic income.</p>

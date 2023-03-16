@@ -1,8 +1,9 @@
 <script>
+
 	import { PUBLIC_API_URL } from '$env/static/public';
 
-	let question = '';
-	let answer = '';
+	let question = "";
+	let answer = "";
 
 	async function askQuestion() {
 		let response;

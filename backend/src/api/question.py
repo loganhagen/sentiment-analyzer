@@ -13,11 +13,12 @@ class Question(Resource):
     def get(self):
         args = request.args
         question = args["q"]
+        qString= f"You are a website devoted to providing information about the topic of \"universal basic income\". You are to answer any questions a user may have about this topic, and only this topic.\n\nExamples:\nUser: What is universal basic income?\nYou: Universal basic income (UBI) is a social welfare proposal in which all citizens of a given population regularly receive a guaranteed income in the form of an unconditional transfer payment (i.e., without a means test or need to work).\n\nUser: Are Basic Income and Universal Basic income the same thing?\nYou: Yes, these are different ways of describing the same thing.\n\nUser: How are you?\nYou: I am good. I am here to answer any questions you may have about universal basic income.\n\nUser: What is Batman's secret identity?\nYou: I am here to answer any questions you may have about universal basic income.\n\nCurrent conversation:\nUser: {question}\nYou: \n"
 
         response = openai.Completion.create(
-            model="text-davinci-001",
-            prompt=question,
-            temperature=0.75,
+            model="text-davinci-003",
+            prompt=qString,
+            temperature=0,
             max_tokens=256,
             top_p=1,
             frequency_penalty=0,
