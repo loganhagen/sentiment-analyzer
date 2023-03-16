@@ -1,9 +1,6 @@
-"""docstring"""
-
-#from flask_cors import cross_origin
 from flask_restx import Namespace, Resource
 
-#Create an API namespace for our health operations
+# Create an API namespace for our health operations
 api = Namespace("health", description="Health check related operations")
 
 class Health(Resource):

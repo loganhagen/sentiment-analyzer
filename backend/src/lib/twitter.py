@@ -1,6 +1,5 @@
 """Class that handles tweets for our backend API"""
 import os
-import csv
 import json
 from datetime import datetime
 import tweepy
@@ -14,7 +13,7 @@ class Twitter:
     def getTweepyBearerToken(self):
         return self.tweepy_client.bearer_token
 
-    def getRecentTweets(self, query, limit):
+    def getRecentTweets(self, query: str, limit: float) -> int:
         """Returns a list of recent tweets"""
         query_result = tweepy.Paginator(
             self.tweepy_client.search_recent_tweets,
@@ -22,6 +21,9 @@ class Twitter:
             tweet_fields=['created_at', 'author_id'],
             max_results=100
         ).flatten(limit=limit)
+
+        if query_result is None:
+            return -1
 
         # Save Tweets to memory as Tweet objects.
         for tweet in query_result:
@@ -34,6 +36,8 @@ class Twitter:
                 )
             )
 
+        return 1
+
     def emptyList(self):
         self.tweet_list.clear()
         
@@ -45,22 +49,6 @@ class Twitter:
         """Prints the tweet list"""
         for tweet in self.tweet_list:
             print(tweet.toString())
-
-    def writeToCSV(self, filename):
-        """Writes the tweet list to a CSV file"""
-        with open(filename, "w", encoding="UTF-8", newline="") as file:
-            writer = csv.writer(file)
-
-            for tweet in self.tweet_list:
-                writer.writerow(tweet.toList())
-
-    def readFromCSV(self, filename):
-        """Reads the tweet list from a CSV file"""
-        with open(filename, newline="", encoding="UTF-8") as file:
-            reader = csv.reader(file, delimiter=",")
-
-            for row in reader:
-                self.tweet_list.append(self.Tweet(row[0], row[1], row[2], row[3]))
 
     def writeToJSON(self, filename):
         """Writes the tweet list to a JSON file"""
@@ -101,21 +89,9 @@ class Twitter:
             self.created_at = created_at
             self.text = text
 
-        def getTweetID(self):
-            """Returns the tweet id"""
-            return self.id
-
-        def getTweetText(self):
-            """Returns the tweet text"""
-            return self.text
-
         def toString(self):
             """Returns a string representation of the tweet"""
             return f"tweet_id: {self.id}\nauthor_id: {self.author_id}\ncreated_at: {self.created_at}\ncontent: {self.text}\n"
-
-        def toList(self):
-            """Returns a list representation of the tweet"""
-            return [self.id, self.author_id, self.created_at, self.text]
 
         def toDict(self):
             """Returns a dictionary representation of the tweet"""

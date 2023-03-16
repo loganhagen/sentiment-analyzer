@@ -2,20 +2,15 @@ import os
 import json
 import re
 from typing import List
-import mongomock
 from nltk.corpus import stopwords
 from pymongo import MongoClient
 from profanity_filter import ProfanityFilter
 
 mongo_uri = 'mongodb://' + os.environ.get('MONGO_USERNAME') + ':' + os.environ.get('MONGO_PASSWORD') + '@' + os.environ.get('MONGO_HOSTNAME') + ':27017'
-test_db = os.environ.get('DB_TEST')
 
 class DBConnect:
     def __init__(self) -> None:
-        if test_db == '1':
-            self.client = mongomock.MongoClient()
-        else:
-            self.client = MongoClient(mongo_uri)
+        self.client = MongoClient(mongo_uri)
 
     def getCollectionNames(self, database: str) -> List[str]:
         return self.client[database].list_collection_names()
@@ -34,10 +29,9 @@ class DBConnect:
         """Returns a random document from the collection"""
         db = self.client[database]
         cl = db[collection]
-        result = cl.aggregate([{"$sample" : { "size" : 1}}])
+        doc = list(cl.aggregate([{"$sample" : { "size" : 1}}]))
 
-        for r in result:
-            return r
+        return doc[0]
 
     def writeFileToCollection(self, database: str, collection: str, filename: str) -> None:
         with open(filename, "r", encoding="UTF-8") as file:
@@ -45,7 +39,7 @@ class DBConnect:
             data = obj["data"]
             db = self.client[database]
             cl = db[collection]  
-            cl.insert_many(data)   
+            cl.insert_many(data, ordered=False)   
 
     def writeCollectionToFile(self, database: str, collection: str, filename: str) -> None:
         db = self.client[database]
