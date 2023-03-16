@@ -1,11 +1,12 @@
 <script>
+    import { PUBLIC_API_URL } from '$env/static/public';
     let tweets = [];
 
     async function getTweets() {
             let response;
 
             try {
-                response = await fetch('http://localhost:8080/api/tweets');
+                response = await fetch(PUBLIC_API_URL + 'tweets');
             } catch (error) {
                 console.log("Failed API call.");
             }
