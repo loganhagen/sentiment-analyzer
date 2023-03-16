@@ -1,40 +1,28 @@
 <script>
+    import { onMount } from 'svelte';
     import { PUBLIC_API_URL } from '$env/static/public';
-    let tweets = [];
 
-    async function getTweets() {
-            let response;
+    let posts = [];
 
-            try {
-                response = await fetch(PUBLIC_API_URL + 'tweets');
-            } catch (error) {
-                console.log("Failed API call.");
-            }
-
-            if (response?.ok) {
-                let json = await response.json();
-                let data = JSON.parse(json);
-                tweets = data["data"];
-            } else {
-                console.log(`HTTP response code: ${response?.status}`);
-            }
-        }
+    onMount(async () => {
+        const response = await fetch(PUBLIC_API_URL + 'tweets');
+        const json = await response.json();
+        posts = JSON.parse(json)["data"]
+    });
 
 </script>
 
 <main>
     <div>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg" 
-        on:click={getTweets}>Get Tweets!
-        </button>
-        <br>
-        {#each tweets as tweet, i}
+        {#each posts as post, i}
             <br>
             <p>Post #{i + 1}</p>
-            <p>ID: {tweet["_id"]}</p>
-            <p>"{tweet["content"]}"</p>
+            <p>ID: {post._id}</p>
+            <p>"{post.content}"</p>
             <p>----</p>
-            <p><a href="//twitter.com/user/status/{tweet["_id"]}" style="color: blue" target="_blank" rel="noreferrer">Link</a></p>
+            <p><a href="//twitter.com/user/status/{post._id}" style="color: blue" target="_blank" rel="noreferrer">Link</a></p>
+        {:else}
+            <p>Loading...</p>
         {/each} 
     <div>
 </main>
