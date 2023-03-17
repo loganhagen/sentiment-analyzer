@@ -74,6 +74,10 @@ test_backend:
     MONGO_HOSTNAME: "mongo"
     MONGO_PORT: "27017"
     BEARER_TOKEN: "AAAAAAAAAAAAAAAAAAAAAFvZlQEAAAAAKJ2aLLYYPFSQyRsPgwSonDACeT0%3DwJjK63Eys0ixVHxTaYjTs9eBgOIOrDkOKytKcixt1m4WX3X4Yi"
+    REDDIT_USERNAME: "Complex_Worry2833"
+    REDDIT_PASSWORD: "Xa99bu94Eu6g"
+    CLIENT_ID: "IeTiyJnJ3tE1ntCIz0dcyw"
+    SECRET_TOKEN: "Rzttejco5MDht_FpCWJZxUv_CMyFtw"
     FLASK_APP: "app.py"
     DB_TEST: '1'
   script:

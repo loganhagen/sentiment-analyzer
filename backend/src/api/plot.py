@@ -1,12 +1,12 @@
 """API route for handling anything that graph plotting using Plotly"""
 import nltk
-#from flask import Response, jsonify
 from flask_restx import Namespace, Resource
 from src.lib.languageProcessing import LanguageProcessing
 from src.lib.graphPlotter import GraphPlotter
 from src.db.connect import DBConnect
 
 nltk.download('vader_lexicon')
+nltk.download('stopwords')
 
 api = Namespace('plot', description='Graph Plotting Related Operations')
 lp = LanguageProcessing()
@@ -29,10 +29,9 @@ class SentimentPlot(Resource):
             return {"message": "Invalid collection"}, 400
 
         doc = dbc.getDocumentById("UBI", collection, post_id)
-        text = str(doc["content"])
+        text = dbc.cleanString(str(doc["content"]))
         sentiment = lp.getSentiment(text)
         df = lp.sentimentToDataFrame(sentiment)
-
         plot = gp.plotPostSentiment(df)
 
         return plot

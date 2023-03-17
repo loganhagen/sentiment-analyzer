@@ -14,6 +14,8 @@ class Tweets(Resource):
     def get(self):
         """Get a list of tweets"""
 
+        return dbc.getCollectionJSON("UBI", "tweets")
+
     def post(self):
         """Add a new list of tweets"""
 
@@ -53,6 +55,7 @@ class Size(Resource):
         """
         collection_size = dbc.getCollectionSize("UBI", "tweets")
         response = jsonify({"size" : collection_size})
+
         return response
 
 

@@ -1,5 +1,25 @@
 <script>
 	import '../app.css';
+	//import { onMount } from 'svelte';
+	// import Dropdown from 'svelte';
+
+	// let dropdown = null;
+	// onMount(() => {
+	// 	dropdown = new Dropdown({
+	// 		target: document.querySelector('.relative'),
+	// 		props: {
+	// 			onShow: () => {
+	// 				dropdown.$refs.trigger.setAttribute('aria-expanded', true);
+	// 				dropdown.$refs.menu.classList.remove('hidden');
+	// 			},
+	// 			onHide: () => {
+	// 				dropdown.$refs.trigger.setAttribute('aria-expanded', false);
+	// 				dropdown.$refs.menu.classList.add('hidden');
+	// 			},
+	// 			placement: 'bottom-start'
+	// 		}
+	// 	});
+	// });
 </script>
 
 <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
@@ -24,9 +44,43 @@
 						About
 					</a>
 				</li>
+				<li>
+					<a
+						href="/all"
+						class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+					>
+						All Tweets
+					</a>
+				</li>
+				<li>
+					<a
+						href="/question"
+						class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+					>
+						Q&A
+					</a>
+				</li>
+				<li class="relative pr-8">
+					<button
+						class="block px-4 py-2 pl-3 pr-8 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+					>
+						Accessibility
+					</button>
+					<ul class="absolute z-10 hidden bg-white shadow-lg rounded-md">
+						<li><button class="text-left">Contrast</button></li>
+						<li><button class="text-left">Keyboard</button></li>
+						<li><button class="text-left">Screen Readers</button></li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</div>
 </nav>
 
 <slot />
+
+<style>
+	.relative:hover .absolute {
+		display: block;
+	}
+</style>
