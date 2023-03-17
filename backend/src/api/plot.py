@@ -1,6 +1,5 @@
 """API route for handling anything that graph plotting using Plotly"""
 import nltk
-#from flask import Response, jsonify
 from flask_restx import Namespace, Resource
 from src.lib.languageProcessing import LanguageProcessing
 from src.lib.graphPlotter import GraphPlotter

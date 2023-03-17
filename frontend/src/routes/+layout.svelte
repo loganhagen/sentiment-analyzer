@@ -1,25 +1,25 @@
 <script>
 	import '../app.css';
 	import { onMount } from 'svelte';
-	import Dropdown from 'svelte';
+	// import Dropdown from 'svelte';
 
-	let dropdown = null;
-	onMount(() => {
-		dropdown = new Dropdown({
-			target: document.querySelector('.relative'),
-			props: {
-				onShow: () => {
-					dropdown.$refs.trigger.setAttribute('aria-expanded', true);
-					dropdown.$refs.menu.classList.remove('hidden');
-				},
-				onHide: () => {
-					dropdown.$refs.trigger.setAttribute('aria-expanded', false);
-					dropdown.$refs.menu.classList.add('hidden');
-				},
-				placement: 'bottom-start'
-			}
-		});
-	});
+	// let dropdown = null;
+	// onMount(() => {
+	// 	dropdown = new Dropdown({
+	// 		target: document.querySelector('.relative'),
+	// 		props: {
+	// 			onShow: () => {
+	// 				dropdown.$refs.trigger.setAttribute('aria-expanded', true);
+	// 				dropdown.$refs.menu.classList.remove('hidden');
+	// 			},
+	// 			onHide: () => {
+	// 				dropdown.$refs.trigger.setAttribute('aria-expanded', false);
+	// 				dropdown.$refs.menu.classList.add('hidden');
+	// 			},
+	// 			placement: 'bottom-start'
+	// 		}
+	// 	});
+	// });
 </script>
 
 <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">

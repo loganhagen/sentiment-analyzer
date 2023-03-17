@@ -3,9 +3,7 @@ import json
 from datetime import datetime
 import requests
 
-
-
-class RedditList:
+class Reddit:
     """Class that handles Reddit API"""
 
     def __init__(self):
