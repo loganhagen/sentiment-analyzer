@@ -1,6 +1,6 @@
 <script>
 	import '../app.css';
-	import { onMount } from 'svelte';
+	//import { onMount } from 'svelte';
 	// import Dropdown from 'svelte';
 
 	// let dropdown = null;
@@ -38,6 +38,14 @@
 				</li>
 				<li>
 					<a
+						href="/about"
+						class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+					>
+						About
+					</a>
+				</li>
+				<li>
+					<a
 						href="/all"
 						class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
 					>
@@ -52,17 +60,16 @@
 						Q&A
 					</a>
 				</li>
-				<li class="relative">
-					<a
-						href="/accessibility"
-						class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+				<li class="relative pr-8">
+					<button
+						class="block px-4 py-2 pl-3 pr-8 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
 					>
 						Accessibility
-					</a>
+					</button>
 					<ul class="absolute z-10 hidden bg-white shadow-lg rounded-md">
-						<li><a href="/accessibility/contrast">Contrast</a></li>
-						<li><a href="/accessibility/keyboard">Keyboard</a></li>
-						<li><a href="/accessibility/screenreaders">Screen Readers</a></li>
+						<li><button class="text-left">Contrast</button></li>
+						<li><button class="text-left">Keyboard</button></li>
+						<li><button class="text-left">Screen Readers</button></li>
 					</ul>
 				</li>
 			</ul>
