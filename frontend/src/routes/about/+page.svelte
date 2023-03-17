@@ -1,7 +1,7 @@
 <main>
 	<div>
-		<img src="https://i.imgur.com/LjZ0Gg5.png" alt="Graphex Icon" style="width:250px;height:300px;float:top;">
-		<h1 style="position:relative;">
+		<img src="https://i.imgur.com/LjZ0Gg5.png" alt="Graphex Icon" style="width:250px;height:300px;">
+		<h1 class="text-4xl px-4 py-4" style="position:relative;">
 			We are team graphex!
 		</h1>
 	</div>
