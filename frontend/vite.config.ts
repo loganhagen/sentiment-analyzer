@@ -1,6 +1,9 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import type { UserConfig } from 'vite';
 
+const { PUBLIC_SERVER_PORT, PUBLIC_SERVER_HOST } = process.env;
+const proxyTarget = `${PUBLIC_SERVER_HOST}:${PUBLIC_SERVER_PORT}`;
+
 const config: UserConfig = {
 	plugins: [sveltekit()],
 	test: {
@@ -10,6 +13,12 @@ const config: UserConfig = {
 		setupFiles: ['src/setupTest.ts']
 	},
 	server: {
+		proxy: {
+			'/api': {
+				target: proxyTarget,
+        		changeOrigin: true,
+			}
+		},
 		port: 3000,
 		strictPort: true,
 		host: true, // needed for docker container

@@ -32,7 +32,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=example
       - MONGO_INITDB_DATABASE=task-management
-      
+
   backend:
     # build specifies the build configuration of the image. In our case we want to build the backend image from the Dockerfile inside the ./backend folder
     # build can be specified either as a string containing a path to the build context
@@ -46,7 +46,6 @@ services:
       # You can access this build arguments/override the build args in the Dockerfile
       # More info can be found here: https://docs.docker.com/compose/compose-file/compose-file-v3/#args
       #args:
-        
 
     # This will override the default run command in the CMD of your Dockerfile
     # This is helpful because we can use docker-compose.yaml `command` for development and configure the CMD for production
@@ -68,10 +67,9 @@ services:
     environment:
       - MONGO_USERNAME=root
       - MONGO_PASSWORD=example
-      - MONGO_HOSTNAME=host.docker.internal
+      - MONGO_HOSTNAME=mymongodb
       - MONGO_PORT=27017
       - MONGO_DATABASE_NAME=task-management
-      - FLASK_APP=app.py
       - BEARER_TOKEN=AAAAAAAAAAAAAAAAAAAAAFvZlQEAAAAAKJ2aLLYYPFSQyRsPgwSonDACeT0%3DwJjK63Eys0ixVHxTaYjTs9eBgOIOrDkOKytKcixt1m4WX3X4Yi
       - REDDIT_USERNAME=Complex_Worry2833
       - REDDIT_PASSWORD=Xa99bu94Eu6g
@@ -106,7 +104,8 @@ services:
       - ./frontend:/app/frontend # better to keep the same name as the folder name in the Dockerfile
 
     environment:
-      - TEMP_PORT=3000
+      - PUBLIC_SERVER_PORT=8080
+      - PUBLIC_SERVER_HOST=http://backend
 
     # This creates interactive mode which lets us execute commands in a shell when the container is running.
     stdin_open: true

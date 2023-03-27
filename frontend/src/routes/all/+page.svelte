@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { PUBLIC_API_URL } from '$env/static/public';
 
 	let posts = [];
 
 	onMount(async () => {
-		const response = await fetch(PUBLIC_API_URL + 'tweets');
+		const response = await fetch('/api/tweets');
 		const json = await response.json();
 		posts = JSON.parse(json)['data'];
 	});
