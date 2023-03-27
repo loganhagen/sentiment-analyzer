@@ -4,7 +4,6 @@
 	import ShowPlot from './show_plot.svelte';
 	import type { Plot, Post } from '../../types';
 	import { sharedPost, sharedPlot } from './store';
-	import { PUBLIC_API_URL } from '$env/static/public';
 
 	// //Create and set current post for the page
 	export let cur_post: Post;
@@ -23,7 +22,7 @@
 
 	// Loads a random tweet into page memory to be accesed under the variable cur_tweet
 	export async function getRandomPost() {
-		const response = await fetch(PUBLIC_API_URL + 'tweets/random');
+		const response = await fetch('/api/tweets/random');
 		const responseJSON = await response.json();
 
 		//update our current post
@@ -43,7 +42,7 @@
 		//Don't create a plot if there is no post loaded into memory
 		if (cur_post.text == 'N/A') return false;
 
-		const response = await fetch(PUBLIC_API_URL + 'plot/sentiment/tweet/' + cur_post.id);
+		const response = await fetch('/api/plot/sentiment/tweet/' + cur_post.id);
 		const responseJSON = await response.json();
 
 		//Get plot as object

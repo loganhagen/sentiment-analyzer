@@ -29,4 +29,4 @@ RUN pip --no-cache-dir install -r requirements.txt
 EXPOSE $PORT
 
 # CMD runs when you want to run a container from an image. This can be overridden in the docker compose file
-#CMD ["flask", "run"]
+CMD ["python3", "app.py"]

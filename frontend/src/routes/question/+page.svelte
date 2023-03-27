@@ -1,5 +1,4 @@
 <script>
-	import { PUBLIC_API_URL } from '$env/static/public';
 
 	let question = '';
 	let answer = '';
@@ -8,7 +7,7 @@
 		let response;
 
 		try {
-			response = await fetch(PUBLIC_API_URL + 'question?' + new URLSearchParams({ q: question }));
+			response = await fetch('/api/question?' + new URLSearchParams({ q: question }));
 		} catch (error) {
 			console.log('Failed API call.');
 		}
