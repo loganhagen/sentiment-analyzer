@@ -83,7 +83,7 @@ test_backend:
     - cd ./backend
     - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
-    - python -m pytest src/test/
+    - python -m pytest --cov=/app/backend/ src/test/
   dependencies:
     - build_backend
   allow_failure: false
