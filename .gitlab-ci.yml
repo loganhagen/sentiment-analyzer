@@ -88,7 +88,7 @@ test_backend:
     - coverage xml
   artifacts:
     paths:
-      - builds/
+      - $CI_PROJECT_DIR
   dependencies:
     - build_backend
   allow_failure: false
