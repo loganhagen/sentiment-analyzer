@@ -83,7 +83,13 @@ test_backend:
     - cd ./backend
     - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
-    - python -m pytest --cov=/app/backend/ src/test/
+    - python -m pytest src/test/
+  artifacts:
+    when: always
+    paths:
+      - rspec.xml
+    reports:
+      junit: rspec.xml
   dependencies:
     - build_backend
   allow_failure: false
