@@ -85,10 +85,6 @@ test_backend:
     - pip --no-cache-dir install -r requirements.txt
     - coverage run -m pytest
     - coverage report
-    - coverage xml
-  artifacts:
-    paths:
-      - $CI_PROJECT_DIR
   dependencies:
     - build_backend
   allow_failure: false
