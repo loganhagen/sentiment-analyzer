@@ -86,6 +86,11 @@ test_backend:
     - coverage run -m pytest
     - coverage report
     - coverage xml
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
   dependencies:
     - build_backend
   allow_failure: false
