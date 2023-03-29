@@ -34,16 +34,16 @@ def test_TopPosts(reddit):
     reddit.getTopPosts()
     assert 100 == reddit.getNumPosts()
 
-# This test takes a long time. Commenting out for now.
-# def test_getComments(reddit):
-#     """Test number of comments in the reddit object is less than or equal to the number of comments for each post in the postList"""
-#     reddit.getHotPosts()
-#     hotPosts = reddit.getPostList()
-#     reddit.getComments()
-#     reddit.addCommentsToPost()
-#     commentCount = 0
-#     for post in hotPosts:
-#         commentCount = commentCount + post.getNumComments()
+# This test takes a very long time.
+def test_getComments(reddit):
+    """Test number of comments in the reddit object is less than or equal to the number of comments for each post in the postList"""
+    reddit.getHotPosts()
+    hotPosts = reddit.getPostList()
+    reddit.getComments()
+    reddit.addCommentsToPost()
+    commentCount = 0
+    for post in hotPosts:
+        commentCount = commentCount + post.getNumComments()
 
-#     totalComments = reddit.getNumComments()
-#     assert commentCount >= totalComments
+    totalComments = reddit.getNumComments()
+    assert commentCount >= totalComments

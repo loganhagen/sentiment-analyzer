@@ -2,21 +2,26 @@ import os
 import json
 import re
 from typing import List
+import mongomock
 from nltk.corpus import stopwords
 from pymongo import MongoClient
 from profanity_filter import ProfanityFilter
 
 mongo_uri = 'mongodb://' + os.environ.get('MONGO_USERNAME') + ':' + os.environ.get('MONGO_PASSWORD') + '@' + os.environ.get('MONGO_HOSTNAME') + ':27017'
+test_db = os.environ.get('DB_TEST')
 
 class DBConnect:
     def __init__(self) -> None:
-        self.client = MongoClient(mongo_uri)
+        if test_db == '1':
+            self.client = mongomock.MongoClient()
+        else:
+            self.client = MongoClient(mongo_uri)
+
+    def getDatabaseNames(self) -> List[str]:
+        return self.client.list_database_names()
 
     def getCollectionNames(self, database: str) -> List[str]:
         return self.client[database].list_collection_names()
-    
-    def getDatabaseNames(self) -> List[str]:
-        return self.client.list_database_names()
 
     def getCollectionSize(self, database: str, collection: str) -> int:
         """Returns size of the collection"""
