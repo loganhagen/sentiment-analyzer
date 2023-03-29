@@ -16,14 +16,11 @@ class Twitter:
     def getRecentTweets(self, query: str, limit: float) -> int:
         """Returns a list of recent tweets"""
         query_result = tweepy.Paginator(
-            self.tweepy_client.search_recent_tweets,
-            query=query,
-            tweet_fields=['created_at', 'author_id'],
-            max_results=100
+        self.tweepy_client.search_recent_tweets,
+        query=query,
+        tweet_fields=['created_at', 'author_id'],
+        max_results=100
         ).flatten(limit=limit)
-
-        if query_result is None:
-            return -1
 
         # Save Tweets to memory as Tweet objects.
         for tweet in query_result:
@@ -36,8 +33,6 @@ class Twitter:
                 )
             )
 
-        return 1
-
     def emptyList(self):
         self.tweet_list.clear()
         
@@ -45,10 +40,13 @@ class Twitter:
         """Returns the number of tweets"""
         return len(self.tweet_list)
 
-    def printTweetList(self):
+    def toString(self):
         """Prints the tweet list"""
+        tString = ""
         for tweet in self.tweet_list:
-            print(tweet.toString())
+            tString += "\n" + tweet.toString()
+
+        return tString
 
     def writeToJSON(self, filename):
         """Writes the tweet list to a JSON file"""

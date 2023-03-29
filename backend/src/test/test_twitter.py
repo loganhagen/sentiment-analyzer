@@ -27,5 +27,7 @@ def test_emptyList(twitter):
 def test_getNumTweets(twitter):
     assert twitter.getNumTweets() > 0
 
-def test_getRecentTweets(emptyTwitter):
-    assert emptyTwitter.getRecentTweets("last of us", 10) == 1
+def test_toString(twitter):
+    asString = twitter.toString()
+
+    assert asString is not None

@@ -1,39 +1,31 @@
-import json
 import pytest
-import mongomock
+from src.db.connect import DBConnect
+
 
 @pytest.fixture
-def db():
-    return mongomock.MongoClient()
+def dbc():
+    dbc = DBConnect()
+    dbc.writeFileToCollection("test_UBI", "test_tweets", "test_tweets.json")
+    return dbc
 
-def test_writeCollection(db):
-    with open("test_tweets.json", "r", encoding="UTF-8") as file:
-        obj = json.load(file)
-        data = obj["data"]
-        db = db["UBI"]
-        cl = db["tweets"]  
-        cl.insert_many(data, ordered=False)  
+def test_getDatabaseNames(dbc):
+    assert dbc.getDatabaseNames() == ["test_UBI"]
 
-    assert cl.estimated_document_count() == 3393
 
-def test_getDocumentByID(db):
-    with open("test_tweets.json", "r", encoding="UTF-8") as file:
-        obj = json.load(file)
-        data = obj["data"]
-        db = db["UBI"]
-        cl = db["tweets"]  
-        cl.insert_many(data, ordered=False)  
-        result = cl.find_one({"_id": "1623133583446806529"}) 
+def test_getCollectionNames(dbc):
+    assert dbc.getCollectionNames("test_UBI") == ["test_tweets"]
 
-        assert result is not None
+def test_getCollectionSize(dbc):
+    assert dbc.getCollectionSize("test_UBI", "test_tweets") == 3393
 
-def test_getRandomDocument(db):
-    with open("test_tweets.json", "r", encoding="UTF-8") as file:
-        obj = json.load(file)
-        data = obj["data"]
-        db = db["UBI"]
-        cl = db["tweets"]  
-        cl.insert_many(data, ordered=False)
-        doc = list(cl.aggregate([{"$sample" : { "size" : 1}}]))
+def test_getRandomDocument(dbc):
+    doc = dbc.getRandomDocument("test_UBI", "test_tweets")
 
-        assert doc is not None
+    assert doc is not None
+
+def test_getDocumentById(dbc):
+    doc = dbc.getDocumentById("test_UBI", "test_tweets", "1623133583446806529")
+
+    assert doc is not None
+
+
