@@ -27,5 +27,3 @@ def test_getDocumentById(dbc):
     doc = dbc.getDocumentById("test_UBI", "test_tweets", "1623133583446806529")
 
     assert doc is not None
-
-
