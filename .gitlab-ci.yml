@@ -83,13 +83,11 @@ test_backend:
     - cd ./backend
     - pip install --upgrade pip
     - pip --no-cache-dir install -r requirements.txt
-    - python -m pytest src/test/
+    - python -m pytest --junitxml=report.xml src/test/
   artifacts:
     when: always
-    paths:
-      - rspec.xml
     reports:
-      junit: rspec.xml
+      junit: report.xml
   dependencies:
     - build_backend
   allow_failure: false
