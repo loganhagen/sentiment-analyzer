@@ -88,7 +88,7 @@ test_backend:
     - coverage xml
   artifacts:
     paths:
-      - coverage.xml
+      - build/
   dependencies:
     - build_backend
   allow_failure: false
