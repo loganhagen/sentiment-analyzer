@@ -13,7 +13,7 @@ class Tweets(Resource):
     Handles API calls for all tweets.
     """
     def get(self):
-        """Get a list of tweets."""
+        """Get string representation of the Twitter data.."""
 
         return dbc.getCollectionJSON("UBI", "tweets")
 
@@ -39,7 +39,7 @@ class Reddit(Resource):
     Handles API calls for all Reddit data.
     """
     def get(self):
-        """Get a JSON string of all Reddit data."""
+        """Get a string representation of the Reddit data."""
 
         return dbc.getCollectionJSON("UBI", "reddit_posts")
 
@@ -115,10 +115,10 @@ class Sentiment(Resource):
 
 # Define routes for the API
 api.add_resource(Tweets, "/tweets")
-api.add_resource(Reddit, "/reddit")
 api.add_resource(Tweet, "/<string:post_id>")
+api.add_resource(Reddit, "/reddit")
 api.add_resource(Random, "/random")
 api.add_resource(SizeAll, "/size")
 api.add_resource(SizeTweets, "/tweets/size")
-api.add_resource(SizeTweets, "/reddit/size")
+api.add_resource(SizeReddit, "/reddit/size")
 api.add_resource(Sentiment, "/sentiment/<string:post_id>")
