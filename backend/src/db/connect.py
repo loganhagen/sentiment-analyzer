@@ -11,6 +11,9 @@ mongo_uri = 'mongodb://' + os.environ.get('MONGO_USERNAME') + ':' + os.environ.g
 test_db = os.environ.get('DB_TEST')
 
 class DBConnect:
+    TWITTER : str = "tweets"
+    REDDIT : str = "reddit_posts"
+    
     def __init__(self) -> None:
         if test_db == '1':
             self.client = mongomock.MongoClient()
