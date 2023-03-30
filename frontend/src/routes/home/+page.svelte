@@ -22,7 +22,7 @@
 
 	// Loads a random tweet into page memory to be accesed under the variable cur_tweet
 	export async function getRandomPost() {
-		const response = await fetch('/api/tweets/random');
+		const response = await fetch('/api/posts/random');
 		const responseJSON = await response.json();
 
 		//update our current post

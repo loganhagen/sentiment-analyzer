@@ -4,7 +4,7 @@
 	let posts = [];
 
 	onMount(async () => {
-		const response = await fetch('/api/tweets');
+		const response = await fetch('/api/posts');
 		const json = await response.json();
 		posts = JSON.parse(json)['data'];
 	});
