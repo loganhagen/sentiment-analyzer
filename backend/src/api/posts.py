@@ -7,6 +7,8 @@ import random
 
 api = Namespace('posts', description='Post related operations')
 dbc = DBConnect()
+TWITTER = "tweets"
+REDDIT = "reddit"
 
 class Tweets(Resource):
     """
@@ -15,7 +17,7 @@ class Tweets(Resource):
     def get(self):
         """Get string representation of the Twitter data.."""
 
-        return dbc.getCollectionJSON("UBI", "tweets")
+        return dbc.getCollectionJSON("UBI", TWITTER)
 
     def post(self):
         """Add a new list of tweets."""
@@ -41,7 +43,7 @@ class Reddit(Resource):
     def get(self):
         """Get a string representation of the Reddit data."""
 
-        return dbc.getCollectionJSON("UBI", "reddit_posts")
+        return dbc.getCollectionJSON("UBI", REDDIT)
 
 class Random(Resource):
     """
@@ -49,8 +51,8 @@ class Random(Resource):
     """
     def get(self):
         """Get a random post"""
-        tweet = dbc.getRandomDocument("UBI", "tweets")
-        reddit = dbc.getRandomDocument("UBI", "reddit_posts")
+        tweet = dbc.getRandomDocument("UBI", TWITTER)
+        reddit = dbc.getRandomDocument("UBI", REDDIT)
         tweet_response = jsonify({"text" : str(tweet["content"]), "id": str(tweet["_id"]), "date": str(tweet["created_at"]), "type": "tweet"})
         reddit_response = jsonify({"text" : str(reddit["content"]), "id": str(reddit["_id"]), "date": str(reddit["created_at"]), "type": "reddit"})
 
@@ -64,7 +66,7 @@ class SizeAll(Resource):
         """
         Get total number of tweets and reddit posts.
         """
-        collection_size = dbc.getCollectionSize("UBI", "tweets") + dbc.getCollectionSize("UBI", "reddit_posts")
+        collection_size = dbc.getCollectionSize("UBI", TWITTER) + dbc.getCollectionSize("UBI", REDDIT)
         response = jsonify({"size" : collection_size})
 
         return response
@@ -77,7 +79,7 @@ class SizeTweets(Resource):
         """
         Get total number of tweets from database collection.
         """
-        collection_size = dbc.getCollectionSize("UBI", "tweets")
+        collection_size = dbc.getCollectionSize("UBI", TWITTER)
         response = jsonify({"size" : collection_size})
 
         return response
@@ -90,7 +92,7 @@ class SizeReddit(Resource):
         """
         Get total number of reddit posts.
         """
-        collection_size = dbc.getCollectionSize("UBI", "reddit_posts")
+        collection_size = dbc.getCollectionSize("UBI", REDDIT)
         response = jsonify({"size" : collection_size})
 
         return response
@@ -105,7 +107,7 @@ class Sentiment(Resource):
         Get the sentiment of a post by ID
         """
         lp = LanguageProcessing()
-        doc = dbc.getDocumentById("UBI", "tweets", post_id)
+        doc = dbc.getDocumentById("UBI", TWITTER, post_id)
         tweet_text = str(doc["content"])
         sentiment = lp.getSentiment(tweet_text)
         response = jsonify({"Sentiment Analysis": sentiment})
