@@ -11,7 +11,6 @@
 </script>
 
 <div class="rounded max-w-5xl max-y-2 overflow-hidden shadow-lg bg-slate-100 space-y-2 px-4 py-4">
-	<h1 class="text-left font-bold">Post:</h1>
 	<p>{post.text}</p>
 	<p class="text-left font-bold">Date: {post.date}</p>
 	{#if post.type == 'tweet'}

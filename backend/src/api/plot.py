@@ -12,23 +12,26 @@ api = Namespace('plot', description='Graph Plotting Related Operations')
 lp = LanguageProcessing()
 gp = GraphPlotter()
 dbc = DBConnect()
-
-class SentimentPlot(Resource):
+    
+class TwitterSentiment(Resource):
     """
     Creates a plot of the sentiment of a given tweets
     """
+    def get(self, post_id):
+        doc = dbc.getDocumentById("UBI", dbc.TWITTER, post_id)
+        text = dbc.cleanString(str(doc["content"]))
+        sentiment = lp.getSentiment(text)
+        df = lp.sentimentToDataFrame(sentiment)
+        plot = gp.plotPostSentiment(df)
+
+        return plot
     
-    def get(self, collection, post_id):
-
-        """Returns a plot of the sentiment of a given tweet"""
-        if collection == "tweet":
-            collection = "tweets"
-        elif collection == "reddit":
-            collection = "reddit"
-        else:
-            return {"message": "Invalid collection"}, 400
-
-        doc = dbc.getDocumentById("UBI", collection, post_id)
+class RedditSentiment(Resource):
+    """
+    Creates a plot of the sentiment of a given tweets
+    """
+    def get(self, post_id):
+        doc = dbc.getDocumentById("UBI", dbc.REDDIT, post_id)
         text = dbc.cleanString(str(doc["content"]))
         sentiment = lp.getSentiment(text)
         df = lp.sentimentToDataFrame(sentiment)
@@ -36,5 +39,5 @@ class SentimentPlot(Resource):
 
         return plot
 
-
-api.add_resource(SentimentPlot, "/sentiment/<string:collection>/<string:post_id>")
+api.add_resource(TwitterSentiment, "/sentiment/tweets/<string:post_id>")
+api.add_resource(RedditSentiment, "/sentiment/reddit/<string:post_id>")
