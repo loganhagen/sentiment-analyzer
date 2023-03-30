@@ -216,10 +216,10 @@ class Reddit:
         def toDict(self):
             """Returns dictionary representation of Post"""
             return {
-                'title': str(self.title),
-                'author': str(self.author),
-                'post_id': str(self.post_id),
-                'date': str(self.date),
+                'content': str(self.title),
+                'author_id': str(self.author),
+                '_id': str(self.post_id),
+                'created_at': str(self.date),
                 'comments': self.commentsToDict()
             }
         
@@ -251,9 +251,9 @@ class Reddit:
         def toDict(self):
             """Returns dictionary representation of Comment"""
             return{
-                'author': str(self.author),
-                'post_id': str(self.post_id),
-                'date': str(self.date),
-                'body': str(self.body)
+                'author_id': str(self.author),
+                '_id': str(self.post_id),
+                'created_at': str(self.date),
+                'content': str(self.body)
             }
         
