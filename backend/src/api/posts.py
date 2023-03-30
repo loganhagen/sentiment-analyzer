@@ -3,57 +3,94 @@ from flask import jsonify
 from flask_restx import Namespace, Resource
 from src.db.connect import DBConnect
 from src.lib.languageProcessing import LanguageProcessing
+import random
 
 api = Namespace('posts', description='Post related operations')
 dbc = DBConnect()
 
 class Tweets(Resource):
     """
-    Handles API calls for all tweets
+    Handles API calls for all tweets.
     """
     def get(self):
-        """Get a list of tweets"""
+        """Get a list of tweets."""
 
         return dbc.getCollectionJSON("UBI", "tweets")
 
     def post(self):
-        """Add a new list of tweets"""
+        """Add a new list of tweets."""
 
 class Tweet(Resource):
     """
-    Handles single tweet api calls
+    Handles single tweet api calls.
     """
 
     def get(self, tweet_id):
-        """Get a tweet by ID"""
+        """Get a tweet by ID."""
 
     def put(self, tweet_id):
-        """Update a tweet by ID"""
+        """Update a tweet by ID."""
 
     def delete(self, tweet_id):
-        """Delete a tweet by ID"""
-
-
-class RandomTweet(Resource):
+        """Delete a tweet by ID."""
+    
+class Reddit(Resource):
     """
-    Returns a random tweet
+    Handles API calls for all Reddit data.
     """
     def get(self):
-        """Get a random tweet"""
-        doc = dbc.getRandomDocument("UBI", "tweets")
-        response = jsonify({"text" : str(doc["content"]), "id": str(doc["_id"]), "date": str(doc["created_at"]), "type": "tweet"})
+        """Get a JSON string of all Reddit data."""
+
+        return dbc.getCollectionJSON("UBI", "reddit_posts")
+
+class Random(Resource):
+    """
+    Returns a random post.
+    """
+    def get(self):
+        """Get a random post"""
+        tweet = dbc.getRandomDocument("UBI", "tweets")
+        reddit = dbc.getRandomDocument("UBI", "reddit_posts")
+        tweet_response = jsonify({"text" : str(tweet["content"]), "id": str(tweet["_id"]), "date": str(tweet["created_at"]), "type": "tweet"})
+        reddit_response = jsonify({"text" : str(reddit["content"]), "id": str(reddit["_id"]), "date": str(reddit["created_at"]), "type": "reddit"})
+
+        return tweet_response if random.randint(0, 1) == 1 else reddit_response
+
+class SizeAll(Resource):
+    """
+    Return total number of tweets and reddit posts.
+    """
+    def get(self):
+        """
+        Get total number of tweets and reddit posts.
+        """
+        collection_size = dbc.getCollectionSize("UBI", "tweets") + dbc.getCollectionSize("UBI", "reddit_posts")
+        response = jsonify({"size" : collection_size})
 
         return response
-
-class Size(Resource):
+    
+class SizeTweets(Resource):
     """
-    Returns total amount of tweets in database collection
+    Return total number of tweets from database collection.
     """
     def get(self):
         """
-        Get total number of tweets from database collection
+        Get total number of tweets from database collection.
         """
         collection_size = dbc.getCollectionSize("UBI", "tweets")
+        response = jsonify({"size" : collection_size})
+
+        return response
+    
+class SizeReddit(Resource):
+    """
+    Return total number of reddit posts.
+    """
+    def get(self):
+        """
+        Get total number of reddit posts.
+        """
+        collection_size = dbc.getCollectionSize("UBI", "reddit_posts")
         response = jsonify({"size" : collection_size})
 
         return response
@@ -77,8 +114,11 @@ class Sentiment(Resource):
 
 
 # Define routes for the API
-api.add_resource(Tweets, "")
+api.add_resource(Tweets, "/tweets")
+api.add_resource(Reddit, "/reddit")
 api.add_resource(Tweet, "/<string:post_id>")
-api.add_resource(RandomTweet, "/random")
-api.add_resource(Size, "/size")
+api.add_resource(Random, "/random")
+api.add_resource(SizeAll, "/size")
+api.add_resource(SizeTweets, "/tweets/size")
+api.add_resource(SizeTweets, "/reddit/size")
 api.add_resource(Sentiment, "/sentiment/<string:post_id>")

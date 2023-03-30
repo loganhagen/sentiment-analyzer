@@ -36,6 +36,13 @@ class DBConnect:
         cl = db[collection]
         doc = list(cl.aggregate([{"$sample" : { "size" : 1}}]))
 
+        # Check if the random sampler failed. Perhaps the collection does not exist, for example.
+        if len(doc) == 0:
+            return {"_id": "abc123",
+                    "created_at" : "01-01-1900",
+                    "content" : "The random sampler failed!",
+            }
+
         return doc[0]
 
     def writeFileToCollection(self, database: str, collection: str, filename: str) -> None:
