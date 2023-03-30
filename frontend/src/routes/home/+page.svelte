@@ -37,12 +37,11 @@
 		sharedPost.set(post);
 	}
 
-	//Loads a plot into page memory to be accesed under the variable cur_plot from cur_post
-	export async function getSentimentPlot() {
+	export async function getTweetSentimentPlot() {
 		//Don't create a plot if there is no post loaded into memory
 		if (cur_post.text == 'N/A') return false;
 
-		const response = await fetch('/api/plot/sentiment/tweet/' + cur_post.id);
+		const response = await fetch('/api/plot/sentiment/tweets/' + cur_post.id);
 		const responseJSON = await response.json();
 
 		//Get plot as object
@@ -55,13 +54,37 @@
 		sharedPlot.set(plot);
 	}
 
+	export async function getRedditSentimentPlot() {
+		//Don't create a plot if there is no post loaded into memory
+		if (cur_post.text == 'N/A') return false;
+
+		const response = await fetch('/api/plot/sentiment/reddit/' + cur_post.id);
+		const responseJSON = await response.json();
+
+		//Get plot as object
+		let plot = JSON.parse(responseJSON);
+
+		//update our current plot
+		plot = { data: plot.data, layout: plot.layout };
+
+		//Set data in sharedPlot store so that the data can be shared between components and pages
+		sharedPlot.set(plot);
+	}
+
+
 	//Handles updating data when button is pressed
 	async function ButtonUpdateComponents() {
 		//Update Post Text
 		await getRandomPost();
 
-		//Update Sentiment Plot
-		await getSentimentPlot();
+		if (cur_post.type == "tweet") {
+			await getTweetSentimentPlot();
+		} else if (cur_post.type == "reddit") {
+			await getRedditSentimentPlot();
+		} else {
+			return false;
+		}
+		
 	}
 </script>
 
