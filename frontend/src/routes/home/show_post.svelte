@@ -21,6 +21,10 @@
 		</p>
 	{:else if post.type == 'reddit'}
 		<p class="text-left font-bold">Source: Reddit</p>
+		<p class="text-left underline">
+			<a href="//reddit.com/r/basicincome/comments/{post.id}/{post.text}" target="_blank" rel="noreferrer">Link to post</a
+			>
+		</p>
 	{:else}
 		<p class="text-left font-bold">Source: N/A</p>
 	{/if}
