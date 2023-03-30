@@ -22,7 +22,11 @@
 	{:else if post.type == 'reddit'}
 		<p class="text-left font-bold">Source: Reddit</p>
 		<p class="text-left underline">
+<<<<<<< HEAD
 			<a href="//reddit.com/r/BasicIncome/comments/{post.id}" target="_blank" rel="noreferrer">Link to post</a
+=======
+			<a href="//reddit.com/r/basicincome/comments/{post.id}/{post.text}" target="_blank" rel="noreferrer">Link to post</a
+>>>>>>> a8c4f3098c03b774d82bf6e5cb1971a53076d40e
 			>
 		</p>
 	{:else}
