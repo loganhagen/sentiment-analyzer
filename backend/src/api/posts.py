@@ -1,9 +1,9 @@
 """API route for handling anything that pertains to tweets"""
+import random
 from flask import jsonify
 from flask_restx import Namespace, Resource
 from src.db.connect import DBConnect
 from src.lib.languageProcessing import LanguageProcessing
-import random
 
 api = Namespace('posts', description='Post related operations')
 dbc = DBConnect()
