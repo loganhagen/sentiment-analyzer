@@ -3,6 +3,7 @@ export type Post = {
 	text: string;
 	id: number;
 	date: string;
+	comments: Array<Comment>;
 	type: string;
 };
 
@@ -16,4 +17,12 @@ export type Plot = {
 export type Interaction = {
 	question: string,
 	answer: string,
+};
+
+//Comment data structure containing comment text, date, comment id, and post id
+export type Comment = {
+	text: string;
+	id: number;
+	post_id: number;
+	date: string;
 };

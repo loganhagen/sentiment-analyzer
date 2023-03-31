@@ -51,8 +51,8 @@ class Random(Resource):
         """Get a random post"""
         tweet = dbc.getRandomDocument("UBI", dbc.TWITTER)
         reddit = dbc.getRandomDocument("UBI", dbc.REDDIT)
-        tweet_response = jsonify({"text" : str(tweet["content"]), "id": str(tweet["_id"]), "date": str(tweet["created_at"]), "type": "tweet"})
-        reddit_response = jsonify({"text" : str(reddit["content"]), "id": str(reddit["_id"]), "date": str(reddit["created_at"]), "type": "reddit"})
+        tweet_response = jsonify({"text" : str(tweet["content"]), "id": str(tweet["_id"]), "date": str(tweet["created_at"]), "comments": None, "type": "tweet"})
+        reddit_response = jsonify({"text" : str(reddit["content"]), "id": str(reddit["_id"]), "date": str(reddit["created_at"]), "comments": reddit["comments"], "type": "reddit"})
 
         return tweet_response if random.randint(0, 1) == 1 else reddit_response
 
