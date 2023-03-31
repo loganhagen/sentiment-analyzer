@@ -11,6 +11,9 @@ mongo_uri = 'mongodb://' + os.environ.get('MONGO_USERNAME') + ':' + os.environ.g
 test_db = os.environ.get('DB_TEST')
 
 class DBConnect:
+    TWITTER : str = "tweets"
+    REDDIT : str = "reddit_posts"
+    
     def __init__(self) -> None:
         if test_db == '1':
             self.client = mongomock.MongoClient()
@@ -36,6 +39,13 @@ class DBConnect:
         cl = db[collection]
         doc = list(cl.aggregate([{"$sample" : { "size" : 1}}]))
 
+        # Check if the random sampler failed. Perhaps the collection does not exist, for example.
+        if len(doc) == 0:
+            return {"_id": "abc123",
+                    "created_at" : "01-01-1900",
+                    "content" : "The random sampler failed!",
+            }
+
         return doc[0]
 
     def writeFileToCollection(self, database: str, collection: str, filename: str) -> None:
@@ -56,6 +66,12 @@ class DBConnect:
 
         with open(filename, "w", encoding="UTF-8") as file:
             file.write(obj)
+
+    def dropCollection(self, database: str, collection: str) -> None:
+        db = self.client[database]
+        cl = db[collection]
+        cl.drop()
+
 
     def getCollectionJSON(self, database: str, collection: str) -> str:
         db = self.client[database]

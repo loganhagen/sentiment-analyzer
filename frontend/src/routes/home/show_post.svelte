@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Post } from '../../types';
 	import { sharedPost } from './store';
+	import ShowComments from './show_comments.svelte';
 
 	let post: Post;
 
@@ -11,7 +12,6 @@
 </script>
 
 <div class="rounded max-w-5xl max-y-2 overflow-hidden shadow-lg bg-slate-100 space-y-2 px-4 py-4">
-	<h1 class="text-left font-bold">Post:</h1>
 	<p>{post.text}</p>
 	<p class="text-left font-bold">Date: {post.date}</p>
 	{#if post.type == 'tweet'}
@@ -22,6 +22,16 @@
 		</p>
 	{:else if post.type == 'reddit'}
 		<p class="text-left font-bold">Source: Reddit</p>
+		<p class="text-left underline">
+			<a
+				href="//reddit.com/r/basicincome/comments/{post.id}/{post.text}"
+				target="_blank"
+				rel="noreferrer">Link to post</a
+			>
+		</p>
+
+		<!-- Displays button for showing/hiding comments -->
+		<ShowComments />
 	{:else}
 		<p class="text-left font-bold">Source: N/A</p>
 	{/if}

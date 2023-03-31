@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	let totalPosts = 0;
 
-	const sizeEndpoint = '/api/tweets/size';
+	const sizeEndpoint = '/api/posts/size';
 	onMount(async function () {
 		const sizeResponse = await fetch(sizeEndpoint);
 		const sizeJSON = await sizeResponse.json();

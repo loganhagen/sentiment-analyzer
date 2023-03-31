@@ -2,13 +2,18 @@
 	import Size from './size.svelte';
 	import ShowPost from './show_post.svelte';
 	import ShowPlot from './show_plot.svelte';
-	import type { Plot, Post } from '../../types';
+	import type { Comment, Plot, Post } from '../../types';
 	import { sharedPost, sharedPlot } from './store';
 
 	// //Create and set current post for the page
 	export let cur_post: Post;
 	//Create and set current plot for the page
 	export let cur_plot: Plot;
+
+	//Subscribe to sharedComments store to update cur_comments whenever a new post is stored in sharedPost
+	//sharedComments.subscribe((comments) =>{
+	//	cur_comments = comments;
+	//});
 
 	//Subscribe to sharedPost store to update cur_post whenever a new post is stored in sharedPost
 	sharedPost.subscribe((post) => {
@@ -22,14 +27,18 @@
 
 	// Loads a random tweet into page memory to be accesed under the variable cur_tweet
 	export async function getRandomPost() {
-		const response = await fetch('/api/tweets/random');
+		const response = await fetch('/api/posts/random');
 		const responseJSON = await response.json();
+
+		//List of comments
+		let comments = getComments(responseJSON['comments']);
 
 		//update our current post
 		let post = {
 			text: responseJSON['text'],
 			id: responseJSON['id'],
 			date: responseJSON['date'],
+			comments: comments,
 			type: responseJSON['type']
 		};
 
@@ -37,12 +46,47 @@
 		sharedPost.set(post);
 	}
 
-	//Loads a plot into page memory to be accesed under the variable cur_plot from cur_post
-	export async function getSentimentPlot() {
+	//gets comments for the posts and returns list of comments
+	function getComments(response: []) {
+		let comments: Comment[] = [];
+		if (response == null) {
+			return comments;
+		}
+
+		//add every comment to the list of comments
+		for (var comment of response) {
+			comments.push({
+				text: comment['content'],
+				id: comment['_id'],
+				post_id: comment['post_id'],
+				date: comment['created_at']
+			});
+		}
+		return comments;
+	}
+
+	export async function getTweetSentimentPlot() {
 		//Don't create a plot if there is no post loaded into memory
 		if (cur_post.text == 'N/A') return false;
 
-		const response = await fetch('/api/plot/sentiment/tweet/' + cur_post.id);
+		const response = await fetch('/api/plot/sentiment/tweets/' + cur_post.id);
+		const responseJSON = await response.json();
+
+		//Get plot as object
+		let plot = JSON.parse(responseJSON);
+
+		//update our current plot
+		plot = { data: plot.data, layout: plot.layout };
+
+		//Set data in sharedPlot store so that the data can be shared between components and pages
+		sharedPlot.set(plot);
+	}
+
+	export async function getRedditSentimentPlot() {
+		//Don't create a plot if there is no post loaded into memory
+		if (cur_post.text == 'N/A') return false;
+
+		const response = await fetch('/api/plot/sentiment/reddit/' + cur_post.id);
 		const responseJSON = await response.json();
 
 		//Get plot as object
@@ -60,8 +104,13 @@
 		//Update Post Text
 		await getRandomPost();
 
-		//Update Sentiment Plot
-		await getSentimentPlot();
+		if (cur_post.type == 'tweet') {
+			await getTweetSentimentPlot();
+		} else if (cur_post.type == 'reddit') {
+			await getRedditSentimentPlot();
+		} else {
+			return false;
+		}
 	}
 </script>
 

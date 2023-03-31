@@ -124,14 +124,10 @@ class Reddit:
             body = child['data']['body']
             date = datetime.fromtimestamp(child['data']['created_utc'])
             post_id = self.splitPostID(child['data']['link_id'])
-            self.commentList.append(
-                self.Comment(
-                    author,
-                    body,
-                    post_id,
-                    date
-                )
-            )
+            comment_id = child['data']['id']
+            comment = self.Comment(author,body,post_id,date)
+            comment.setCommentID(comment_id)
+            self.commentList.append(comment)
 
 
     def addCommentsToPost(self):
@@ -216,10 +212,10 @@ class Reddit:
         def toDict(self):
             """Returns dictionary representation of Post"""
             return {
-                'title': str(self.title),
-                'author': str(self.author),
-                'post_id': str(self.post_id),
-                'date': str(self.date),
+                'content': str(self.title),
+                'author_id': str(self.author),
+                '_id': str(self.post_id),
+                'created_at': str(self.date),
                 'comments': self.commentsToDict()
             }
         
@@ -231,6 +227,7 @@ class Reddit:
             self.body = body
             self.post_id = self.parsePostID(post_id)
             self.date = date
+            self.id = None
       
 
         def getComment(self):
@@ -241,6 +238,9 @@ class Reddit:
         def getPostID(self):
             """Return comment post id"""
             return self.post_id
+
+        def setCommentID(self, comment_id):
+            self.id = comment_id
         
 
         def parsePostID(self, post_id):
@@ -251,9 +251,10 @@ class Reddit:
         def toDict(self):
             """Returns dictionary representation of Comment"""
             return{
-                'author': str(self.author),
+                'author_id': str(self.author),
+                '_id': str(self.id),
                 'post_id': str(self.post_id),
-                'date': str(self.date),
-                'body': str(self.body)
+                'created_at': str(self.date),
+                'content': str(self.body)
             }
         

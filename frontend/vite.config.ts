@@ -16,7 +16,7 @@ const config: UserConfig = {
 		proxy: {
 			'/api': {
 				target: proxyTarget,
-        		changeOrigin: true,
+				changeOrigin: true
 			}
 		},
 		port: 3000,
