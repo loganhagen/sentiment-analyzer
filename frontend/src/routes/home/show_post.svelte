@@ -3,7 +3,7 @@
 	import { sharedPost } from './store';
 
 	let post: Post;
-	let comments: Post["comments"];
+
 	//Access post from store whenever the data is changed
 	sharedPost.subscribe((data) => {
 		post = data;
@@ -22,10 +22,20 @@
 	{:else if post.type == 'reddit'}
 		<p class="text-left font-bold">Source: Reddit</p>
 		<p class="text-left underline">
-			<a href="//reddit.com/r/basicincome/comments/{post.id}/{post.text}" target="_blank" rel="noreferrer">Link to post</a
+			<a
+				href="//reddit.com/r/basicincome/comments/{post.id}/{post.text}"
+				target="_blank"
+				rel="noreferrer">Link to post</a
 			>
 		</p>
-		<li>{comments}</li>
+
+		<ul class="text-left space-y-5 text-gray-500 list-disc list-inside dark:text-gray-400">
+			{#each post.comments as comment}
+				<li>
+					{comment.text}
+				</li>
+			{/each}
+		</ul>
 	{:else}
 		<p class="text-left font-bold">Source: N/A</p>
 	{/if}

@@ -2,13 +2,18 @@
 	import Size from './size.svelte';
 	import ShowPost from './show_post.svelte';
 	import ShowPlot from './show_plot.svelte';
-	import type { Plot, Post } from '../../types';
+	import type { Comment, Plot, Post } from '../../types';
 	import { sharedPost, sharedPlot } from './store';
 
 	// //Create and set current post for the page
 	export let cur_post: Post;
 	//Create and set current plot for the page
 	export let cur_plot: Plot;
+
+	//Subscribe to sharedComments store to update cur_comments whenever a new post is stored in sharedPost
+	//sharedComments.subscribe((comments) =>{
+	//	cur_comments = comments;
+	//});
 
 	//Subscribe to sharedPost store to update cur_post whenever a new post is stored in sharedPost
 	sharedPost.subscribe((post) => {
@@ -25,17 +30,39 @@
 		const response = await fetch('/api/posts/random');
 		const responseJSON = await response.json();
 
+		//List of comments
+		let comments = getComments(responseJSON['comments']);
+
 		//update our current post
 		let post = {
 			text: responseJSON['text'],
 			id: responseJSON['id'],
 			date: responseJSON['date'],
-			comments: responseJSON['comments'],
+			comments: comments,
 			type: responseJSON['type']
 		};
 
 		//Set data in sharedPost store so that the data can be shared between components and pages
 		sharedPost.set(post);
+	}
+
+	//gets comments for the posts and returns list of comments
+	function getComments(response: []) {
+		let comments: Comment[] = [];
+		if (response == null) {
+			return comments;
+		}
+
+		//add every comment to the list of comments
+		for (var comment of response) {
+			comments.push({
+				text: comment['content'],
+				id: comment['_id'],
+				post_id: comment['post_id'],
+				date: comment['created_at']
+			});
+		}
+		return comments;
 	}
 
 	export async function getTweetSentimentPlot() {
@@ -72,20 +99,18 @@
 		sharedPlot.set(plot);
 	}
 
-
 	//Handles updating data when button is pressed
 	async function ButtonUpdateComponents() {
 		//Update Post Text
 		await getRandomPost();
 
-		if (cur_post.type == "tweet") {
+		if (cur_post.type == 'tweet') {
 			await getTweetSentimentPlot();
-		} else if (cur_post.type == "reddit") {
+		} else if (cur_post.type == 'reddit') {
 			await getRedditSentimentPlot();
 		} else {
 			return false;
 		}
-		
 	}
 </script>
 
