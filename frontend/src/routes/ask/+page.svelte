@@ -1,12 +1,8 @@
 <script lang="ts">
-	type Interaction = {
-		question: string,
-		answer: string,
-	};
+	import type { Interaction } from '../../types';
 
 	let interactions: Interaction[] = [];
-	let question = '';
-	let answer = '';
+	var question = '';
 
 	async function askQuestion() {
 		document.getElementById('textinput1').value = "";
@@ -20,9 +16,9 @@
 
 		if (response?.ok) {
 			let json = await response.json();
-			answer = json['choices'][0]['text'];
+			let answer = json['choices'][0]['text'];
 			interactions.push({question, answer});
-			console.log(interactions);
+			interactions = interactions;
 		} else {
 			console.log(`HTTP response code: ${response?.status}`);
 		}
@@ -38,14 +34,11 @@
 		on:click={askQuestion}
 		>Ask!
 	</button>
-	{#if answer}
-		<div>
-			<p class="rounded max-w-5xl max-y-2 overflow-hidden shadow-lg bg-slate-100 space-y-2 px-4 py-4">{answer}</p>
+	{#each interactions as interaction, i}
+		<div class="rounded max-w-5xl max-y-2 overflow-hidden shadow-lg bg-slate-100 space-y-2 px-4 py-4">
+			<p style="color:Gray">{interaction.question}</p>
+			<p>{interaction.answer}</p>
 		</div>
-	{/if}
-	{#each interactions as interaction}
-		<p>{interaction.question}</p>
-		<p>{interaction.answer}</p>
 	{/each}
 </main>
 

@@ -13,6 +13,12 @@ export type Plot = {
 	layout: object;
 };
 
+// Interaction data structure for storing dialogue between user and OpenAI API.
+export type Interaction = {
+	question: string,
+	answer: string,
+};
+
 //Comment data structure containing comment text, date, comment id, and post id
 export type Comment = {
 	text: string;
