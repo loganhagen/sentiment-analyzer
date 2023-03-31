@@ -124,16 +124,10 @@ class Reddit:
             body = child['data']['body']
             date = datetime.fromtimestamp(child['data']['created_utc'])
             post_id = self.splitPostID(child['data']['link_id'])
-            id = child['data']['id']
-            self.commentList.append(
-                self.Comment(
-                    author,
-                    body,
-                    post_id,
-                    id,
-                    date
-                )
-            )
+            comment_id = child['data']['id']
+            comment = self.Comment(author,body,post_id,date)
+            comment.setCommentID(comment_id)
+            self.commentList.append(comment)
 
 
     def addCommentsToPost(self):
@@ -228,12 +222,12 @@ class Reddit:
 
     class Comment:
         """Class that represents a a comment"""
-        def __init__(self, author, body, post_id, id, date):
+        def __init__(self, author, body, post_id, date):
             self.author = author
             self.body = body
             self.post_id = self.parsePostID(post_id)
-            self.id = id
             self.date = date
+            self.id = None
       
 
         def getComment(self):
@@ -244,6 +238,9 @@ class Reddit:
         def getPostID(self):
             """Return comment post id"""
             return self.post_id
+
+        def setCommentID(self, comment_id):
+            self.id = comment_id
         
 
         def parsePostID(self, post_id):
