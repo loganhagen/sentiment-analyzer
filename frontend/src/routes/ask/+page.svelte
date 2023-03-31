@@ -21,11 +21,7 @@
 		if (response?.ok) {
 			let json = await response.json();
 			answer = json['choices'][0]['text'];
-			var interaction = {
-				question: question,
-				answer: answer
-			};
-			interactions.push(interaction);
+			interactions.push({question, answer});
 			console.log(interactions);
 		} else {
 			console.log(`HTTP response code: ${response?.status}`);
@@ -47,6 +43,10 @@
 			<p class="rounded max-w-5xl max-y-2 overflow-hidden shadow-lg bg-slate-100 space-y-2 px-4 py-4">{answer}</p>
 		</div>
 	{/if}
+	{#each interactions as interaction}
+		<p>{interaction.question}</p>
+		<p>{interaction.answer}</p>
+	{/each}
 </main>
 
 <style lang="postcss">
