@@ -30,6 +30,7 @@
 			text: responseJSON['text'],
 			id: responseJSON['id'],
 			date: responseJSON['date'],
+			comments: responseJSON['comments'],
 			type: responseJSON['type']
 		};
 

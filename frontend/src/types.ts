@@ -3,6 +3,7 @@ export type Post = {
 	text: string;
 	id: number;
 	date: string;
+	comments: object;
 	type: string;
 };
 

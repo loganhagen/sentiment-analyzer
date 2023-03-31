@@ -3,7 +3,7 @@
 	import { sharedPost } from './store';
 
 	let post: Post;
-
+	let comments: Post["comments"];
 	//Access post from store whenever the data is changed
 	sharedPost.subscribe((data) => {
 		post = data;
@@ -25,6 +25,7 @@
 			<a href="//reddit.com/r/basicincome/comments/{post.id}/{post.text}" target="_blank" rel="noreferrer">Link to post</a
 			>
 		</p>
+		<li>{comments}</li>
 	{:else}
 		<p class="text-left font-bold">Source: N/A</p>
 	{/if}
