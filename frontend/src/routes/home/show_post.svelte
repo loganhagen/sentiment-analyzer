@@ -29,6 +29,8 @@
 				rel="noreferrer">Link to post</a
 			>
 		</p>
+
+		<!-- Displays button for showing/hiding comments -->
 		<ShowComments />
 	{:else}
 		<p class="text-left font-bold">Source: N/A</p>
