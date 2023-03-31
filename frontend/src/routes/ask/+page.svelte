@@ -1,12 +1,8 @@
 <script lang="ts">
-	type Interaction = {
-		question: string,
-		answer: string,
-	};
+	import type { Interaction } from '../../types';
 
 	let interactions: Interaction[] = [];
-	let question = '';
-	let answer = '';
+	var question = '';
 
 	async function askQuestion() {
 		document.getElementById('textinput1').value = "";
@@ -20,10 +16,9 @@
 
 		if (response?.ok) {
 			let json = await response.json();
-			answer = json['choices'][0]['text'];
+			let answer = json['choices'][0]['text'];
 			interactions.push({question, answer});
 			interactions = interactions;
-			console.log(interactions);
 		} else {
 			console.log(`HTTP response code: ${response?.status}`);
 		}

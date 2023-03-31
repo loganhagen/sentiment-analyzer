@@ -25,6 +25,8 @@ class Ask(Resource):
         \nYou: I am good. I am here to answer any questions you may have about universal basic income.
         \n\nUser: What is Batman's secret identity?
         \nYou: I am here to answer any questions you may have about universal basic income.
+        \nUser: Who is Lionel Messi?
+        \n\nYou: I am sorry, I'm here to answer any questions you may have about universal basic income.
         \n\nCurrent conversation:
         \nUser: {question}
         \nYou: \n
