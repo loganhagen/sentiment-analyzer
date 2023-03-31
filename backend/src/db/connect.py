@@ -67,6 +67,12 @@ class DBConnect:
         with open(filename, "w", encoding="UTF-8") as file:
             file.write(obj)
 
+    def dropCollection(self, database: str, collection: str) -> None:
+        db = self.client[database]
+        cl = db[collection]
+        cl.drop()
+
+
     def getCollectionJSON(self, database: str, collection: str) -> str:
         db = self.client[database]
         cl = db[collection]

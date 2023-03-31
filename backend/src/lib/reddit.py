@@ -124,11 +124,13 @@ class Reddit:
             body = child['data']['body']
             date = datetime.fromtimestamp(child['data']['created_utc'])
             post_id = self.splitPostID(child['data']['link_id'])
+            id = child['data']['id']
             self.commentList.append(
                 self.Comment(
                     author,
                     body,
                     post_id,
+                    id,
                     date
                 )
             )
@@ -226,10 +228,11 @@ class Reddit:
 
     class Comment:
         """Class that represents a a comment"""
-        def __init__(self, author, body, post_id, date):
+        def __init__(self, author, body, post_id, id, date):
             self.author = author
             self.body = body
             self.post_id = self.parsePostID(post_id)
+            self.id = id
             self.date = date
       
 
@@ -252,7 +255,8 @@ class Reddit:
             """Returns dictionary representation of Comment"""
             return{
                 'author_id': str(self.author),
-                '_id': str(self.post_id),
+                '_id': str(self.id),
+                'post_id': str(self.post_id),
                 'created_at': str(self.date),
                 'content': str(self.body)
             }
