@@ -24,12 +24,17 @@
 
 <main>
 	<h1 style="font-size:150%;">Q & A (Powered By OpenAI)</h1>
-	<input placeholder="Your question here..." size="32" id="textinput1"/>
-	<button
-		class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
-		on:click={handleClick}
-		>Ask!
-	</button>
+	<hr>
+	<div id="input">
+		<!-- <textarea id="textarea1" placeholder="Your question here..." rows="3" cols="33"></textarea> -->
+		<input placeholder="Your question here..." size="32" id="textinput1"/>
+		<button
+			class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
+			on:click={handleClick}
+			>Ask!
+		</button>
+	</div>
+	
 	<!-- Prints the array of interactions as it is updated. Since the array is empty on page load, nothing is printed.
 	I would like some kind of loading action to appear on button click.  -->
 	{#each interactions as interaction, i}
@@ -49,5 +54,8 @@
 		padding: 1em;
 		max-width: 1000px;
 		margin: 0 auto;
+	}
+	input {
+		margin: 30px;
 	}
 </style>
