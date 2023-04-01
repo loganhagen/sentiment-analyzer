@@ -4,7 +4,7 @@
 	let posts = [];
 
 	onMount(async () => {
-		const response = await fetch('/api/posts/tweets');
+		const response = await fetch('/api/posts/reddit');
 		const json = await response.json();
 		posts = JSON.parse(json)['data'];
 	});
@@ -22,7 +22,7 @@
 				<p class="text-left font-bold">Date: {post.created_at}</p>
 				<p class="text-left font-bold">ID: {post._id}</p>
 				<p class="text-left underline">
-					<a href="//twitter.com/user/status/{post._id}" target="_blank" rel="noreferrer"
+					<a href="//reddit.com/r/basicincome/comments/{post._id}" target="_blank" rel="noreferrer"
 						>Link to post</a
 					>
 				</p>
