@@ -23,7 +23,8 @@
 </script>
 
 <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
-	<div class="container flex flex-wrap items-center justify-between mx-auto">
+	<div class="container flex flex-wrap items-center justify-start mx-auto">
+		<img src="src/Favicon.png" alt="Logo" class="h-8 mx-4" />
 		<div class="hidden w-full md:block md:w-auto" id="navbar-default">
 			<ul
 				class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
