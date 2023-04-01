@@ -16,33 +16,38 @@
 	}
 
 	async function handleClick() {
-		let question: string = (<HTMLInputElement>document.getElementById('textinput1')).value;
+		let question: string = (<HTMLInputElement>document.getElementById('textarea1')).value;
 		await askQuestion(question);
 	}
 
 </script>
 
 <main>
-	<h1 style="font-size:150%;">Q & A (Powered By OpenAI)</h1>
+	<h1 style="font-size:150%;">FAQ Chatbot</h1>
+	<h2>Powered by OpenAI</h2>
 	<hr>
-	<div id="input">
-		<!-- <textarea id="textarea1" placeholder="Your question here..." rows="3" cols="33"></textarea> -->
-		<input placeholder="Your question here..." size="32" id="textinput1"/>
-		<button
-			class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
-			on:click={handleClick}
-			>Ask!
-		</button>
+	<div class="textarea1">
+		<!-- <input placeholder="Your question here..." size="32" id="textinput1"/> -->
+		<textarea name="textarea1" rows="5" cols="50"  placeholder="Your question here..." id="textarea1"></textarea>
 	</div>
+	<!-- {#await promise}
+		<p>Generating...</p>
+	{/await} -->
+	<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg" on:click={handleClick}>
+		Ask!
+	</button>
 	
 	<!-- Prints the array of interactions as it is updated. Since the array is empty on page load, nothing is printed.
 	I would like some kind of loading action to appear on button click.  -->
+	<div class="responseArea">
 	{#each interactions as interaction, i}
 		<div class="rounded max-w-5xl max-y-2 overflow-hidden shadow-lg bg-slate-100 space-y-2 px-4 py-4">
 			<p style="color:Gray">{interaction.question}</p>
+			<hr>
 			<p>{interaction.answer}</p>
 		</div>
 	{/each}
+	<div>
 </main>
 
 <style lang="postcss">
@@ -55,7 +60,16 @@
 		max-width: 1000px;
 		margin: 0 auto;
 	}
-	input {
-		margin: 30px;
+	h1 {
+		margin: 10px;
+	}
+	.textarea1 {
+		margin: 10px;
+	}
+	textarea {
+		outline: 1px solid black;
+	}
+	.responseArea {
+		margin: 10px;
 	}
 </style>
