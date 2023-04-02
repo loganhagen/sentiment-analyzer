@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1680462888947" clover="3.2.0">
-  <project timestamp="1680462888947" name="All files">
+<coverage generated="1680463551805" clover="3.2.0">
+  <project timestamp="1680463551805" name="All files">
     <metrics statements="81" coveredstatements="81" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="1" elements="84" coveredelements="83" complexity="0" loc="81" ncloc="81" packages="1" files="3" classes="3"/>
     <file name="show_comments.svelte" path="/app/frontend/src/routes/home/show_comments.svelte">
       <metrics statements="35" coveredstatements="35" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>

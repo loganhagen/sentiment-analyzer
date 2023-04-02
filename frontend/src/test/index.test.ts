@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
-import ShowPost from './routes/home/show_post.svelte';
-import { sharedPost } from './routes/home/store';
-import type { Post } from './types';
+import ShowPost from '../routes/home/show_post.svelte';
+import { sharedPost } from '../routes/home/store';
+import type { Post } from '../types';
 
 // Test Show Post
 describe('Show Post', () => {
