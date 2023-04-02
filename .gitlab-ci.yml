@@ -37,7 +37,7 @@ test_frontend:
   script:
     - cd ./frontend
     - npm install
-    - npm run test:unit
+    - npx vitest --coverage
   dependencies:
     - build_frontend
   allow_failure: false

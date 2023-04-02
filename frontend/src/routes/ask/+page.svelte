@@ -41,7 +41,9 @@
 	I would like some kind of loading action to appear on button click.  -->
 	<div class="responseArea">
 	{#each interactions as interaction, i}
-		<div class="rounded max-w-5xl max-y-2 overflow-hidden shadow-lg bg-slate-100 space-y-2 px-4 py-4">
+		<div
+			class="rounded max-w-5xl max-y-2 overflow-hidden shadow-lg bg-slate-100 space-y-2 px-4 py-4"
+		>
 			<p style="color:Gray">{interaction.question}</p>
 			<hr>
 			<p>{interaction.answer}</p>

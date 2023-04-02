@@ -10,7 +10,7 @@ const config: UserConfig = {
 		globals: true,
 		include: ['src/**/*.{test,spec}.{js,ts}'],
 		environment: 'jsdom',
-		setupFiles: ['src/setupTest.ts']
+		setupFiles: ['src/test/setupTest.ts']
 	},
 	server: {
 		proxy: {
