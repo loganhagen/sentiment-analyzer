@@ -1,47 +1,55 @@
 <script lang="ts">
 	import type { Interaction } from '../../types';
 
+	// Array to hold all interactions between the user and AI.
 	let interactions: Interaction[] = [];
-	var question = '';
 
-	async function askQuestion() {
-		document.getElementById('textinput1').value = '';
-		let response;
+	async function askQuestion(question: string) {
+		const response = await fetch('/api/ask?' + new URLSearchParams({ q: question }));
+		const json = await response.json();
 
-		try {
-			response = await fetch('/api/ask?' + new URLSearchParams({ q: question }));
-		} catch (error) {
-			console.log('Failed API call.');
-		}
-
-		if (response?.ok) {
-			let json = await response.json();
-			let answer = json['choices'][0]['text'];
-			interactions.push({ question, answer });
+		if (response.ok) {
+			let answer: string = json['choices'][0]['text'];
+			interactions.push({question, answer});
 			interactions = interactions;
-		} else {
-			console.log(`HTTP response code: ${response?.status}`);
 		}
 	}
+
+	async function handleClick() {
+		let question: string = (<HTMLInputElement>document.getElementById('textarea1')).value;
+		await askQuestion(question);
+	}
+
 </script>
 
 <main>
-	<h1 style="font-size:150%;">Q & A (Powered By OpenAI)</h1>
-
-	<input bind:value={question} placeholder="Your question here..." size="32" id="textinput1" />
-	<button
-		class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
-		on:click={askQuestion}
-		>Ask!
+	<h1 style="font-size:150%;">FAQ Chatbot</h1>
+	<h2>Powered by OpenAI</h2>
+	<hr>
+	<div class="textarea1">
+		<!-- <input placeholder="Your question here..." size="32" id="textinput1"/> -->
+		<textarea name="textarea1" rows="5" cols="50"  placeholder="Your question here..." id="textarea1"></textarea>
+	</div>
+	<!-- {#await promise}
+		<p>Generating...</p>
+	{/await} -->
+	<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg" on:click={handleClick}>
+		Ask!
 	</button>
+	
+	<!-- Prints the array of interactions as it is updated. Since the array is empty on page load, nothing is printed.
+	I would like some kind of loading action to appear on button click.  -->
+	<div class="responseArea">
 	{#each interactions as interaction, i}
 		<div
 			class="rounded max-w-5xl max-y-2 overflow-hidden shadow-lg bg-slate-100 space-y-2 px-4 py-4"
 		>
 			<p style="color:Gray">{interaction.question}</p>
+			<hr>
 			<p>{interaction.answer}</p>
 		</div>
 	{/each}
+	<div>
 </main>
 
 <style lang="postcss">
@@ -54,4 +62,17 @@
 		max-width: 1000px;
 		margin: 0 auto;
 	}
+	h1 {
+		margin: 10px;
+	}
+	.textarea1 {
+		margin: 10px;
+	}
+	textarea {
+		outline: 1px solid black;
+	}
+	.responseArea {
+		margin: 10px;
+	}
 </style>
+
