@@ -26,6 +26,7 @@ RUN apt-get update
 RUN apt-get -y install cron
 RUN chmod 0644 runCron
 RUN crontab runCron
+RUN cron
 
 # Install and update all python libraries required to run the backend
 RUN pip --no-cache-dir install -r requirements.txt
@@ -39,4 +40,4 @@ EXPOSE $PORT
 # CMD runs when you want to run a container from an image. This can be overridden in the docker compose file
 CMD ["python3", "app.py"]
 # 
-CMD cron
+#CMD cron
