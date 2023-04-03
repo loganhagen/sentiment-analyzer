@@ -56,6 +56,16 @@ class DBConnect:
             cl = db[collection]  
             cl.insert_many(data, ordered=False)   
 
+    def writeJSONToCollection(self, database:str, collection: str, jsonObject: object) -> None:
+        #print(jsonObject)
+        obj = json.loads(jsonObject)
+        data = obj["data"]
+        #print(data)
+        db = self.client[database]
+        cl = db[collection] 
+        cl.insert_many(data,ordered=False)
+
+
     def writeCollectionToFile(self, database: str, collection: str, filename: str) -> None:
         db = self.client[database]
         cl = db[collection]
