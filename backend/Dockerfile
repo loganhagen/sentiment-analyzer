@@ -21,11 +21,14 @@ ENV PORT $PORT
 WORKDIR /app/backend
 COPY . /app/backend
 
-
+#update and install cron
 RUN apt-get update
 RUN apt-get -y install cron
+#read & write permission
 RUN chmod 0644 runCron
+#set crontab
 RUN crontab runCron
+#run cron
 RUN cron
 
 # Install and update all python libraries required to run the backend
@@ -39,5 +42,4 @@ EXPOSE $PORT
 
 # CMD runs when you want to run a container from an image. This can be overridden in the docker compose file
 CMD ["python3", "app.py"]
-# 
-#CMD cron
+
