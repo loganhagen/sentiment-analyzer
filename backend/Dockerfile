@@ -21,8 +21,20 @@ ENV PORT $PORT
 WORKDIR /app/backend
 COPY . /app/backend
 
+#update and install cron
+RUN apt-get update
+RUN apt-get -y install cron
+#read & write permission
+RUN chmod 0644 runCron
+#set crontab
+RUN crontab runCron
+#run cron
+RUN cron
+
 # Install and update all python libraries required to run the backend
 RUN pip --no-cache-dir install -r requirements.txt
+
+
 
 # Last we expose the PORT 8080.
 # The EXPOSE STANZA informs Docker that the container listens on the specified network ports at runtime.
@@ -30,3 +42,4 @@ EXPOSE $PORT
 
 # CMD runs when you want to run a container from an image. This can be overridden in the docker compose file
 CMD ["python3", "app.py"]
+
