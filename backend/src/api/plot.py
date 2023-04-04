@@ -39,5 +39,20 @@ class RedditSentiment(Resource):
 
         return plot
 
+class DataBaseSentiment(Resource):
+    """
+    Creates a twin pair bar graph of the sentiment of all posts in the database
+    """
+    def get(self):
+        twitter_sentiment, reddit_sentiment = lp.getDatabaseSentiment(dbc)
+
+        twitter_df = lp.sentimentToDataFrame(twitter_sentiment)
+        reddit_df = lp.sentimentToDataFrame(reddit_sentiment)
+
+        plot = gp.plotDatabaseSentiment(twitter_df, reddit_df)
+
+        return plot
+
 api.add_resource(TwitterSentiment, "/sentiment/tweets/<string:post_id>")
 api.add_resource(RedditSentiment, "/sentiment/reddit/<string:post_id>")
+api.add_resource(DataBaseSentiment, "/sentiment/all")

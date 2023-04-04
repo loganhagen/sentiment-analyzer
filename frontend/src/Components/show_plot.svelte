@@ -1,28 +1,16 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import type { Plot } from '../../types';
-	import { sharedPlot } from './store';
+	import type { Plot } from '../types';
 	import Plotly, { type Root } from 'plotly.js-dist-min';
 
-	//initialize variables
-	let plot: Plot;
+	//initialize variabless
+	export let plot: Plot;
 	let plot_div: Root;
 
 	//Disables the intrusive plotly toolbar
 	const config = {
 		displayModeBar: false
 	};
-
-	//Access plot from store whenever the data is changed
-	sharedPlot.subscribe((data) => {
-		plot = data;
-		if (plot_div != undefined || plot_div != null) {
-			/* eslint-disable */
-			Plotly.purge(plot_div);
-			Plotly.react(plot_div, plot.data, plot.layout, config);
-			/* eslint-enable */
-		}
-	});
 
 	//Load plot on component mount in slot
 	onMount(() => {

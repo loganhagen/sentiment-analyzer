@@ -1,7 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
-import ShowPost from '../routes/home/show_post.svelte';
-import { sharedPost } from '../routes/home/store';
+import ShowPost from '../Components/show_post.svelte';
 import type { Post } from '../types';
 
 // Test Show Post
@@ -10,25 +9,24 @@ describe('Show Post', () => {
 		date: '2023-02-08 02:21:38+00:00',
 		id: '1623144998735851520',
 		text: '@HC_Richardson Biggest take away for universal bas…ies is that the recipients start more businesses.',
+		comments: [],
 		type: 'tweet'
 	};
 	const post: Post = {
 		text: responseJSON['text'],
 		id: parseInt(responseJSON['id']),
 		date: responseJSON['date'],
+		comments: responseJSON['comments'],
 		type: responseJSON['type']
 	};
 
-	//Set post data in the page/component related svelte store
-	sharedPost.set(post);
-
 	test('Check for correct text of post', () => {
-		render(ShowPost);
+		render(ShowPost, { post });
 		expect(screen.getByText(post.text)).toBeInTheDocument();
 	});
 
 	test('Check for correct date of post', () => {
-		render(ShowPost);
+		render(ShowPost, { post });
 		expect(screen.getByText('Date: ' + post.date)).toBeInTheDocument();
 	});
 });
