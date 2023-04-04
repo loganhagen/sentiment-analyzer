@@ -51,6 +51,5 @@
 				</button>
 			{/if}
 		{/await}
-		
 	</div>
 </main>

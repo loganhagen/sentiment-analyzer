@@ -17,8 +17,6 @@
 		//Get plot as object
 		let plot = JSON.parse(responseJSON);
 
-		console.log(plot);
-
 		//update our current plot
 		let plot_obj = { data: plot.data, layout: plot.layout };
 

@@ -2,6 +2,7 @@
 	import Switch from "../../Components/switch.svelte";
 	import { sharedTab } from "./store";
 	import Tabs from "./Components/tabs.svelte";
+	import Size from "../../Components/size.svelte";
 
 	//The value of switched represents which tab we are on, but techincally in this case we only care about when it is updated, not its value
 	let switched: boolean;
@@ -14,7 +15,8 @@
 
 
 <main>
-	<div class="space-y-2 px-0">
+	<!-- <div class="shadow-lg bg-slate-400 space-y-4 px-4 py-4"> -->
+	<div>
 		<Switch store={sharedTab} options={["Twitter", "Reddit"]}/>
 		<!-- Update page if switched bool is changed at any point -->
 		{#key switched}
