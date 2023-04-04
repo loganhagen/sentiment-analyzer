@@ -1,14 +1,8 @@
 <script lang="ts">
-	import type { Post } from '../../types';
-	import { sharedPost } from './store';
+	import type { Post } from '../types';
 
-	let post: Post;
+	export let post: Post;
 	let visible = false;
-
-	//Access post from store whenever the data is changed
-	sharedPost.subscribe((data) => {
-		post = data;
-	});
 
 	//toggle visibility to show the list of comments
 	function toggleVibility() {

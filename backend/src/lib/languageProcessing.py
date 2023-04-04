@@ -1,4 +1,5 @@
 """Class that handles Language Processing for our backend"""
+from flask import jsonify
 import pandas as pd
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 #Expecting the use of NLTK, plotly, pandas, and scikit-learn
@@ -22,3 +23,29 @@ class LanguageProcessing:
         df['Sentiment Score'] = vals
 
         return df
+
+    def getDatabaseSentiment(self, dbc):
+        """Return sentiment analysis of entire database collection"""
+        db = dbc.client["UBI"]
+
+        twitter_col = db[dbc.TWITTER]
+        reddit_col = db[dbc.REDDIT]
+
+        twitter_str = ""
+        reddit_str = ""
+
+        #Build string with all tweets
+        for document in twitter_col.find({}):
+            twitter_str += (str(document["content"]) + " ") 
+
+        #Build string with all reddit posts
+        for document in reddit_col.find({}): 
+            reddit_str += (str(document["content"]) + " ")
+
+        #get sentiment for tweets
+        twitter_sentiment = self.getSentiment(twitter_str)
+
+        #get sentiment for reddit posts
+        reddit_sentiment = self.getSentiment(reddit_str)
+
+        return twitter_sentiment, reddit_sentiment

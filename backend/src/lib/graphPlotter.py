@@ -1,5 +1,6 @@
 """Class that uses Plotly to generate graph data to be passed to PlotlyJS as a JSON object."""
 import plotly.express as px
+import plotly.graph_objects as go
 import pandas as pd
 
 class GraphPlotter:
@@ -30,6 +31,25 @@ class GraphPlotter:
             fig.update_layout(
                 title=title,
             )
+
+        result = fig.to_json()
+        return result
+    
+    def plotDatabaseSentiment(self, twitter_df: pd.DataFrame, reddit_df: pd.DataFrame, title:str=None, x_label:str=None, y_label:str=None):
+        
+        fig = go.Figure(data = [
+
+            go.Bar(name='Twitter', x=twitter_df['Sentiment Score'], y=twitter_df['Sentiment'], orientation='h'),
+            go.Bar(name='Reddit', x=reddit_df['Sentiment Score'], y=reddit_df['Sentiment'], orientation='h')
+            ]
+        )
+
+        fig.update_layout(
+            title='Sentiment Analysis of All Posts',
+            xaxis_title="Sentiment Score",
+            yaxis_title="Sentiment",
+            barmode='group',
+        )
 
         result = fig.to_json()
         return result

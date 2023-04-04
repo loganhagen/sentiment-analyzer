@@ -1,14 +1,8 @@
 <script lang="ts">
-	import type { Post } from '../../types';
-	import { sharedPost } from './store';
+	import type { Post } from '../types';
 	import ShowComments from './show_comments.svelte';
 
-	let post: Post;
-
-	//Access post from store whenever the data is changed
-	sharedPost.subscribe((data) => {
-		post = data;
-	});
+	export let post: Post;
 </script>
 
 <div class="rounded max-w-5xl max-y-2 overflow-hidden shadow-lg bg-slate-100 space-y-2 px-4 py-4">
@@ -31,7 +25,7 @@
 		</p>
 
 		<!-- Displays button for showing/hiding comments -->
-		<ShowComments />
+		<ShowComments {post} />
 	{:else}
 		<p class="text-left font-bold">Source: N/A</p>
 	{/if}
