@@ -101,3 +101,5 @@ spec:
 
       imagePullSecrets:
         - name: regcred # TODO: replace this with your image pull secret name
+
+#comment for triggering rebuild

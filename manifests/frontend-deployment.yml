@@ -83,3 +83,5 @@ spec:
       # Comment out the imagePullSecrets field if you are running locally.
       imagePullSecrets:
         - name: regcred # TODO: replace this with your image pull secret name
+
+#comment for triggering rebuild
