@@ -4,7 +4,7 @@
 
 <nav class="bg-black border-gray-200 px-4 sm:px-4 py-2.5 dark:bg-gray-900">
 	<div class="container flex flex-wrap items-center justify-start mx-auto">
-		<img src="src/Favicon.png" alt="Logo" class="h-8 mx-4" />
+		<img src="src/images/Favicon.png" alt="Logo" class="h-8 mx-4" />
 		<div class="hidden w-full md:block md:w-auto" id="navbar-default">
 			<ul
 				class="flex flex-col p-4 mt-4 md:border-l-2 md:border-r-2 md:border-white bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-black dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
