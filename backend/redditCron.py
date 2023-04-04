@@ -1,3 +1,4 @@
+import pymongo
 from src.lib.reddit import Reddit
 from src.db.connect import DBConnect
 
@@ -14,4 +15,7 @@ r.addCommentsToPost()
 jsonObj = r.writeToJSON()
 
 #add to database collection
-dbc.writeJSONToCollection("UBI","reddit_posts",jsonObj)
+try:
+    dbc.writeJSONToCollection("UBI","reddit_posts",jsonObj)
+except pymongo.errors.BulkWriteError as e:
+    print("BulkWriteError occured, likely due to duplicate posts. Non duplicate posts should have been added.")
