@@ -1,5 +1,4 @@
 """Class that handles Language Processing for our backend"""
-from flask import jsonify
 import pandas as pd
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 #Expecting the use of NLTK, plotly, pandas, and scikit-learn

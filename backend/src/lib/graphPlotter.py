@@ -35,7 +35,7 @@ class GraphPlotter:
         result = fig.to_json()
         return result
     
-    def plotDatabaseSentiment(self, twitter_df: pd.DataFrame, reddit_df: pd.DataFrame, title:str=None, x_label:str=None, y_label:str=None):
+    def plotDatabaseSentiment(self, twitter_df: pd.DataFrame, reddit_df: pd.DataFrame):
         
         fig = go.Figure(data = [
 
