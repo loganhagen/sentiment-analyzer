@@ -121,7 +121,7 @@
 	<div class="space-y-2">
 		<!-- Update Post and Data Vis -->
 		<button
-			class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
+			class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg transform active:scale-75 transition-transform"
 			on:click={ButtonUpdateComponents}
 		>
 			Get Random Post

@@ -39,7 +39,7 @@
 		<p>Generating...</p>
 	{/await} -->
 	<button
-		class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
+		class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg transform active:scale-75 transition-transform" 
 		on:click={handleClick}
 	>
 		Ask!
@@ -82,5 +82,26 @@
 	}
 	.responseArea {
 		margin: 10px;
+	}
+
+	.button {
+	padding: 15px 25px;
+	font-size: 24px;
+	text-align: center;
+	cursor: pointer;
+	outline: none;
+	color: #fff;
+	background-color: #04AA6D;
+	border: none;
+	border-radius: 15px;
+	box-shadow: 0 9px #999;
+	}
+
+	.button:hover {background-color: #3e8e41}
+
+	.button:active {
+	background-color: #3e8e41;
+	box-shadow: 0 5px #666;
+	transform: translateY(4px);
 	}
 </style>
