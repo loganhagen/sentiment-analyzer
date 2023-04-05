@@ -1,8 +1,8 @@
 """API route for handling anything that pertains to tweets"""
 import random
-from flask import jsonify, make_response
 import gzip
 import json
+from flask import jsonify, make_response
 from flask_restx import Namespace, Resource
 from src.db.connect import DBConnect
 from src.lib.languageProcessing import LanguageProcessing

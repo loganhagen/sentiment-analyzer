@@ -7,7 +7,7 @@
 
 <div class="rounded max-w-5xl max-y-2 overflow-hidden shadow-lg bg-slate-100 space-y-2 px-4 py-4">
 	{#if post.type == 'tweet'}
-		<img src="src/images/twitter_icon.png" alt="Logo" class="h-8" />
+		<img src="src/images/twitter_icon.png" alt="Logo" class="h-8" width="35" height="30"/>
 		<p>{post.text}</p>
 		<p class="text-left font-bold">Date: {post.date}</p>
 		<p class="text-left font-bold">Source: Twitter</p>
@@ -16,7 +16,7 @@
 			>
 		</p>
 	{:else if post.type == 'reddit'}
-		<img src="src/images/reddit_icon.png" alt="Logo" class="h-8" />
+		<img src="src/images/reddit_icon.png" alt="Logo" class="h-8" width="35" height="30"/>
 		<p>{post.text}</p>
 		<p class="text-left font-bold">Date: {post.date}</p>
 		<p class="text-left font-bold">Source: Reddit</p>
