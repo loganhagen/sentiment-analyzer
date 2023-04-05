@@ -16,8 +16,10 @@
 	}
 
 	async function handleClick() {
+		(<HTMLInputElement>document.getElementById('response')).innerHTML = "Generating...";
 		let question: string = (<HTMLInputElement>document.getElementById('textarea1')).value;
 		await askQuestion(question);
+		(<HTMLInputElement>document.getElementById('response')).innerHTML = "";
 	}
 </script>
 
@@ -39,11 +41,10 @@
 		<p>Generating...</p>
 	{/await} -->
 	<button
-		class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg"
-		on:click={handleClick}
-	>
+		class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg transform active:scale-75 transition-transform" on:click={handleClick}>
 		Ask!
 	</button>
+	<p id="response"></p>
 
 	<!-- Prints the array of interactions as it is updated. Since the array is empty on page load, nothing is printed.
 	I would like some kind of loading action to appear on button click.  -->
