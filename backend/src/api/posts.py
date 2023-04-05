@@ -1,6 +1,8 @@
 """API route for handling anything that pertains to tweets"""
 import random
-from flask import jsonify
+from flask import jsonify, make_response
+import gzip
+import json
 from flask_restx import Namespace, Resource
 from src.db.connect import DBConnect
 from src.lib.languageProcessing import LanguageProcessing
@@ -14,8 +16,12 @@ class Tweets(Resource):
     """
     def get(self):
         """Get string representation of the Twitter data.."""
+        data = dbc.getCollection(dbc.DB, dbc.TWITTER)
+        zipped_data = gzip.compress(json.dumps(data).encode('utf-8'), 5)
+        response = make_response(zipped_data)
+        response.headers['Content-Encoding'] = 'gzip'
 
-        return dbc.getCollectionJSON("UBI", dbc.TWITTER)
+        return response
 
     def post(self):
         """Add a new list of tweets."""

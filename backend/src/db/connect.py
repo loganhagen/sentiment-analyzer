@@ -11,6 +11,7 @@ mongo_uri = 'mongodb://' + os.environ.get('MONGO_USERNAME') + ':' + os.environ.g
 test_db = os.environ.get('DB_TEST')
 
 class DBConnect:
+    DB : str = "UBI"
     TWITTER : str = "tweets"
     REDDIT : str = "reddit_posts"
     
@@ -83,14 +84,14 @@ class DBConnect:
         cl.drop()
 
 
-    def getCollectionJSON(self, database: str, collection: str) -> str:
+    def getCollection(self, database: str, collection: str) -> str:
         db = self.client[database]
         cl = db[collection]
         docs = list(cl.find({}))
-        file = {}
-        file["data"] = docs
+        obj = {}
+        obj["data"] = docs
 
-        return json.dumps(file)
+        return obj
 
     def censorCollection(self, database: str, collection: str) -> None:
         pf = ProfanityFilter()
