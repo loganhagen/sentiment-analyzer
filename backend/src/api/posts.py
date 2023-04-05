@@ -47,7 +47,13 @@ class Reddit(Resource):
     def get(self):
         """Get a string representation of the Reddit data."""
 
-        return dbc.getCollectionJSON("UBI", dbc.REDDIT)
+        data = dbc.getCollection(dbc.DB, dbc.REDDIT)
+        zipped_data = gzip.compress(json.dumps(data).encode('utf-8'), 5)
+        response = make_response(zipped_data)
+        response.headers['Content-Encoding'] = 'gzip'
+
+        return response
+
 
 class Random(Resource):
     """
