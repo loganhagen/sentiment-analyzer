@@ -3,7 +3,10 @@ import nltk
 from src.lib.languageProcessing import LanguageProcessing
 from src.lib.graphPlotter import GraphPlotter
 
-nltk.download('vader_lexicon')
+try:
+    nltk.download('vader_lexicon')
+except (EOFError, FileExistsError)  as e:
+    print(e)
 
 def test_plotPostSentiment():
     """Test our bar plots by comparing a freshly built bar plot to a known JSON version of a plotly horizontal bar plot"""
