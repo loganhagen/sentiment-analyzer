@@ -30,21 +30,23 @@ class LanguageProcessing:
         twitter_col = db[dbc.TWITTER]
         reddit_col = db[dbc.REDDIT]
 
-        twitter_str = ""
-        reddit_str = ""
+        twitter_list = []
+        reddit_list = []
 
         #Build string with all tweets
         for document in twitter_col.find({}):
-            twitter_str += (str(document["content"]) + " ") 
+            tmp_tweet_list = (str(document["content"])).split()
+            twitter_list.extend(tmp_tweet_list)
 
         #Build string with all reddit posts
-        for document in reddit_col.find({}): 
-            reddit_str += (str(document["content"]) + " ")
+        for document in reddit_col.find({}):
+            tmp_reddit_list = (str(document["content"])).split()
+            reddit_list.extend(tmp_reddit_list)
 
         #get sentiment for tweets
-        twitter_sentiment = self.getSentiment(twitter_str)
+        twitter_sentiment = self.getSentiment(' '.join(twitter_list))
 
         #get sentiment for reddit posts
-        reddit_sentiment = self.getSentiment(reddit_str)
+        reddit_sentiment = self.getSentiment(' '.join(reddit_list))
 
         return twitter_sentiment, reddit_sentiment

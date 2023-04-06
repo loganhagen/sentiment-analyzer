@@ -12,7 +12,7 @@ api = Namespace('plot', description='Graph Plotting Related Operations')
 lp = LanguageProcessing()
 gp = GraphPlotter()
 dbc = DBConnect()
-    
+
 class TwitterSentiment(Resource):
     """
     Creates a plot of the sentiment of a given tweets
@@ -44,14 +44,10 @@ class DataBaseSentiment(Resource):
     Creates a twin pair bar graph of the sentiment of all posts in the database
     """
     def get(self):
-        twitter_sentiment, reddit_sentiment = lp.getDatabaseSentiment(dbc)
-
-        twitter_df = lp.sentimentToDataFrame(twitter_sentiment)
-        reddit_df = lp.sentimentToDataFrame(reddit_sentiment)
-
-        plot = gp.plotDatabaseSentiment(twitter_df, reddit_df)
-
-        return plot
+        with open('db_sentiment.json', 'r', encoding='utf-8') as file:
+            db_plot = file.read()
+            file.close()
+            return db_plot
 
 api.add_resource(TwitterSentiment, "/sentiment/tweets/<string:post_id>")
 api.add_resource(RedditSentiment, "/sentiment/reddit/<string:post_id>")
