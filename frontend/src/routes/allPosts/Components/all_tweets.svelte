@@ -9,11 +9,11 @@
 	async function lazyLoad() {
 		const response = await fetch('/api/posts/tweets');
 		const responseJSON = await response.json();
-		let objects = JSON.parse(responseJSON)['data'];
+		let objects = responseJSON['data'];
 
-		//ignore the red underlined code, ESLint yells at us to specify a type but when we do it says the type doesn't have these properties even though the object type can have any props
+		// ignore the red underlined code, ESLint yells at us to specify a type but when we do it says the type doesn't have these properties even though the object type can have any props
 		objects.forEach((element: object) => {
-			//create post struct to add to our post array
+		 	// create post struct to add to our post array
 			let post: Post = {
 				text: element.content,
 				id: element._id,
