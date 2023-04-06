@@ -5,7 +5,8 @@
 #populate db at startup
 startup()
 {
-    #python3 dbPopulateTweets.py
+    python3 dbUpdateSentimentPlot.py
+    python3 dbPopulateTwitter.py
     python3 dbPopulateReddit.py
     python3 dbUpdateSentimentPlot.py
 }
@@ -18,7 +19,8 @@ update_db()
         echo "Waiting 120 minutes..."
         #Wait 120 minutes before updating the database
         sleep 7200
-        #python3 dbPopulateTweets.py
+        
+        python3 dbPopulateTwitter.py
         python3 dbPopulateReddit.py
         python3 dbUpdateSentimentPlot.py
     done

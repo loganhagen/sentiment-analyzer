@@ -11,6 +11,7 @@ mongo_uri = 'mongodb://' + os.environ.get('MONGO_USERNAME') + ':' + os.environ.g
 test_db = os.environ.get('DB_TEST')
 
 class DBConnect:
+    DB : str = "UBI"
     TWITTER : str = "tweets"
     REDDIT : str = "reddit_posts"
     
