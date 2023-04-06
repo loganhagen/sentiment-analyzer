@@ -5,8 +5,15 @@ from src.lib.languageProcessing import LanguageProcessing
 from src.lib.graphPlotter import GraphPlotter
 from src.db.connect import DBConnect
 
-nltk.download('vader_lexicon')
-nltk.download('stopwords')
+try:
+    nltk.download('vader_lexicon')
+except (EOFError, FileExistsError)  as e:
+    print(e)
+
+try:
+    nltk.download('stopwords')
+except (EOFError, FileExistsError) as e:
+    print(e)
 
 api = Namespace('plot', description='Graph Plotting Related Operations')
 lp = LanguageProcessing()

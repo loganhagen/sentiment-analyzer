@@ -3,7 +3,10 @@ import unittest
 import nltk
 from src.lib.languageProcessing import LanguageProcessing
 
-nltk.download('vader_lexicon')
+try:
+    nltk.download('vader_lexicon')
+except (EOFError, FileExistsError)  as e:
+    print(e)
 
 def test_languageProcessing():
     """Initialize a languageProcessing object"""
