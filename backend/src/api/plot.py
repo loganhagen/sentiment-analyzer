@@ -1,5 +1,4 @@
 """API route for handling anything that graph plotting using Plotly"""
-from ast import comprehension
 import gzip
 import nltk
 from flask import make_response
