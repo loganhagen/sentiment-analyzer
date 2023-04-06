@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>All Posts</title> 
+</svelte:head>
+
 <script lang="ts">
 	import Switch from '../../Components/switch.svelte';
 	import { sharedTab } from './store';

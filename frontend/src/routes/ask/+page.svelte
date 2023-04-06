@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>Q&A</title> 
+</svelte:head>
+
 <script lang="ts">
 	import type { Interaction } from '../../types';
 

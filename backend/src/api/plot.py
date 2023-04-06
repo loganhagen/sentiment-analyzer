@@ -1,5 +1,7 @@
 """API route for handling anything that graph plotting using Plotly"""
+import gzip
 import nltk
+from flask import make_response
 from flask_restx import Namespace, Resource
 from src.lib.languageProcessing import LanguageProcessing
 from src.lib.graphPlotter import GraphPlotter
@@ -20,6 +22,16 @@ lp = LanguageProcessing()
 gp = GraphPlotter()
 dbc = DBConnect()
 
+def compressPlot(plot):
+    """
+    Compress a plot into response using gzip
+    """
+    zipped_data = gzip.compress(plot.encode('utf-8'), 5)
+    response = make_response(zipped_data)
+    response.headers['Content-Encoding'] = 'gzip'
+
+    return response
+
 class TwitterSentiment(Resource):
     """
     Creates a plot of the sentiment of a given tweets
@@ -31,7 +43,9 @@ class TwitterSentiment(Resource):
         df = lp.sentimentToDataFrame(sentiment)
         plot = gp.plotPostSentiment(df)
 
-        return plot
+        response = compressPlot(plot)
+
+        return response
     
 class RedditSentiment(Resource):
     """
@@ -44,7 +58,9 @@ class RedditSentiment(Resource):
         df = lp.sentimentToDataFrame(sentiment)
         plot = gp.plotPostSentiment(df)
 
-        return plot
+        response = compressPlot(plot)
+
+        return response
 
 class DataBaseSentiment(Resource):
     """
@@ -52,9 +68,10 @@ class DataBaseSentiment(Resource):
     """
     def get(self):
         with open('db_sentiment.json', 'r', encoding='utf-8') as file:
-            db_plot = file.read()
+            plot = file.read()
             file.close()
-            return db_plot
+            response = compressPlot(plot)
+            return response
 
 api.add_resource(TwitterSentiment, "/sentiment/tweets/<string:post_id>")
 api.add_resource(RedditSentiment, "/sentiment/reddit/<string:post_id>")

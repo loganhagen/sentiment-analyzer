@@ -14,11 +14,8 @@
 		const response = await fetch('/api/plot/sentiment/all');
 		const responseJSON = await response.json();
 
-		//Get plot as object
-		let plot = JSON.parse(responseJSON);
-
 		//update our current plot
-		let plot_obj = { data: plot.data, layout: plot.layout };
+		let plot_obj = { data: responseJSON["data"], layout: responseJSON["layout"] };
 
 		sharedDB.set(plot_obj);
 	});

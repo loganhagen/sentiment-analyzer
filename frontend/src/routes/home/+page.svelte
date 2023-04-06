@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>Data Visualizations</title> 
+</svelte:head>
+
 <script context="module" lang="ts">
 	import Switch from '../../Components/switch.svelte';
 	import Tabs from './Components/tabs.svelte';

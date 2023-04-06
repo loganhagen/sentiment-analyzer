@@ -16,9 +16,5 @@ class Health(Resource):
             _type_: _description_
         """
         return {"status": "OK", "message": "Server is healthy"}
-    
-    def put(self):
-        return
-
 
 api.add_resource(Health, "")
