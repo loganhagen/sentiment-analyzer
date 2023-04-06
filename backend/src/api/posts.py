@@ -1,6 +1,8 @@
 """API route for handling anything that pertains to tweets"""
 import random
-from flask import jsonify
+import gzip
+import json
+from flask import jsonify, make_response
 from flask_restx import Namespace, Resource
 from src.db.connect import DBConnect
 from src.lib.languageProcessing import LanguageProcessing
@@ -14,8 +16,12 @@ class Tweets(Resource):
     """
     def get(self):
         """Get string representation of the Twitter data.."""
+        data = dbc.getCollection(dbc.DB, dbc.TWITTER)
+        zipped_data = gzip.compress(json.dumps(data).encode('utf-8'), 5)
+        response = make_response(zipped_data)
+        response.headers['Content-Encoding'] = 'gzip'
 
-        return dbc.getCollectionJSON("UBI", dbc.TWITTER)
+        return response
 
     def post(self):
         """Add a new list of tweets."""
@@ -41,7 +47,13 @@ class Reddit(Resource):
     def get(self):
         """Get a string representation of the Reddit data."""
 
-        return dbc.getCollectionJSON("UBI", dbc.REDDIT)
+        data = dbc.getCollection(dbc.DB, dbc.REDDIT)
+        zipped_data = gzip.compress(json.dumps(data).encode('utf-8'), 5)
+        response = make_response(zipped_data)
+        response.headers['Content-Encoding'] = 'gzip'
+
+        return response
+
 
 class Random(Resource):
     """
@@ -49,12 +61,18 @@ class Random(Resource):
     """
     def get(self):
         """Get a random post"""
-        tweet = dbc.getRandomDocument("UBI", dbc.TWITTER)
-        reddit = dbc.getRandomDocument("UBI", dbc.REDDIT)
-        tweet_response = jsonify({"text" : str(tweet["content"]), "id": str(tweet["_id"]), "date": str(tweet["created_at"]), "comments": None, "type": "tweet"})
-        reddit_response = jsonify({"text" : str(reddit["content"]), "id": str(reddit["_id"]), "date": str(reddit["created_at"]), "comments": reddit["comments"], "type": "reddit"})
 
-        return tweet_response if random.randint(0, 1) == 1 else reddit_response
+        rand = random.randint(0, 1)
+
+        if rand == 0:
+            tweet = dbc.getRandomDocument("UBI", dbc.TWITTER)
+            response = jsonify({"text" : str(tweet["content"]), "id": str(tweet["_id"]), "date": str(tweet["created_at"]), "comments": None, "type": "tweet"})
+        
+        if rand == 1:
+            reddit = dbc.getRandomDocument("UBI", dbc.REDDIT)
+            response = jsonify({"text" : str(reddit["content"]), "id": str(reddit["_id"]), "date": str(reddit["created_at"]), "comments": reddit["comments"], "type": "reddit"})
+        
+        return response
 
 class SizeAll(Resource):
     """

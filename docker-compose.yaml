@@ -44,12 +44,12 @@ services:
 
       # You can also add build arguments, which are environment variables accessible only during the build process.
       # You can access this build arguments/override the build args in the Dockerfile
-      # More info can be found here: https://docs.docker.com/compose/compose-file/compose-file-v3/#args
+      # More info can be found here: https://docs.docker.com/csompose/compose-file/compose-file-v3/#args
       #args:
 
     # This will override the default run command in the CMD of your Dockerfile
     # This is helpful because we can use docker-compose.yaml `command` for development and configure the CMD for production
-    command: ["python3", "app.py"]
+    command: ["./initBackend.sh"]
 
     # exposes the ports in the format HOST:CONTAINER
     # The CONTAINER port is the port exposed inside the container and the HOST port is publicly exposed port that our host machine can send request to
