@@ -2,13 +2,23 @@
 import random
 import gzip
 import json
-from flask import jsonify, make_response
+from flask import make_response
 from flask_restx import Namespace, Resource
 from src.db.connect import DBConnect
 from src.lib.languageProcessing import LanguageProcessing
 
 api = Namespace('posts', description='Post related operations')
 dbc = DBConnect()
+
+def compressData(data):
+    """
+    Compress a post response using gzip.
+    """
+    zipped_data = gzip.compress(json.dumps(data).encode('utf-8'), 5)
+    response = make_response(zipped_data)
+    response.headers['Content-Encoding'] = 'gzip'
+
+    return response
 
 class Tweets(Resource):
     """
@@ -17,10 +27,7 @@ class Tweets(Resource):
     def get(self):
         """Get string representation of the Twitter data.."""
         data = dbc.getCollection(dbc.DB, dbc.TWITTER)
-        zipped_data = gzip.compress(json.dumps(data).encode('utf-8'), 5)
-        response = make_response(zipped_data)
-        response.headers['Content-Encoding'] = 'gzip'
-
+        response = compressData(data)
         return response
 
     def post(self):
@@ -48,12 +55,8 @@ class Reddit(Resource):
         """Get a string representation of the Reddit data."""
 
         data = dbc.getCollection(dbc.DB, dbc.REDDIT)
-        zipped_data = gzip.compress(json.dumps(data).encode('utf-8'), 5)
-        response = make_response(zipped_data)
-        response.headers['Content-Encoding'] = 'gzip'
-
+        response = compressData(data)
         return response
-
 
 class Random(Resource):
     """
@@ -66,11 +69,13 @@ class Random(Resource):
 
         if rand == 0:
             tweet = dbc.getRandomDocument("UBI", dbc.TWITTER)
-            response = jsonify({"text" : str(tweet["content"]), "id": str(tweet["_id"]), "date": str(tweet["created_at"]), "comments": None, "type": "tweet"})
+            data = {"text" : str(tweet["content"]), "id": str(tweet["_id"]), "date": str(tweet["created_at"]), "comments": None, "type": "tweet"}
+            response = compressData(data)
         
         if rand == 1:
             reddit = dbc.getRandomDocument("UBI", dbc.REDDIT)
-            response = jsonify({"text" : str(reddit["content"]), "id": str(reddit["_id"]), "date": str(reddit["created_at"]), "comments": reddit["comments"], "type": "reddit"})
+            data = {"text" : str(reddit["content"]), "id": str(reddit["_id"]), "date": str(reddit["created_at"]), "comments": reddit["comments"], "type": "reddit"}
+            response = compressData(data)
         
         return response
 
@@ -83,7 +88,8 @@ class SizeAll(Resource):
         Get total number of tweets and reddit posts.
         """
         collection_size = dbc.getCollectionSize("UBI", dbc.TWITTER) + dbc.getCollectionSize("UBI", dbc.REDDIT)
-        response = jsonify({"size" : collection_size})
+        data = {"size": collection_size}
+        response = compressData(data)
 
         return response
     
@@ -96,7 +102,8 @@ class SizeTweets(Resource):
         Get total number of tweets from database collection.
         """
         collection_size = dbc.getCollectionSize("UBI", dbc.TWITTER)
-        response = jsonify({"size" : collection_size})
+        data = {"size": collection_size}
+        response = compressData(data)
 
         return response
     
@@ -109,7 +116,8 @@ class SizeReddit(Resource):
         Get total number of reddit posts.
         """
         collection_size = dbc.getCollectionSize("UBI", dbc.REDDIT)
-        response = jsonify({"size" : collection_size})
+        data = {"size": collection_size}
+        response = compressData(data)
 
         return response
 
@@ -126,7 +134,8 @@ class Sentiment(Resource):
         doc = dbc.getDocumentById("UBI", dbc.TWITTER, post_id)
         tweet_text = str(doc["content"])
         sentiment = lp.getSentiment(tweet_text)
-        response = jsonify({"Sentiment Analysis": sentiment})
+        data = {'Sentiment Analysis': sentiment}
+        response = compressData(data)
 
         return response
 

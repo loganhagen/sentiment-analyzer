@@ -71,11 +71,8 @@
 		const response = await fetch('/api/plot/sentiment/tweets/' + cur_post.id);
 		const responseJSON = await response.json();
 
-		//Get plot as object
-		let plot = JSON.parse(responseJSON);
-
 		//update our current plot
-		plot = { data: plot.data, layout: plot.layout };
+		let plot = { data: responseJSON["data"], layout: responseJSON["layout"] }
 
 		//Set data in sharedPlot store so that the data can be shared between components and pages
 		plot_store.set(plot);
@@ -89,11 +86,7 @@
 		const response = await fetch('/api/plot/sentiment/reddit/' + cur_post.id);
 		const responseJSON = await response.json();
 
-		//Get plot as object
-		let plot = JSON.parse(responseJSON);
-
-		//update our current plot
-		plot = { data: plot.data, layout: plot.layout };
+		let plot = { data: responseJSON["data"], layout: responseJSON["layout"] }
 
 		//Set data in sharedPlot store so that the data can be shared between components and pages
 		plot_store.set(plot);
