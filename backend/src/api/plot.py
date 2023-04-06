@@ -7,12 +7,12 @@ from src.db.connect import DBConnect
 
 try:
     nltk.download('vader_lexicon')
-except EOFError as e:
+except (EOFError, FileExistsError)  as e:
     print(e)
 
 try:
     nltk.download('stopwords')
-except EOFError as e:
+except (EOFError, FileExistsError) as e:
     print(e)
 
 api = Namespace('plot', description='Graph Plotting Related Operations')

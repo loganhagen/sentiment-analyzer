@@ -1,3 +1,4 @@
+import pymongo
 import pytest
 from src.db.connect import DBConnect
 
@@ -5,7 +6,10 @@ from src.db.connect import DBConnect
 @pytest.fixture
 def dbc():
     dbc = DBConnect()
-    dbc.writeFileToCollection("test_UBI", "test_tweets", "test_tweets.json")
+    try:
+        dbc.writeFileToCollection("test_UBI", "test_tweets", "test_tweets.json")
+    except pymongo.errors.BulkWriteError as e:
+        print(e)
     return dbc
 
 def test_getDatabaseNames(dbc):
