@@ -9,7 +9,7 @@
 	async function lazyLoad() {
 		const response = await fetch('/api/posts/reddit');
 		const responseJSON = await response.json();
-		let objects = JSON.parse(responseJSON)['data'];
+		let objects = responseJSON['data'];
 
 		//ignore the red underlined code, ESLint yells at us to specify a type but when we do it says the type doesn't have these properties even though the object type can have any props
 		objects.forEach((element: object) => {
