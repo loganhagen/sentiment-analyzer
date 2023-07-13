@@ -6,7 +6,7 @@ This project is a containerized full-stack web application built by a team of 5 
 ## How To Use
 1. Clone repository
 2. Navigate to the root folder of the repository.
-3. Initiate container build and run by using command ```docker compose up``` or ```docker compose up -d``` to ignore logs.
+3. Initiate container build and run by using command ```docker compose up``` or ```docker compose up -d``` (ignores logs).
 4. Navigate to ```localhost:3000```
 5. Enter ```docker compose down --volume``` to tear down the container stack and delete the local volume.
 
