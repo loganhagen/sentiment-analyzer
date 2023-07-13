@@ -42,3 +42,4 @@ __pycache__/
 .pytest_cache
 studentlist.txt
 k8s/
+.env
