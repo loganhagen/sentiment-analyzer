@@ -16,3 +16,4 @@ This project is a containerized full-stack web application built by a team of 5 
 
 ## Known Issues
 - Occasionally, the graph for the sentiment analysis for all posts takes longer than expected to load.
+- Due to differences in how Linux and Windows handle line endings, Windows users may need to utitlize the following flag when cloning the repository: ```--config core.autocrlf=input```.
