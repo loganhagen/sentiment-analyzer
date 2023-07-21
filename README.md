@@ -11,7 +11,7 @@ This project is a containerized full-stack web application built by a team of 5 
 5. Enter ```docker compose down --volume``` to tear down the container stack and delete the local volume.
 
 ## Note
-- The Q&A module uses the OpenAPI AI to generate responses. This requires an OpenAI API key. If you have one that you would like to use, enter the following command ```echo OPENAI_API_KEY=<apikeyhere> > .env``` to create an environment file that Docker Compose will use during the build.
+- The Q&A module uses the OpenAPI API to generate responses. This requires an OpenAI API key. If you have one that you would like to use, enter the following command ```echo OPENAI_API_KEY=<apikeyhere> > .env``` to create an environment file that Docker Compose will use during the build.
 
 
 ## Known Issues
