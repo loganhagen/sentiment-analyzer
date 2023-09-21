@@ -5,7 +5,7 @@ ARG PORT=3000
 ENV PORT $PORT
 
 # Install latest npm for all security fixes
-RUN npm i npm@latest -g
+RUN npm i npm@9 -g
 
 # It is better to install the dependencies first in a 
 # different directory and point the node_modules/.bin to the PATH
