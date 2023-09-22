@@ -69,6 +69,7 @@ services:
       - MONGO_PASSWORD=example
       - MONGO_HOSTNAME=mymongodb
       - MONGO_PORT=27017
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
 
     # This creates interactive mode which lets us execute commands in a shell when the container is running.
     stdin_open: true
@@ -80,11 +81,6 @@ services:
     # Strategies for handling such issue can be found here: https://docs.docker.com/compose/startup-order/
     depends_on:
       - mymongodb
-
-  yoobi:
-    image: loganhagen/yoobi
-    ports:
-      - "3001:3001"
 
   # Explanantions are similar to the backend and mymongodb explanation above
   frontend:

@@ -9,11 +9,11 @@
 	let interactions: Interaction[] = [];
 
 	async function askQuestion(question: string) {
-		const response = await fetch('http://localhost:3001/?' + new URLSearchParams({ q: question }));
+		const response = await fetch('/api/ask?' + new URLSearchParams({ q: question }));
 		const json = await response.json();
 
 		if (response.ok) {
-			let answer: string = json['content'];
+			let answer: string = json['choices'][0]['text'];
 			interactions.push({ question, answer });
 			interactions = interactions;
 		}
