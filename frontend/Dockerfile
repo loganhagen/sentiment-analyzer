@@ -20,7 +20,6 @@ RUN npm ci && npm cache clean --force
 
 # point the node_modules/.bin to the PATH so that we can run the scripts like vite, react-scripts
 ENV PATH /app/node_modules/.bin:$PATH
-ENV PUBLIC_API_URL http://localhost:8080/api/
 
 # Copy the rest of the files in a nested directory
 WORKDIR /app/frontend
